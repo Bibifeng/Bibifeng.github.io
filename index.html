@@ -275,6 +275,187 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://bibifeng.github.io/2020/05/11/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%9F%BA%E4%BA%8Euni-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E9%A1%B5%E9%9D%A2%E5%91%A8%E6%9C%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bibifeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bibifeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/11/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%9F%BA%E4%BA%8Euni-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E9%A1%B5%E9%9D%A2%E5%91%A8%E6%9C%9F/" itemprop="url">小程序(基于uni)常用的应用生命周期&页面生命周期</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-11T09:26:41+08:00">
+                2020-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">小程序</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>常用应用生命周期</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">函数名</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">onLaunch</td>
+<td align="left">当uni-app 初始化完成时触发（全局只触发一次）</td>
+</tr>
+<tr>
+<td align="left">onShow</td>
+<td align="left">当 uni-app 启动，或从后台进入前台显示</td>
+</tr>
+<tr>
+<td align="left">onHide</td>
+<td align="left">当 uni-app 从前台进入后台</td>
+</tr>
+<tr>
+<td align="left">onError</td>
+<td align="left">当 uni-app 报错时触发</td>
+</tr>
+</tbody></table>
+<ul>
+<li>应用生命周期仅可在App.vue中监听，在其它页面监听无效</li>
+<li>调用顺序：onLaunch &gt; onShow &gt; onHide</li>
+</ul>
+<blockquote>
+<p>常用页面生命周期</p>
+</blockquote>
+<p>详见uni官方文档</p>
+<ul>
+<li>当每进入/切换到一个新的页面的时候，就会调用页面生命周期函数</li>
+<li>调用顺序：onLoad &gt; onReady &gt; onShow &gt; onHide</li>
+</ul>
+<p>参考来源：<br><em><a href="https://www.jianshu.com/p/3f43eaa83bbd" target="_blank" rel="noopener">https://www.jianshu.com/p/3f43eaa83bbd</a></em></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://bibifeng.github.io/2020/05/04/%E8%87%AA%E5%B7%B1%E7%9A%84%E5%88%86%E6%94%AFmerge%E5%88%B0%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E6%9C%89%E5%86%B2%E7%AA%81%E6%97%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -371,7 +552,7 @@
             <blockquote>
 <p>以自己分支release-bibifeng 合并到 dev 分支为例</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev</span><br><span class="line">git pull &#x2F;&#x2F; 更新分支</span><br><span class="line">git merge --no-ff release-bibifeng</span><br><span class="line">&#x2F;&#x2F; 解决冲突...</span><br><span class="line">git add .</span><br><span class="line">git commit -m &#39;commit message&#39;</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev &#x2F;&#x2F; 切换分支</span><br><span class="line">git pull &#x2F;&#x2F; 更新分支</span><br><span class="line">git merge --no-ff release-bibifeng</span><br><span class="line">&#x2F;&#x2F; 解决冲突...</span><br><span class="line">git add .</span><br><span class="line">git commit -m &#39;commit message&#39;</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure>
           
         
       
@@ -452,7 +633,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -463,7 +644,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -6,9 +6,57 @@
     <content><![CDATA[<blockquote>
 <p>以自己分支release-bibifeng 合并到 dev 分支为例</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout dev</span><br><span class="line">git pull &#x2F;&#x2F; 更新分支</span><br><span class="line">git merge --no-ff release-bibifeng</span><br><span class="line">&#x2F;&#x2F; 解决冲突...</span><br><span class="line">git add .</span><br><span class="line">git commit -m &#39;commit message&#39;</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout dev &#x2F;&#x2F; 切换分支</span><br><span class="line">git pull &#x2F;&#x2F; 更新分支</span><br><span class="line">git merge --no-ff release-bibifeng</span><br><span class="line">&#x2F;&#x2F; 解决冲突...</span><br><span class="line">git add .</span><br><span class="line">git commit -m &#39;commit message&#39;</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>git</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>小程序(基于uni)常用的应用生命周期&amp;页面生命周期</title>
+    <url>/2020/05/11/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%9F%BA%E4%BA%8Euni-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E9%A1%B5%E9%9D%A2%E5%91%A8%E6%9C%9F/</url>
+    <content><![CDATA[<blockquote>
+<p>常用应用生命周期</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">函数名</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">onLaunch</td>
+<td align="left">当uni-app 初始化完成时触发（全局只触发一次）</td>
+</tr>
+<tr>
+<td align="left">onShow</td>
+<td align="left">当 uni-app 启动，或从后台进入前台显示</td>
+</tr>
+<tr>
+<td align="left">onHide</td>
+<td align="left">当 uni-app 从前台进入后台</td>
+</tr>
+<tr>
+<td align="left">onError</td>
+<td align="left">当 uni-app 报错时触发</td>
+</tr>
+</tbody></table>
+<ul>
+<li>应用生命周期仅可在App.vue中监听，在其它页面监听无效</li>
+<li>调用顺序：onLaunch &gt; onShow &gt; onHide</li>
+</ul>
+<blockquote>
+<p>常用页面生命周期</p>
+</blockquote>
+<p>详见uni官方文档</p>
+<ul>
+<li>当每进入/切换到一个新的页面的时候，就会调用页面生命周期函数</li>
+<li>调用顺序：onLoad &gt; onReady &gt; onShow &gt; onHide</li>
+</ul>
+<p>参考来源：<br><em><a href="https://www.jianshu.com/p/3f43eaa83bbd" target="_blank" rel="noopener">https://www.jianshu.com/p/3f43eaa83bbd</a></em></p>
+]]></content>
+      <categories>
+        <category>小程序</category>
       </categories>
   </entry>
 </search>
