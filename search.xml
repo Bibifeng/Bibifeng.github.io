@@ -71,4 +71,42 @@
         <category>git</category>
       </categories>
   </entry>
+  <entry>
+    <title>uni小程序页面获取传参</title>
+    <url>/2020/05/15/uni%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%A1%B5%E9%9D%A2%E8%8E%B7%E5%8F%96%E4%BC%A0%E5%8F%82/</url>
+    <content><![CDATA[<h4 id="前一个页面传值给下一个页面"><a href="#前一个页面传值给下一个页面" class="headerlink" title="前一个页面传值给下一个页面"></a>前一个页面传值给下一个页面</h4><blockquote>
+<p>uni.navigateTo(); 保留当前页面，跳转到应用内的某个页面，使用uni.navigateBack() 可以返回到原页面</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">uni.navigateTo(&#123;</span><br><span class="line">    url: &#39;test?id&#x3D;1&amp;name&#x3D;&#39; + encodeURIComponent(JSON.stringify(name))</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>注意：url传参有长度限制，太长时可通过对参数进行 转码+序列化 的方法传过去</p>
+<p>在下一个页面接收值（需要相应的反序列化、解码）：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">onLoad(e) &#123;</span><br><span class="line">	this.id &#x3D; e.id;</span><br><span class="line">	this.name &#x3D; JSON.parse(decodeURIComponent(e.name));</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h4 id="下一个页面在返回前传值给前一个页面"><a href="#下一个页面在返回前传值给前一个页面" class="headerlink" title="下一个页面在返回前传值给前一个页面"></a>下一个页面在返回前传值给前一个页面</h4><p>举例，从A页面通过navigateTo到B页面，B页面有一个参数需要传回给A页面，在B页面可进行如下操作：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let pages &#x3D; getCurrentPages();  &#x2F;&#x2F;获取所有页面栈实例列表</span><br><span class="line">let nowPage &#x3D; pages[ pages.length - 1];  &#x2F;&#x2F;当前页页面实例</span><br><span class="line">let prevPage &#x3D; pages[ pages.length - 2 ];  &#x2F;&#x2F;上一页页面实例</span><br><span class="line">prevPage.$vm.searchVal &#x3D; 1211;   &#x2F;&#x2F;修改上一页data里面的searchVal参数值为1211</span><br><span class="line">uni.navigateBack(&#123;  &#x2F;&#x2F;uni.navigateTo跳转的返回，如果带任何参数配置，默认返回上一级</span><br><span class="line">	delta: 1</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">————————————————</span><br><span class="line">原文链接：https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_42231156&#x2F;java&#x2F;article&#x2F;details&#x2F;99674176</span><br></pre></td></tr></table></figure>
+
+<p>注意，B页面在返回时已经对A页面的searchVal的值进行了修改，如果需要触发A页面的相关操作，则需要在A页面的onShow页面周期中进行触发</p>
+<p>另一种修改A页面的值的方法如下（替换上面的prevPage.$vm.searchVal = 1211），但是个人没试过</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">prevPage.setData(&#123;</span><br><span class="line">    searchVal: 1211,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过好友链接分享传值"><a href="#通过好友链接分享传值" class="headerlink" title="通过好友链接分享传值"></a>通过好友链接分享传值</h4><p>有时候会有这样的情景：分享详情页时，当另一个人从分享链接打开进到这个页面时，需要一个id才能请求接口获取详情数据，因此就需要在分享的时候把这个id传过来，在打开的时候拿到这个id去请求数据</p>
+<p>在于onShow生命周期同级加入onShareAppMessage函数，才能开启页面分享</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">onShareAppMessage() &#123;</span><br><span class="line">	<span class="comment">// 转发</span></span><br><span class="line">	wx.showShareMenu(&#123;</span><br><span class="line">	  withShareTicket: <span class="literal">true</span></span><br><span class="line">	&#125;)</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		title: title, <span class="comment">// 分享链接的title</span></span><br><span class="line">		path: <span class="string">'/xxx/xxx?id=1234'</span>, <span class="comment">// 分享打开时的页面路径</span></span><br><span class="line">		imageUrl: imageUrl, <span class="comment">// 分享链接的图片</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当好友从链接打开时，页面会走到上面path定义的路径当中，这时候要获取id，方法和上一种url传参一样，在页面onLoad生命周期中获取</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">onLoad(e) &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(e.id);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过扫二维码进来的页面如何获取传参值"><a href="#通过扫二维码进来的页面如何获取传参值" class="headerlink" title="通过扫二维码进来的页面如何获取传参值"></a>通过扫二维码进来的页面如何获取传参值</h4><p>二维码扫码进来，要获取生成二维码时传的自定义参数，也和上面类似方式获取，只不过相当于小程序自动加了一个scene字段存储传参信息，获取如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">onLoad(e) &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="built_in">decodeURIComponent</span>(e.scene));</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>注意一定要对scene字段进行decodeURIComponent处理</p>
+<p>关于二维码限制传参长度（只有几十个字符）的问题，一般的做法是，将所需的传参先走我们自己的接口，在后台临时存储，然后后台生成一个类似缓存ID的标识（长度一定不能超过微信的限制），再把缓存ID通过生成二维码的接口传过去去获取二维码。在扫码打开后的页面，通过decodeURIComponent(e.scene)获取到的值，就是缓存ID，此时再通过自己的接口，用缓存ID去查询生成二维码时候的传参</p>
+]]></content>
+      <tags>
+        <tag>小程序</tag>
+      </tags>
+  </entry>
 </search>
