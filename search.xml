@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>自己的分支merge到远程分支有冲突时</title>
-    <url>/2020/05/04/%E8%87%AA%E5%B7%B1%E7%9A%84%E5%88%86%E6%94%AFmerge%E5%88%B0%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E6%9C%89%E5%86%B2%E7%AA%81%E6%97%B6/</url>
-    <content><![CDATA[<blockquote>
-<p>以自己分支release-bibifeng 合并到 dev 分支为例</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout dev &#x2F;&#x2F; 切换分支</span><br><span class="line">git pull &#x2F;&#x2F; 更新分支</span><br><span class="line">git merge --no-ff release-bibifeng</span><br><span class="line">&#x2F;&#x2F; 解决冲突...</span><br><span class="line">git add .</span><br><span class="line">git commit -m &#39;commit message&#39;</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
+    <title>uni小程序富文本组件处理图片宽度溢出</title>
+    <url>/2020/05/15/uni%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BB%84%E4%BB%B6%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87%E5%AE%BD%E5%BA%A6%E6%BA%A2%E5%87%BA/</url>
+    <content><![CDATA[<p>接口返回文本编辑器的内容字段后，进行如下处理：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let str;</span><br><span class="line">str &#x3D; res.data.content || &#39;&#39;; &#x2F;&#x2F; 获取接口返回</span><br><span class="line">str &#x3D; str.replace(&#x2F;&lt;&#x2F;g, &#39;&lt;&#39;) </span><br><span class="line">.replace(&#x2F;&gt;&#x2F;g, &#39;&gt;&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(height&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(width&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(style&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(alt&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)&#x2F;ig, &#39;&lt;img style&#x3D;&quot;width: 100%;&quot; $1&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>处理后宽度就不会溢出了：<br><img src="/.io//pic.png" alt="pic"></p>
+]]></content>
+      <tags>
+        <tag>小程序</tag>
+      </tags>
   </entry>
   <entry>
     <title>小程序(基于uni)常用的应用生命周期&amp;页面生命周期</title>
@@ -57,6 +58,17 @@
 ]]></content>
       <categories>
         <category>小程序</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>自己的分支merge到远程分支有冲突时</title>
+    <url>/2020/05/04/%E8%87%AA%E5%B7%B1%E7%9A%84%E5%88%86%E6%94%AFmerge%E5%88%B0%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E6%9C%89%E5%86%B2%E7%AA%81%E6%97%B6/</url>
+    <content><![CDATA[<blockquote>
+<p>以自己分支release-bibifeng 合并到 dev 分支为例</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout dev &#x2F;&#x2F; 切换分支</span><br><span class="line">git pull &#x2F;&#x2F; 更新分支</span><br><span class="line">git merge --no-ff release-bibifeng</span><br><span class="line">&#x2F;&#x2F; 解决冲突...</span><br><span class="line">git add .</span><br><span class="line">git commit -m &#39;commit message&#39;</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>git</category>
       </categories>
   </entry>
 </search>
