@@ -8,9 +8,9 @@
 
 <p>处理后宽度就不会溢出了：<br><img src="/.io//pic.png" alt="pic"></p>
 ]]></content>
-      <tags>
-        <tag>小程序</tag>
-      </tags>
+      <categories>
+        <category>小程序</category>
+      </categories>
   </entry>
   <entry>
     <title>小程序(基于uni)常用的应用生命周期&amp;页面生命周期</title>
@@ -105,8 +105,32 @@
 <p>注意一定要对scene字段进行decodeURIComponent处理</p>
 <p>关于二维码限制传参长度（只有几十个字符）的问题，一般的做法是，将所需的传参先走我们自己的接口，在后台临时存储，然后后台生成一个类似缓存ID的标识（长度一定不能超过微信的限制），再把缓存ID通过生成二维码的接口传过去去获取二维码。在扫码打开后的页面，通过decodeURIComponent(e.scene)获取到的值，就是缓存ID，此时再通过自己的接口，用缓存ID去查询生成二维码时候的传参</p>
 ]]></content>
-      <tags>
-        <tag>小程序</tag>
-      </tags>
+      <categories>
+        <category>小程序</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>ElementUI给循环表单项添加prop校验</title>
+    <url>/2020/05/19/ElementUI%E7%BB%99%E5%BE%AA%E7%8E%AF%E8%A1%A8%E5%8D%95%E9%A1%B9%E6%B7%BB%E5%8A%A0prop%E6%A0%A1%E9%AA%8C/</url>
+    <content><![CDATA[<p>场景：饿了么表单项是循环生成的，但是需要给这些表单项都加上校验（校验规则相同），代码如下：</p>
+<p>template</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;el-col v-for&#x3D;&quot;(item, key) in fieldArr&quot;&gt;</span><br><span class="line">    &lt;el-form-item :label&#x3D;&quot;key + 1 + &#39;月&#39;&quot; :prop&#x3D;&quot;&#39;fieldArr.&#39; + key&quot; :rules&#x3D;&quot;rules.field&quot;&gt;</span><br><span class="line">        &lt;el-input v-model&#x3D;&quot;fieldArr[key]&quot;&gt;&lt;&#x2F;el-input&gt;</span><br><span class="line">    &lt;&#x2F;el-form-item&gt;</span><br><span class="line">&lt;&#x2F;el-col&gt;</span><br></pre></td></tr></table></figure>
+
+<p>rules</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">rules: &#123;</span><br><span class="line">    field: [</span><br><span class="line">        &#123;</span><br><span class="line">            required: <span class="literal">true</span>,</span><br><span class="line">            message: <span class="string">'请输入当月数据'</span>,</span><br><span class="line">            trigger: <span class="string">'blur'</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总结：</p>
+<ol>
+<li><p>prop要和v-model绑定的数据一致，上面的fieldArr是一个初始化为12个长度的一维数组，渲染出来的表单项是1~12月份的输入框</p>
+</li>
+<li><p>如果prop要绑定为该一维数组的第0号位上的元素，fieldArr是固定的，变化的只是fieldArr后面的数值（field[1]、field[2] 等），所以fieldArr是一个字符串，并且要加一个”.”，拼接一个循环的索引值（情景中的key）</p>
+</li>
+<li><p>要给循环的表单项单独绑定rules，绑定格式为：rules.xxx（xxx是校验项。如果是静态生成的表单项只需要在form标签中绑定rules，在表单项中绑定prop即可）</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>ElementUI</category>
+      </categories>
   </entry>
 </search>
