@@ -275,6 +275,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://bibifeng.github.io/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93%E5%B0%8F%E5%BF%83%E6%9C%BA%EF%BC%9Afor%E5%BE%AA%E7%8E%AF%E5%B0%86%E6%8E%A5%E5%8F%A3%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5push%E8%BF%9B%E6%95%B0%E7%BB%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bibifeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bibifeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93%E5%B0%8F%E5%BF%83%E6%9C%BA%EF%BC%9Afor%E5%BE%AA%E7%8E%AF%E5%B0%86%E6%8E%A5%E5%8F%A3%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5push%E8%BF%9B%E6%95%B0%E7%BB%84/" itemprop="url">每天一道小心机：for循环将接口多个字段push进数组</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-20T09:18:50+08:00">
+                2020-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93%E5%B0%8F%E5%BF%83%E6%9C%BA/" itemprop="url" rel="index">
+                    <span itemprop="name">每天一道小心机</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>场景：接口将1~12个月份对应的值用12个字段返回，这12个字段长这样：<code>field1、field2 ... field12</code>，但前端想要将12个字段组装为一个数组去循环生成相应元素，怎么做？</p>
+</blockquote>
+<p>json数据：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  field1: '12',</span><br><span class="line">  field2: '2',</span><br><span class="line">  field3: '36',</span><br><span class="line">  <span class="comment">// ... 中间省略</span></span><br><span class="line">  field12: '324'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">12</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> fieldIndex = <span class="string">'field'</span> + (i + <span class="number">1</span>); <span class="comment">// 加上1是因为接口字段从field1开始，没有field0</span></span><br><span class="line">    arr.push(data[fieldIndex]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：push的时候不能直接用<code>data.fieldIndex</code>，这样写实际上js会读取data里面叫<code>fieldIndex</code>变量的值，但在情境中<code>fieldIndex</code>是动态值，因此只能用<code>data[fieldIndex]</code>的方式去访问，又是一个小细节-。-</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://bibifeng.github.io/2020/05/19/ElementUI%E7%BB%99%E5%BE%AA%E7%8E%AF%E8%A1%A8%E5%8D%95%E9%A1%B9%E6%B7%BB%E5%8A%A0prop%E6%A0%A1%E9%AA%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -368,20 +519,20 @@
       
         
           
-            <p>场景：饿了么表单项是循环生成的，但是需要给这些表单项都加上校验（校验规则相同），代码如下：</p>
+            <p>场景：饿了么表单项是循环生成的，但是需要给这些表单项都加上校验（校验规则相同），下面是一个循环生成1~12月份的输入框表单项的表单示例，代码如下：</p>
 <p>template</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-col v-for&#x3D;&quot;(item, key) in fieldArr&quot;&gt;</span><br><span class="line">    &lt;el-form-item :label&#x3D;&quot;key + 1 + &#39;月&#39;&quot; :prop&#x3D;&quot;&#39;fieldArr.&#39; + key&quot; :rules&#x3D;&quot;rules.field&quot;&gt;</span><br><span class="line">        &lt;el-input v-model&#x3D;&quot;fieldArr[key]&quot;&gt;&lt;&#x2F;el-input&gt;</span><br><span class="line">    &lt;&#x2F;el-form-item&gt;</span><br><span class="line">&lt;&#x2F;el-col&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-col</span> <span class="attr">v-for</span>=<span class="string">"(item, key) in fieldArr"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">:label</span>=<span class="string">"key + 1 + '月'"</span> <span class="attr">:prop</span>=<span class="string">"'fieldArr.' + key"</span> <span class="attr">:rules</span>=<span class="string">"rules.field"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-model</span>=<span class="string">"fieldArr[key]"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-input</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-col</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>rules</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rules: &#123;</span><br><span class="line">    field: [</span><br><span class="line">        &#123;</span><br><span class="line">            required: <span class="literal">true</span>,</span><br><span class="line">            message: <span class="string">'请输入当月数据'</span>,</span><br><span class="line">            trigger: <span class="string">'blur'</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        fieldArr: <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">12</span>),</span><br><span class="line">        rules: &#123;</span><br><span class="line">            field: [</span><br><span class="line">                &#123;</span><br><span class="line">                    required: <span class="literal">true</span>,</span><br><span class="line">                    message: <span class="string">'请输入当月数据'</span>,</span><br><span class="line">                    trigger: <span class="string">'blur'</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>总结：</p>
 <ol>
-<li><p>prop要和v-model绑定的数据一致，上面的fieldArr是一个初始化为12个长度的一维数组，渲染出来的表单项是1~12月份的输入框</p>
+<li><p>prop要和v-model绑定的数据一致（写法会不一样，看代码示例），上面的fieldArr是一个初始化为12个长度的一维数组</p>
 </li>
-<li><p>如果prop要绑定为该一维数组的第0号位上的元素，fieldArr是固定的，变化的只是fieldArr后面的数值（field[1]、field[2] 等），所以fieldArr是一个字符串，并且要加一个”.”，拼接一个循环的索引值（情景中的key）</p>
+<li><p>因为prop要绑定这个一维数组的第0、1、2、3…11号位上的元素，fieldArr是固定的，变化的只是fieldArr后面的数值（<code>field[1]、field[2]</code> 等），所以fieldArr是一个字符串，并且要加一个”<code>.</code>“，拼接一个循环的索引值（情景中的key），注意这里不能直接用<code>:prop=&quot;field[key]&quot;</code></p>
 </li>
-<li><p>要给循环的表单项单独绑定rules，绑定格式为：rules.xxx（xxx是校验项。如果是静态生成的表单项只需要在form标签中绑定rules，在表单项中绑定prop即可）</p>
+<li><p>要给循环的表单项单独绑定rules，绑定格式为：<code>rules.xxx</code>（xxx是校验项。如果是静态生成的表单项只需要在form标签中绑定rules，在表单项中绑定prop即可）</p>
 </li>
 </ol>
 
@@ -1088,7 +1239,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1099,7 +1250,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

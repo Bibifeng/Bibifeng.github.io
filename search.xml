@@ -1,12 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ElementUI给循环表单项添加prop校验</title>
+    <url>/2020/05/19/ElementUI%E7%BB%99%E5%BE%AA%E7%8E%AF%E8%A1%A8%E5%8D%95%E9%A1%B9%E6%B7%BB%E5%8A%A0prop%E6%A0%A1%E9%AA%8C/</url>
+    <content><![CDATA[<p>场景：饿了么表单项是循环生成的，但是需要给这些表单项都加上校验（校验规则相同），下面是一个循环生成1~12月份的输入框表单项的表单示例，代码如下：</p>
+<p>template</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-col</span> <span class="attr">v-for</span>=<span class="string">"(item, key) in fieldArr"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">:label</span>=<span class="string">"key + 1 + '月'"</span> <span class="attr">:prop</span>=<span class="string">"'fieldArr.' + key"</span> <span class="attr">:rules</span>=<span class="string">"rules.field"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-model</span>=<span class="string">"fieldArr[key]"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-input</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-col</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>rules</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        fieldArr: <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">12</span>),</span><br><span class="line">        rules: &#123;</span><br><span class="line">            field: [</span><br><span class="line">                &#123;</span><br><span class="line">                    required: <span class="literal">true</span>,</span><br><span class="line">                    message: <span class="string">'请输入当月数据'</span>,</span><br><span class="line">                    trigger: <span class="string">'blur'</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总结：</p>
+<ol>
+<li><p>prop要和v-model绑定的数据一致（写法会不一样，看代码示例），上面的fieldArr是一个初始化为12个长度的一维数组</p>
+</li>
+<li><p>因为prop要绑定这个一维数组的第0、1、2、3…11号位上的元素，fieldArr是固定的，变化的只是fieldArr后面的数值（<code>field[1]、field[2]</code> 等），所以fieldArr是一个字符串，并且要加一个”<code>.</code>“，拼接一个循环的索引值（情景中的key），注意这里不能直接用<code>:prop=&quot;field[key]&quot;</code></p>
+</li>
+<li><p>要给循环的表单项单独绑定rules，绑定格式为：<code>rules.xxx</code>（xxx是校验项。如果是静态生成的表单项只需要在form标签中绑定rules，在表单项中绑定prop即可）</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>ElementUI</category>
+      </categories>
+  </entry>
+  <entry>
     <title>uni小程序富文本组件处理图片宽度溢出</title>
     <url>/2020/05/15/uni%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BB%84%E4%BB%B6%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87%E5%AE%BD%E5%BA%A6%E6%BA%A2%E5%87%BA/</url>
     <content><![CDATA[<p>接口返回文本编辑器的内容字段后，进行如下处理：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let str;</span><br><span class="line">str &#x3D; res.data.content || &#39;&#39;; &#x2F;&#x2F; 获取接口返回</span><br><span class="line">str &#x3D; str.replace(&#x2F;&lt;&#x2F;g, &#39;&lt;&#39;) </span><br><span class="line">.replace(&#x2F;&gt;&#x2F;g, &#39;&gt;&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(height&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(width&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(style&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(alt&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)&#x2F;ig, &#39;&lt;img style&#x3D;&quot;width: 100%;&quot; $1&#39;);</span><br></pre></td></tr></table></figure>
 
 <p>处理后宽度就不会溢出了：<br><img src="/.io//pic.png" alt="pic"></p>
+]]></content>
+      <categories>
+        <category>小程序</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>uni小程序页面获取传参</title>
+    <url>/2020/05/15/uni%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%A1%B5%E9%9D%A2%E8%8E%B7%E5%8F%96%E4%BC%A0%E5%8F%82/</url>
+    <content><![CDATA[<h4 id="前一个页面传值给下一个页面"><a href="#前一个页面传值给下一个页面" class="headerlink" title="前一个页面传值给下一个页面"></a>前一个页面传值给下一个页面</h4><blockquote>
+<p>uni.navigateTo(); 保留当前页面，跳转到应用内的某个页面，使用uni.navigateBack() 可以返回到原页面</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">uni.navigateTo(&#123;</span><br><span class="line">    url: &#39;test?id&#x3D;1&amp;name&#x3D;&#39; + encodeURIComponent(JSON.stringify(name))</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>注意：url传参有长度限制，太长时可通过对参数进行 转码+序列化 的方法传过去</p>
+<p>在下一个页面接收值（需要相应的反序列化、解码）：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">onLoad(e) &#123;</span><br><span class="line">	this.id &#x3D; e.id;</span><br><span class="line">	this.name &#x3D; JSON.parse(decodeURIComponent(e.name));</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h4 id="下一个页面在返回前传值给前一个页面"><a href="#下一个页面在返回前传值给前一个页面" class="headerlink" title="下一个页面在返回前传值给前一个页面"></a>下一个页面在返回前传值给前一个页面</h4><p>举例，从A页面通过navigateTo到B页面，B页面有一个参数需要传回给A页面，在B页面可进行如下操作：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let pages &#x3D; getCurrentPages();  &#x2F;&#x2F;获取所有页面栈实例列表</span><br><span class="line">let nowPage &#x3D; pages[ pages.length - 1];  &#x2F;&#x2F;当前页页面实例</span><br><span class="line">let prevPage &#x3D; pages[ pages.length - 2 ];  &#x2F;&#x2F;上一页页面实例</span><br><span class="line">prevPage.$vm.searchVal &#x3D; 1211;   &#x2F;&#x2F;修改上一页data里面的searchVal参数值为1211</span><br><span class="line">uni.navigateBack(&#123;  &#x2F;&#x2F;uni.navigateTo跳转的返回，如果带任何参数配置，默认返回上一级</span><br><span class="line">	delta: 1</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">————————————————</span><br><span class="line">原文链接：https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_42231156&#x2F;java&#x2F;article&#x2F;details&#x2F;99674176</span><br></pre></td></tr></table></figure>
+
+<p>注意，B页面在返回时已经对A页面的searchVal的值进行了修改，如果需要触发A页面的相关操作，则需要在A页面的onShow页面周期中进行触发</p>
+<p>另一种修改A页面的值的方法如下（替换上面的prevPage.$vm.searchVal = 1211），但是个人没试过</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">prevPage.setData(&#123;</span><br><span class="line">    searchVal: 1211,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过好友链接分享传值"><a href="#通过好友链接分享传值" class="headerlink" title="通过好友链接分享传值"></a>通过好友链接分享传值</h4><p>有时候会有这样的情景：分享详情页时，当另一个人从分享链接打开进到这个页面时，需要一个id才能请求接口获取详情数据，因此就需要在分享的时候把这个id传过来，在打开的时候拿到这个id去请求数据</p>
+<p>在于onShow生命周期同级加入onShareAppMessage函数，才能开启页面分享</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">onShareAppMessage() &#123;</span><br><span class="line">	<span class="comment">// 转发</span></span><br><span class="line">	wx.showShareMenu(&#123;</span><br><span class="line">	  withShareTicket: <span class="literal">true</span></span><br><span class="line">	&#125;)</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		title: title, <span class="comment">// 分享链接的title</span></span><br><span class="line">		path: <span class="string">'/xxx/xxx?id=1234'</span>, <span class="comment">// 分享打开时的页面路径</span></span><br><span class="line">		imageUrl: imageUrl, <span class="comment">// 分享链接的图片</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当好友从链接打开时，页面会走到上面path定义的路径当中，这时候要获取id，方法和上一种url传参一样，在页面onLoad生命周期中获取</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">onLoad(e) &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(e.id);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过扫二维码进来的页面如何获取传参值"><a href="#通过扫二维码进来的页面如何获取传参值" class="headerlink" title="通过扫二维码进来的页面如何获取传参值"></a>通过扫二维码进来的页面如何获取传参值</h4><p>二维码扫码进来，要获取生成二维码时传的自定义参数，也和上面类似方式获取，只不过相当于小程序自动加了一个scene字段存储传参信息，获取如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">onLoad(e) &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="built_in">decodeURIComponent</span>(e.scene));</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>注意一定要对scene字段进行decodeURIComponent处理</p>
+<p>关于二维码限制传参长度（只有几十个字符）的问题，一般的做法是，将所需的传参先走我们自己的接口，在后台临时存储，然后后台生成一个类似缓存ID的标识（长度一定不能超过微信的限制），再把缓存ID通过生成二维码的接口传过去去获取二维码。在扫码打开后的页面，通过decodeURIComponent(e.scene)获取到的值，就是缓存ID，此时再通过自己的接口，用缓存ID去查询生成二维码时候的传参</p>
 ]]></content>
       <categories>
         <category>小程序</category>
@@ -61,6 +123,24 @@
       </categories>
   </entry>
   <entry>
+    <title>每天一道小心机：for循环将接口多个字段push进数组</title>
+    <url>/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93%E5%B0%8F%E5%BF%83%E6%9C%BA%EF%BC%9Afor%E5%BE%AA%E7%8E%AF%E5%B0%86%E6%8E%A5%E5%8F%A3%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5push%E8%BF%9B%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<blockquote>
+<p>场景：接口将1~12个月份对应的值用12个字段返回，这12个字段长这样：<code>field1、field2 ... field12</code>，但前端想要将12个字段组装为一个数组去循环生成相应元素，怎么做？</p>
+</blockquote>
+<p>json数据：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  field1: '12',</span><br><span class="line">  field2: '2',</span><br><span class="line">  field3: '36',</span><br><span class="line">  <span class="comment">// ... 中间省略</span></span><br><span class="line">  field12: '324'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">12</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> fieldIndex = <span class="string">'field'</span> + (i + <span class="number">1</span>); <span class="comment">// 加上1是因为接口字段从field1开始，没有field0</span></span><br><span class="line">    arr.push(data[fieldIndex]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：push的时候不能直接用<code>data.fieldIndex</code>，这样写实际上js会读取data里面叫<code>fieldIndex</code>变量的值，但在情境中<code>fieldIndex</code>是动态值，因此只能用<code>data[fieldIndex]</code>的方式去访问，又是一个小细节-。-</p>
+]]></content>
+      <categories>
+        <category>每天一道小心机</category>
+      </categories>
+  </entry>
+  <entry>
     <title>自己的分支merge到远程分支有冲突时</title>
     <url>/2020/05/04/%E8%87%AA%E5%B7%B1%E7%9A%84%E5%88%86%E6%94%AFmerge%E5%88%B0%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E6%9C%89%E5%86%B2%E7%AA%81%E6%97%B6/</url>
     <content><![CDATA[<blockquote>
@@ -69,68 +149,6 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout dev &#x2F;&#x2F; 切换分支</span><br><span class="line">git pull &#x2F;&#x2F; 更新分支</span><br><span class="line">git merge --no-ff release-bibifeng</span><br><span class="line">&#x2F;&#x2F; 解决冲突...</span><br><span class="line">git add .</span><br><span class="line">git commit -m &#39;commit message&#39;</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>git</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>uni小程序页面获取传参</title>
-    <url>/2020/05/15/uni%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%A1%B5%E9%9D%A2%E8%8E%B7%E5%8F%96%E4%BC%A0%E5%8F%82/</url>
-    <content><![CDATA[<h4 id="前一个页面传值给下一个页面"><a href="#前一个页面传值给下一个页面" class="headerlink" title="前一个页面传值给下一个页面"></a>前一个页面传值给下一个页面</h4><blockquote>
-<p>uni.navigateTo(); 保留当前页面，跳转到应用内的某个页面，使用uni.navigateBack() 可以返回到原页面</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">uni.navigateTo(&#123;</span><br><span class="line">    url: &#39;test?id&#x3D;1&amp;name&#x3D;&#39; + encodeURIComponent(JSON.stringify(name))</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>注意：url传参有长度限制，太长时可通过对参数进行 转码+序列化 的方法传过去</p>
-<p>在下一个页面接收值（需要相应的反序列化、解码）：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">onLoad(e) &#123;</span><br><span class="line">	this.id &#x3D; e.id;</span><br><span class="line">	this.name &#x3D; JSON.parse(decodeURIComponent(e.name));</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<h4 id="下一个页面在返回前传值给前一个页面"><a href="#下一个页面在返回前传值给前一个页面" class="headerlink" title="下一个页面在返回前传值给前一个页面"></a>下一个页面在返回前传值给前一个页面</h4><p>举例，从A页面通过navigateTo到B页面，B页面有一个参数需要传回给A页面，在B页面可进行如下操作：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let pages &#x3D; getCurrentPages();  &#x2F;&#x2F;获取所有页面栈实例列表</span><br><span class="line">let nowPage &#x3D; pages[ pages.length - 1];  &#x2F;&#x2F;当前页页面实例</span><br><span class="line">let prevPage &#x3D; pages[ pages.length - 2 ];  &#x2F;&#x2F;上一页页面实例</span><br><span class="line">prevPage.$vm.searchVal &#x3D; 1211;   &#x2F;&#x2F;修改上一页data里面的searchVal参数值为1211</span><br><span class="line">uni.navigateBack(&#123;  &#x2F;&#x2F;uni.navigateTo跳转的返回，如果带任何参数配置，默认返回上一级</span><br><span class="line">	delta: 1</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">————————————————</span><br><span class="line">原文链接：https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_42231156&#x2F;java&#x2F;article&#x2F;details&#x2F;99674176</span><br></pre></td></tr></table></figure>
-
-<p>注意，B页面在返回时已经对A页面的searchVal的值进行了修改，如果需要触发A页面的相关操作，则需要在A页面的onShow页面周期中进行触发</p>
-<p>另一种修改A页面的值的方法如下（替换上面的prevPage.$vm.searchVal = 1211），但是个人没试过</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">prevPage.setData(&#123;</span><br><span class="line">    searchVal: 1211,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="通过好友链接分享传值"><a href="#通过好友链接分享传值" class="headerlink" title="通过好友链接分享传值"></a>通过好友链接分享传值</h4><p>有时候会有这样的情景：分享详情页时，当另一个人从分享链接打开进到这个页面时，需要一个id才能请求接口获取详情数据，因此就需要在分享的时候把这个id传过来，在打开的时候拿到这个id去请求数据</p>
-<p>在于onShow生命周期同级加入onShareAppMessage函数，才能开启页面分享</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">onShareAppMessage() &#123;</span><br><span class="line">	<span class="comment">// 转发</span></span><br><span class="line">	wx.showShareMenu(&#123;</span><br><span class="line">	  withShareTicket: <span class="literal">true</span></span><br><span class="line">	&#125;)</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		title: title, <span class="comment">// 分享链接的title</span></span><br><span class="line">		path: <span class="string">'/xxx/xxx?id=1234'</span>, <span class="comment">// 分享打开时的页面路径</span></span><br><span class="line">		imageUrl: imageUrl, <span class="comment">// 分享链接的图片</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当好友从链接打开时，页面会走到上面path定义的路径当中，这时候要获取id，方法和上一种url传参一样，在页面onLoad生命周期中获取</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">onLoad(e) &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(e.id);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<h4 id="通过扫二维码进来的页面如何获取传参值"><a href="#通过扫二维码进来的页面如何获取传参值" class="headerlink" title="通过扫二维码进来的页面如何获取传参值"></a>通过扫二维码进来的页面如何获取传参值</h4><p>二维码扫码进来，要获取生成二维码时传的自定义参数，也和上面类似方式获取，只不过相当于小程序自动加了一个scene字段存储传参信息，获取如下：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">onLoad(e) &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="built_in">decodeURIComponent</span>(e.scene));</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<p>注意一定要对scene字段进行decodeURIComponent处理</p>
-<p>关于二维码限制传参长度（只有几十个字符）的问题，一般的做法是，将所需的传参先走我们自己的接口，在后台临时存储，然后后台生成一个类似缓存ID的标识（长度一定不能超过微信的限制），再把缓存ID通过生成二维码的接口传过去去获取二维码。在扫码打开后的页面，通过decodeURIComponent(e.scene)获取到的值，就是缓存ID，此时再通过自己的接口，用缓存ID去查询生成二维码时候的传参</p>
-]]></content>
-      <categories>
-        <category>小程序</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>ElementUI给循环表单项添加prop校验</title>
-    <url>/2020/05/19/ElementUI%E7%BB%99%E5%BE%AA%E7%8E%AF%E8%A1%A8%E5%8D%95%E9%A1%B9%E6%B7%BB%E5%8A%A0prop%E6%A0%A1%E9%AA%8C/</url>
-    <content><![CDATA[<p>场景：饿了么表单项是循环生成的，但是需要给这些表单项都加上校验（校验规则相同），代码如下：</p>
-<p>template</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;el-col v-for&#x3D;&quot;(item, key) in fieldArr&quot;&gt;</span><br><span class="line">    &lt;el-form-item :label&#x3D;&quot;key + 1 + &#39;月&#39;&quot; :prop&#x3D;&quot;&#39;fieldArr.&#39; + key&quot; :rules&#x3D;&quot;rules.field&quot;&gt;</span><br><span class="line">        &lt;el-input v-model&#x3D;&quot;fieldArr[key]&quot;&gt;&lt;&#x2F;el-input&gt;</span><br><span class="line">    &lt;&#x2F;el-form-item&gt;</span><br><span class="line">&lt;&#x2F;el-col&gt;</span><br></pre></td></tr></table></figure>
-
-<p>rules</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">rules: &#123;</span><br><span class="line">    field: [</span><br><span class="line">        &#123;</span><br><span class="line">            required: <span class="literal">true</span>,</span><br><span class="line">            message: <span class="string">'请输入当月数据'</span>,</span><br><span class="line">            trigger: <span class="string">'blur'</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>总结：</p>
-<ol>
-<li><p>prop要和v-model绑定的数据一致，上面的fieldArr是一个初始化为12个长度的一维数组，渲染出来的表单项是1~12月份的输入框</p>
-</li>
-<li><p>如果prop要绑定为该一维数组的第0号位上的元素，fieldArr是固定的，变化的只是fieldArr后面的数值（field[1]、field[2] 等），所以fieldArr是一个字符串，并且要加一个”.”，拼接一个循环的索引值（情景中的key）</p>
-</li>
-<li><p>要给循环的表单项单独绑定rules，绑定格式为：rules.xxx（xxx是校验项。如果是静态生成的表单项只需要在form标签中绑定rules，在表单项中绑定prop即可）</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>ElementUI</category>
       </categories>
   </entry>
 </search>
