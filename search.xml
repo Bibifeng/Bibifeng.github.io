@@ -151,4 +151,27 @@
         <category>git</category>
       </categories>
   </entry>
+  <entry>
+    <title>小程序(uni)在页面传参时布尔值失效的问题</title>
+    <url>/2020/06/05/%E5%B0%8F%E7%A8%8B%E5%BA%8F-uni-%E5%9C%A8%E9%A1%B5%E9%9D%A2%E4%BC%A0%E5%8F%82%E6%97%B6%E5%B8%83%E5%B0%94%E5%80%BC%E5%A4%B1%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>在开发过程中发现了一个不太起眼但很重要的问题，也是踩坑踩过来的。先看下面这段小程序A页面传值到B页面的代码</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// A页面</span></span><br><span class="line">methods: &#123;</span><br><span class="line">    viewB() &#123;</span><br><span class="line">        <span class="keyword">let</span> id = <span class="string">'123'</span>,</span><br><span class="line">            isHide = <span class="literal">true</span>,</span><br><span class="line">        uni.navigateTo(&#123;</span><br><span class="line">            url: <span class="string">'/pages/demo/b?id='</span> + id + <span class="string">'&amp;isHide='</span> isHide,</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// B页面 接收值</span></span><br><span class="line">onLoad(e) &#123;</span><br><span class="line">    <span class="keyword">this</span>.isHide = e.isHide;</span><br><span class="line">    <span class="keyword">this</span>.id = e.id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看起来没什么问题，传参有两个，字符传类型<code>id</code> 和 布尔值类型<code>isHide</code>。在B页面的onLoad周期中也能正常接收到这两个值。</p>
+<p>因为<code>isHide</code>是A页面去控制B页面的按钮是否显示的，但是在B页面中发现无论<code>isHide</code>是<code>true</code>还是<code>false</code>，都无法正常控制按钮的显示与隐藏</p>
+<p>仔细排查确认代码没写错之后，<strong>在小程序调试工具中偶然发现A页面带过来的布尔类型<code>isHide</code>，到了B页面却莫名其妙的变成了字符串类型</strong></p>
+<p>也就是说，在A页面 <code>isHide: true;</code> 但是在B页面 <code>isHide: &#39;true&#39;</code>;</p>
+<p>初步猜想是url传参的时候，布尔值被转成了字符串，所以我又尝试了以对象的形式去传参，如下代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// A页面</span></span><br><span class="line">methods: &#123;</span><br><span class="line">    viewB() &#123;</span><br><span class="line">        <span class="keyword">let</span> params: &#123;</span><br><span class="line">            id: <span class="string">'123'</span>,</span><br><span class="line">            isHide: <span class="literal">true</span>,</span><br><span class="line">        &#125;</span><br><span class="line">        uni.navigateTo(&#123;</span><br><span class="line">            url: <span class="string">'/pages/demo/b?params='</span> + <span class="built_in">encodeURIComponent</span>(<span class="built_in">JSON</span>.stringify(params)),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// B页面 接收值</span></span><br><span class="line">onLoad(e) &#123;</span><br><span class="line">    <span class="keyword">let</span> obj = <span class="built_in">JSON</span>.parse(<span class="built_in">decodeURIComponent</span>(e.params));</span><br><span class="line">    <span class="keyword">this</span>.isHide = obj.isHide; <span class="comment">// 这里拿到的isHide不会被转成字符串</span></span><br><span class="line">    <span class="keyword">this</span>.id = obj.id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样页面就正常了</p>
+]]></content>
+      <categories>
+        <category>小程序</category>
+      </categories>
+  </entry>
 </search>
