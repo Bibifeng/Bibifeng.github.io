@@ -79,14 +79,14 @@
 
 
 
-<meta name="description" content="在开发过程中发现了一个不太起眼但很重要的问题，也是踩坑踩过来的。先看下面这段小程序A页面传值到B页面的代码 12345678910&#x2F;&#x2F; A页面methods: &amp;#123;    viewB() &amp;#123;        let id &#x3D; &#39;123&#39;,            isHide &#x3D; true,        uni.navigateTo(&amp;#123;            url: &#39;">
+<meta name="description" content="在开发过程中发现了一个不太起眼但很重要的问题，也是踩坑踩过来的。先看下面这段小程序A页面传值到B页面的代码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小程序(uni)在页面传参时布尔值失效的问题">
 <meta property="og:url" content="https://bibifeng.github.io/2020/06/05/%E5%B0%8F%E7%A8%8B%E5%BA%8F-uni-%E5%9C%A8%E9%A1%B5%E9%9D%A2%E4%BC%A0%E5%8F%82%E6%97%B6%E5%B8%83%E5%B0%94%E5%80%BC%E5%A4%B1%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Bibifeng&#39;s blog">
-<meta property="og:description" content="在开发过程中发现了一个不太起眼但很重要的问题，也是踩坑踩过来的。先看下面这段小程序A页面传值到B页面的代码 12345678910&#x2F;&#x2F; A页面methods: &amp;#123;    viewB() &amp;#123;        let id &#x3D; &#39;123&#39;,            isHide &#x3D; true,        uni.navigateTo(&amp;#123;            url: &#39;">
+<meta property="og:description" content="在开发过程中发现了一个不太起眼但很重要的问题，也是踩坑踩过来的。先看下面这段小程序A页面传值到B页面的代码">
 <meta property="article:published_time" content="2020-06-05T01:33:00.000Z">
-<meta property="article:modified_time" content="2020-06-05T02:11:17.506Z">
+<meta property="article:modified_time" content="2020-06-06T06:10:13.585Z">
 <meta property="article:author" content="bibifeng">
 <meta property="article:tag" content="bibifeng">
 <meta name="twitter:card" content="summary">
@@ -366,6 +366,8 @@
 
       
         <p>在开发过程中发现了一个不太起眼但很重要的问题，也是踩坑踩过来的。先看下面这段小程序A页面传值到B页面的代码</p>
+<a id="more"></a>
+
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A页面</span></span><br><span class="line">methods: &#123;</span><br><span class="line">    viewB() &#123;</span><br><span class="line">        <span class="keyword">let</span> id = <span class="string">'123'</span>,</span><br><span class="line">            isHide = <span class="literal">true</span>,</span><br><span class="line">        uni.navigateTo(&#123;</span><br><span class="line">            url: <span class="string">'/pages/demo/b?id='</span> + id + <span class="string">'&amp;isHide='</span> isHide,</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// B页面 接收值</span></span><br><span class="line">onLoad(e) &#123;</span><br><span class="line">    <span class="keyword">this</span>.isHide = e.isHide;</span><br><span class="line">    <span class="keyword">this</span>.id = e.id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -431,6 +433,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/06/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B5%8CH5%E4%BC%A0%E5%8F%82/" rel="prev" title="小程序嵌H5传参">
+                小程序嵌H5传参 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -498,7 +504,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
