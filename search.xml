@@ -243,6 +243,57 @@
       </categories>
   </entry>
   <entry>
+    <title>微信小程序(uni)通过地图选择地址、根据地址查看地图(进行导航)</title>
+    <url>/2020/06/18/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-uni-%E9%80%9A%E8%BF%87%E5%9C%B0%E5%9B%BE%E9%80%89%E6%8B%A9%E5%9C%B0%E5%9D%80%E3%80%81%E6%A0%B9%E6%8D%AE%E5%9C%B0%E5%9D%80%E6%9F%A5%E7%9C%8B%E5%9C%B0%E5%9B%BE-%E8%BF%9B%E8%A1%8C%E5%AF%BC%E8%88%AA/</url>
+    <content><![CDATA[<blockquote>
+<p>通过地图选择地址</p>
+</blockquote>
+<a id="more"></a>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 选择地址</span></span><br><span class="line">getAddressByMap() &#123;</span><br><span class="line">    uni.authorize(&#123;</span><br><span class="line">        scope: <span class="string">'scope.userLocation'</span>, <span class="comment">// 查询该权限项是否已开启</span></span><br><span class="line">        success: <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 成功获取授权，调用获取位置api</span></span><br><span class="line">            uni.chooseLocation(&#123;</span><br><span class="line">                success:<span class="function"><span class="params">r</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">'位置名称：'</span> + r.name);</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">'详细地址：'</span> + r.address);</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">'纬度：'</span> + r.latitude);</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">'经度：'</span> + r.longitude);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">        fail: <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 如果用户没有授权过或者拒绝了获取地理位置的权限，会走到这里</span></span><br><span class="line">            uni.showModal(&#123;</span><br><span class="line">                title: <span class="string">'温馨提示'</span>,</span><br><span class="line">                content: <span class="string">'您尚未开启定位,请先开启'</span>,</span><br><span class="line">                confirmText: <span class="string">'去设置'</span>,</span><br><span class="line">                success(res)&#123;</span><br><span class="line">                    <span class="keyword">if</span> (res.confirm) &#123;</span><br><span class="line">                        <span class="comment">//打开授权设置</span></span><br><span class="line">                        uni.openSetting(&#123;</span><br><span class="line">                          success: <span class="function"><span class="params">r</span> =&gt;</span> &#123;</span><br><span class="line">                            <span class="built_in">console</span>.log(r.authSetting);</span><br><span class="line">                          &#125;,</span><br><span class="line">                        &#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">            </span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<p>一定要先使用<code>authorize</code>查询是否授权，如果不这样做，直接使用<code>chooseLocation</code>，会有一种情况就是假如用户第一次拒绝了权限申请，那么后面便无法再次触发<code>chooseLocation</code></p>
+<p>所以使用了<code>authorize</code>查询授权情况后，如果用户授权，便调用<code>chooseLocation</code>；如果用户没有授权，便提示让用户先去开启获取地理位置权限项</p>
+<p>在<code>openSetting</code>（即让用户去开启权限项）之前，有两个步骤需要做：</p>
+<ol>
+<li><p>一定要加上<code>showModal</code>，询问用户是否要去开启权限项，只有用户主动调用，<code>openSetting</code>才会正常打开，否则，直接调用的话将没有任何反应</p>
+</li>
+<li><p>创建app.json，加上权限选择配置，如下：</p>
+</li>
+</ol>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"permission"</span>: &#123;</span><br><span class="line">	  <span class="attr">"scope.userLocation"</span>: &#123;</span><br><span class="line">	    <span class="attr">"desc"</span>: <span class="string">"你的位置信息将用于小程序位置接口的效果展示"</span></span><br><span class="line">	  &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>根据地址查看地图(进行导航)，以腾讯地图为例</p>
+</blockquote>
+<p>准备：腾讯地图的jssdk 和 地图密钥</p>
+<p>先使用jssdk，查询地址对应的经纬度相应信息，然后将经纬度传给uni提供的api： <code>openLocation</code>即可</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> QQMap <span class="keyword">from</span> <span class="string">'./qqmap-wx-jssdk.js'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            mapsdk: <span class="literal">null</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    onLoad(e) &#123;</span><br><span class="line">        <span class="comment">// 实例化 腾讯地图构造函数</span></span><br><span class="line">        <span class="keyword">this</span>.mapsdk = <span class="keyword">new</span> QQMapWX(&#123;</span><br><span class="line">            key: <span class="string">'申请的密钥'</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        <span class="comment">// 在地图中查看地址</span></span><br><span class="line">        addressInMap() &#123;</span><br><span class="line">            <span class="keyword">this</span>.mapsdk.geocoder(&#123;</span><br><span class="line">                address: <span class="string">'地址：如广东省深圳市深圳大学'</span>,</span><br><span class="line">                success: <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="comment">// 调起地图</span></span><br><span class="line">                    wx.openLocation(&#123;</span><br><span class="line">                        latitude: res.result.location.lat,</span><br><span class="line">                        longitude: res.result.location.lng,</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;,</span><br><span class="line">                fail: <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="comment">// 这里是防止地址不合法，怕查不到对应经纬度，提示一下用户</span></span><br><span class="line">                    uni.showToast(&#123;</span><br><span class="line">                        title: <span class="string">'无法定位到该地址，请检查地址准确性'</span>,</span><br><span class="line">                        icon: <span class="string">'none'</span>,</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;,</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>小程序</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>每天一道小心机：for循环将接口多个字段push进数组</title>
+    <url>/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93%E5%B0%8F%E5%BF%83%E6%9C%BA%EF%BC%9Afor%E5%BE%AA%E7%8E%AF%E5%B0%86%E6%8E%A5%E5%8F%A3%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5push%E8%BF%9B%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<blockquote>
+<p>场景：接口将1~12个月份对应的值用12个字段返回，这12个字段长这样：<code>field1、field2 ... field12</code>，但前端想要将12个字段组装为一个数组去循环生成相应元素，怎么做？</p>
+</blockquote>
+<a id="more"></a>
+
+<p>json数据：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  field1: '12',</span><br><span class="line">  field2: '2',</span><br><span class="line">  field3: '36',</span><br><span class="line">  <span class="comment">// ... 中间省略</span></span><br><span class="line">  field12: '324'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">12</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> fieldIndex = <span class="string">'field'</span> + (i + <span class="number">1</span>); <span class="comment">// 加上1是因为接口字段从field1开始，没有field0</span></span><br><span class="line">    arr.push(data[fieldIndex]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：push的时候不能直接用<code>data.fieldIndex</code>，这样写实际上js会读取data里面叫<code>fieldIndex</code>变量的值，但在情境中<code>fieldIndex</code>是动态值，因此只能用<code>data[fieldIndex]</code>的方式去访问，又是一个小细节-。-</p>
+]]></content>
+      <categories>
+        <category>每天一道小心机</category>
+      </categories>
+  </entry>
+  <entry>
     <title>总结一些git日常使用命令</title>
     <url>/2020/08/05/%E6%80%BB%E7%BB%93%E4%B8%80%E4%BA%9Bgit%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<p>日常使用的git命令，记录下</p>
@@ -299,52 +350,18 @@
       </categories>
   </entry>
   <entry>
-    <title>每天一道小心机：for循环将接口多个字段push进数组</title>
-    <url>/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93%E5%B0%8F%E5%BF%83%E6%9C%BA%EF%BC%9Afor%E5%BE%AA%E7%8E%AF%E5%B0%86%E6%8E%A5%E5%8F%A3%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5push%E8%BF%9B%E6%95%B0%E7%BB%84/</url>
+    <title>解决uni微信小程序在onShareAppMessage中分享传参无法按预设的url传参进行的问题</title>
+    <url>/2020/08/10/%E8%A7%A3%E5%86%B3uni%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%9C%A8onShareAppMessage%E4%B8%AD%E5%88%86%E4%BA%AB%E4%BC%A0%E5%8F%82%E6%97%A0%E6%B3%95%E6%8C%89%E9%A2%84%E8%AE%BE%E7%9A%84url%E4%BC%A0%E5%8F%82%E8%BF%9B%E8%A1%8C%E7%9A%84%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<blockquote>
-<p>场景：接口将1~12个月份对应的值用12个字段返回，这12个字段长这样：<code>field1、field2 ... field12</code>，但前端想要将12个字段组装为一个数组去循环生成相应元素，怎么做？</p>
+<p>问题复现：在进行页面分享相关业务开发时，使用了微信提供的<code>onShareAppMessage</code>的API，其中在预设了<code>path</code>之后，意外的发现无论url后面的传参值怎么变，分享出去之后的url都是默认url，与自己预设的path值不一样</p>
 </blockquote>
 <a id="more"></a>
 
-<p>json数据：</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  field1: '12',</span><br><span class="line">  field2: '2',</span><br><span class="line">  field3: '36',</span><br><span class="line">  <span class="comment">// ... 中间省略</span></span><br><span class="line">  field12: '324'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>代码：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">12</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> fieldIndex = <span class="string">'field'</span> + (i + <span class="number">1</span>); <span class="comment">// 加上1是因为接口字段从field1开始，没有field0</span></span><br><span class="line">    arr.push(data[fieldIndex]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意：push的时候不能直接用<code>data.fieldIndex</code>，这样写实际上js会读取data里面叫<code>fieldIndex</code>变量的值，但在情境中<code>fieldIndex</code>是动态值，因此只能用<code>data[fieldIndex]</code>的方式去访问，又是一个小细节-。-</p>
+<p>一番查找，发现了一个问题。由于我需要在分享时去判断一个接口返回值，从而动态的去改变需要在分享的url中的参数，所以我在<code>onShareAppMessage</code>中使用了promise，期待等接口请求完再生成分享链接</p>
+<p>但是事实上，<code>onShareAppMessage</code>是官方已经封装好的，里面并不支持进行同步操作，即使用了promise或者是使用了async、await，虽然代码会按正常顺序执行，但最终分享出去的url，始终都是页面默认url，这与<code>onShareAppMessage</code>内部实现有关</p>
+<p>解决办法：将分享时需要的那个接口返回值，提前进行请求（我放在了页面一进来时候去请求），这样在<code>onShareAppMessage</code>就可以直接拿来用，而不用再进行同步接口请求了</p>
+<p>去掉了<code>onShareAppMessage</code>中的promise，分享出去的path中的url传参就是正常我们预定义的了</p>
 ]]></content>
-      <categories>
-        <category>每天一道小心机</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>微信小程序(uni)通过地图选择地址、根据地址查看地图(进行导航)</title>
-    <url>/2020/06/18/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-uni-%E9%80%9A%E8%BF%87%E5%9C%B0%E5%9B%BE%E9%80%89%E6%8B%A9%E5%9C%B0%E5%9D%80%E3%80%81%E6%A0%B9%E6%8D%AE%E5%9C%B0%E5%9D%80%E6%9F%A5%E7%9C%8B%E5%9C%B0%E5%9B%BE-%E8%BF%9B%E8%A1%8C%E5%AF%BC%E8%88%AA/</url>
-    <content><![CDATA[<blockquote>
-<p>通过地图选择地址</p>
-</blockquote>
-<a id="more"></a>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 选择地址</span></span><br><span class="line">getAddressByMap() &#123;</span><br><span class="line">    uni.authorize(&#123;</span><br><span class="line">        scope: <span class="string">'scope.userLocation'</span>, <span class="comment">// 查询该权限项是否已开启</span></span><br><span class="line">        success: <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 成功获取授权，调用获取位置api</span></span><br><span class="line">            uni.chooseLocation(&#123;</span><br><span class="line">                success:<span class="function"><span class="params">r</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">'位置名称：'</span> + r.name);</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">'详细地址：'</span> + r.address);</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">'纬度：'</span> + r.latitude);</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">'经度：'</span> + r.longitude);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">        fail: <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 如果用户没有授权过或者拒绝了获取地理位置的权限，会走到这里</span></span><br><span class="line">            uni.showModal(&#123;</span><br><span class="line">                title: <span class="string">'温馨提示'</span>,</span><br><span class="line">                content: <span class="string">'您尚未开启定位,请先开启'</span>,</span><br><span class="line">                confirmText: <span class="string">'去设置'</span>,</span><br><span class="line">                success(res)&#123;</span><br><span class="line">                    <span class="keyword">if</span> (res.confirm) &#123;</span><br><span class="line">                        <span class="comment">//打开授权设置</span></span><br><span class="line">                        uni.openSetting(&#123;</span><br><span class="line">                          success: <span class="function"><span class="params">r</span> =&gt;</span> &#123;</span><br><span class="line">                            <span class="built_in">console</span>.log(r.authSetting);</span><br><span class="line">                          &#125;,</span><br><span class="line">                        &#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">            </span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>思路：</p>
-<p>一定要先使用<code>authorize</code>查询是否授权，如果不这样做，直接使用<code>chooseLocation</code>，会有一种情况就是假如用户第一次拒绝了权限申请，那么后面便无法再次触发<code>chooseLocation</code></p>
-<p>所以使用了<code>authorize</code>查询授权情况后，如果用户授权，便调用<code>chooseLocation</code>；如果用户没有授权，便提示让用户先去开启获取地理位置权限项</p>
-<p>在<code>openSetting</code>（即让用户去开启权限项）之前，有两个步骤需要做：</p>
-<ol>
-<li><p>一定要加上<code>showModal</code>，询问用户是否要去开启权限项，只有用户主动调用，<code>openSetting</code>才会正常打开，否则，直接调用的话将没有任何反应</p>
-</li>
-<li><p>创建app.json，加上权限选择配置，如下：</p>
-</li>
-</ol>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"permission"</span>: &#123;</span><br><span class="line">	  <span class="attr">"scope.userLocation"</span>: &#123;</span><br><span class="line">	    <span class="attr">"desc"</span>: <span class="string">"你的位置信息将用于小程序位置接口的效果展示"</span></span><br><span class="line">	  &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>根据地址查看地图(进行导航)，以腾讯地图为例</p>
-</blockquote>
-<p>准备：腾讯地图的jssdk 和 地图密钥</p>
-<p>先使用jssdk，查询地址对应的经纬度相应信息，然后将经纬度传给uni提供的api： <code>openLocation</code>即可</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> QQMap <span class="keyword">from</span> <span class="string">'./qqmap-wx-jssdk.js'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            mapsdk: <span class="literal">null</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    onLoad(e) &#123;</span><br><span class="line">        <span class="comment">// 实例化 腾讯地图构造函数</span></span><br><span class="line">        <span class="keyword">this</span>.mapsdk = <span class="keyword">new</span> QQMapWX(&#123;</span><br><span class="line">            key: <span class="string">'申请的密钥'</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        <span class="comment">// 在地图中查看地址</span></span><br><span class="line">        addressInMap() &#123;</span><br><span class="line">            <span class="keyword">this</span>.mapsdk.geocoder(&#123;</span><br><span class="line">                address: <span class="string">'地址：如广东省深圳市深圳大学'</span>,</span><br><span class="line">                success: <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="comment">// 调起地图</span></span><br><span class="line">                    wx.openLocation(&#123;</span><br><span class="line">                        latitude: res.result.location.lat,</span><br><span class="line">                        longitude: res.result.location.lng,</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;,</span><br><span class="line">                fail: <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="comment">// 这里是防止地址不合法，怕查不到对应经纬度，提示一下用户</span></span><br><span class="line">                    uni.showToast(&#123;</span><br><span class="line">                        title: <span class="string">'无法定位到该地址，请检查地址准确性'</span>,</span><br><span class="line">                        icon: <span class="string">'none'</span>,</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;,</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>小程序</category>
       </categories>
