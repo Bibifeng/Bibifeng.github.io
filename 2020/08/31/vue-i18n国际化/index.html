@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="前端,bibifeng,vue" />
+  <meta name="keywords" content="国际化," />
 
 
 
@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="场景：饿了么表单项是循环生成的，但是需要给这些表单项都加上校验（校验规则相同），下面是一个循环生成1~12月份的输入框表单项的表单示例，代码如下：">
+<meta name="description" content="在vue项目中使用vue-i18n进行国际化（业务需求，本文例子中只考虑中英互译）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ElementUI给循环表单项添加prop校验">
-<meta property="og:url" content="https://bibifeng.github.io/2020/05/19/ElementUI%E7%BB%99%E5%BE%AA%E7%8E%AF%E8%A1%A8%E5%8D%95%E9%A1%B9%E6%B7%BB%E5%8A%A0prop%E6%A0%A1%E9%AA%8C/index.html">
+<meta property="og:title" content="vue-i18n国际化">
+<meta property="og:url" content="https://bibifeng.github.io/2020/08/31/vue-i18n%E5%9B%BD%E9%99%85%E5%8C%96/index.html">
 <meta property="og:site_name" content="Bibifeng&#39;s blog">
-<meta property="og:description" content="场景：饿了么表单项是循环生成的，但是需要给这些表单项都加上校验（校验规则相同），下面是一个循环生成1~12月份的输入框表单项的表单示例，代码如下：">
-<meta property="article:published_time" content="2020-05-19T11:36:47.000Z">
-<meta property="article:modified_time" content="2020-06-06T06:11:51.584Z">
+<meta property="og:description" content="在vue项目中使用vue-i18n进行国际化（业务需求，本文例子中只考虑中英互译）">
+<meta property="article:published_time" content="2020-08-31T11:12:57.000Z">
+<meta property="article:modified_time" content="2020-08-31T12:12:58.460Z">
 <meta property="article:author" content="bibifeng">
-<meta property="article:tag" content="bibifeng">
+<meta property="article:tag" content="国际化">
 <meta name="twitter:card" content="summary">
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://bibifeng.github.io/2020/05/19/ElementUI给循环表单项添加prop校验/"/>
+  <link rel="canonical" href="https://bibifeng.github.io/2020/08/31/vue-i18n国际化/"/>
 
 
 
 
 
-  <title>ElementUI给循环表单项添加prop校验 | Bibifeng's blog</title>
+  <title>vue-i18n国际化 | Bibifeng's blog</title>
   
 
 
@@ -276,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://bibifeng.github.io/2020/05/19/ElementUI%E7%BB%99%E5%BE%AA%E7%8E%AF%E8%A1%A8%E5%8D%95%E9%A1%B9%E6%B7%BB%E5%8A%A0prop%E6%A0%A1%E9%AA%8C/">
+    <link itemprop="mainEntityOfPage" href="https://bibifeng.github.io/2020/08/31/vue-i18n%E5%9B%BD%E9%99%85%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="bibifeng">
@@ -293,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ElementUI给循环表单项添加prop校验</h1>
+          <h1 class="post-title" itemprop="name headline">vue-i18n国际化</h1>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-19T19:36:47+08:00">
-                2020-05-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-31T19:12:57+08:00">
+                2020-08-31
               </time>
             
 
@@ -315,28 +315,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ElementUI/" itemprop="url" rel="index">
-                    <span itemprop="name">ElementUI</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -370,25 +348,41 @@
       
 
       
-        <p>场景：饿了么表单项是循环生成的，但是需要给这些表单项都加上校验（校验规则相同），下面是一个循环生成1~12月份的输入框表单项的表单示例，代码如下：</p>
+        <blockquote>
+<p>在vue项目中使用vue-i18n进行国际化（业务需求，本文例子中只考虑中英互译）</p>
+</blockquote>
 <a id="more"></a>
 
-<p>template</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-col</span> <span class="attr">v-for</span>=<span class="string">"(item, key) in fieldArr"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">:label</span>=<span class="string">"key + 1 + '月'"</span> <span class="attr">:prop</span>=<span class="string">"'fieldArr.' + key"</span> <span class="attr">:rules</span>=<span class="string">"rules.field"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-model</span>=<span class="string">"fieldArr[key]"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-input</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-col</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="安装vue-i18n依赖包"><a href="#安装vue-i18n依赖包" class="headerlink" title="安装vue-i18n依赖包"></a>安装vue-i18n依赖包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 这里指定了版本，--save写进依赖项</span><br><span class="line">npm i vue-i18n@8.18.1 --save</span><br></pre></td></tr></table></figure>
 
-<p>rules</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        fieldArr: <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">12</span>),</span><br><span class="line">        rules: &#123;</span><br><span class="line">            field: [</span><br><span class="line">                &#123;</span><br><span class="line">                    required: <span class="literal">true</span>,</span><br><span class="line">                    message: <span class="string">'请输入当月数据'</span>,</span><br><span class="line">                    trigger: <span class="string">'blur'</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>在项目的src目录下创建一个文件夹用来存放国际化相关的公共配置文件（我以<code>language</code>文件夹为例）</p>
+<p>在<code>/src/language</code>文件夹中，新建三个文件：<code>index.js</code>、<code>en-config.json</code>、<code>zh-config.json</code></p>
+<p>index.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"><span class="keyword">import</span> VueI18n <span class="keyword">from</span> <span class="string">'vue-i18n'</span>;</span><br><span class="line"><span class="comment">// 公共翻译配置 - 中文</span></span><br><span class="line"><span class="keyword">import</span> zh <span class="keyword">from</span> <span class="string">'./zh-config'</span>;</span><br><span class="line"><span class="comment">// 公共翻译配置 - 英文</span></span><br><span class="line"><span class="keyword">import</span> en <span class="keyword">from</span> <span class="string">'./en-config'</span>;</span><br><span class="line">Vue.use(VueI18n);</span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line"><span class="keyword">const</span> sysLang = navigator.language.split(<span class="string">'-'</span>)[<span class="number">0</span>]; <span class="comment">// 获取当前系统语言</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> i18n = <span class="keyword">new</span> VueI18n(&#123;</span><br><span class="line">	locale: sysLang === <span class="string">'zh'</span> ? <span class="string">'zh'</span> : <span class="string">'en'</span>, <span class="comment">// 当前系统语言为中文（zh开头）时，显示中文，其他一律显示英文（业务需要）</span></span><br><span class="line">	fallbackLocale: <span class="string">'zh'</span>, <span class="comment">// 版本回退中文</span></span><br><span class="line">	messages: &#123;</span><br><span class="line">		zh,</span><br><span class="line">		en,</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>总结：</p>
-<ol>
-<li><p>prop要和v-model绑定的数据一致（写法会不一样，看代码示例），上面的fieldArr是一个初始化为12个长度的一维数组</p>
-</li>
-<li><p>因为prop要绑定这个一维数组的第0、1、2、3…11号位上的元素，fieldArr是固定的，变化的只是fieldArr后面的数值（<code>field[1]、field[2]</code> 等），所以fieldArr是一个字符串，并且要加一个”<code>.</code>“，拼接一个循环的索引值（情景中的key），注意这里不能直接用<code>:prop=&quot;field[key]&quot;</code></p>
-</li>
-<li><p>要给循环的表单项单独绑定rules，绑定格式为：<code>rules.xxx</code>（xxx是校验项。如果是静态生成的表单项只需要在form标签中绑定rules，在表单项中绑定prop即可）</p>
-</li>
-</ol>
+<p>zh-config.json 中文配置文件</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"info"</span>: &#123;</span><br><span class="line">		<span class="attr">"name"</span>: <span class="string">"名称"</span>,</span><br><span class="line">		<span class="attr">"sex"</span>: <span class="string">"性别"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>en-config.json 英文配置文件</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"info"</span>: &#123;</span><br><span class="line">		<span class="attr">"name"</span>: <span class="string">"name"</span>,</span><br><span class="line">		<span class="attr">"sex"</span>: <span class="string">"sex"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在项目入口文件 <code>main.js</code> 引入<code>vue-i18n</code>并实例化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; i18n &#125; <span class="keyword">from</span> <span class="string">'./language/index'</span>;</span><br><span class="line"><span class="comment">// 此处省略其他无关代码...</span></span><br><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    i18n,</span><br><span class="line">    <span class="comment">// 此处省略其他无关代码...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>全局使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;telplate&gt;</span><br><span class="line">    &lt;!-- 姓名：张三 --&gt;</span><br><span class="line">    &lt;!-- name：张三 --&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123; $t(&#39;info.name&#39;) &#125;&#125;: 张三&lt;&#x2F;p&gt; </span><br><span class="line">&lt;&#x2F;telplate&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="常见业务场景"><a href="#常见业务场景" class="headerlink" title="常见业务场景"></a>常见业务场景</h4><p>如果项目中需要国际化的内容不仅仅是固定的一些文字，比如不同的业务有不同的翻译配置，不仅仅是刚刚上面定义的那些，这时候我们就需要在业务里面写翻译配置文件了</p>
+<p>比如我需要在我的业务文件<code>demo.vue</code>中使用国际化</p>
+<p>那么在与<code>demo.vue</code>同级目录下新建两个业务翻译配置文件：</p>
+<p><code>demo-en.json</code>英文配置</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"demo"</span>: <span class="string">"demo"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>demo-zh.json</code>中文配置</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"demo"</span>: <span class="string">"业务示例"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>demo.vue 在业务代码中追加业务翻译配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123; $t(&#39;demo&#39;) &#125;&#125;&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	import zhMap from &#39;.&#x2F;demo-zh&#39;;</span><br><span class="line">	import enMap from &#39;.&#x2F;demo-en&#39;;</span><br><span class="line">	export default &#123;</span><br><span class="line">	    beforeCreate() &#123;</span><br><span class="line">            let lang &#x3D; this.$i18n.locale; &#x2F;&#x2F; 获取当前语言</span><br><span class="line">            if (lang &#x3D;&#x3D;&#x3D; &#39;cn&#39;) &#123;</span><br><span class="line">                &#x2F;&#x2F; 追加自己业务的中文配置</span><br><span class="line">                this.$i18n.mergeLocaleMessage(lang, zhMap);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                &#x2F;&#x2F; 英文</span><br><span class="line">                this.$i18n.mergeLocaleMessage(lang, enMap);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -408,7 +402,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://bibifeng.github.io/2020/05/19/ElementUI%E7%BB%99%E5%BE%AA%E7%8E%AF%E8%A1%A8%E5%8D%95%E9%A1%B9%E6%B7%BB%E5%8A%A0prop%E6%A0%A1%E9%AA%8C/" title="ElementUI给循环表单项添加prop校验">https://bibifeng.github.io/2020/05/19/ElementUI%E7%BB%99%E5%BE%AA%E7%8E%AF%E8%A1%A8%E5%8D%95%E9%A1%B9%E6%B7%BB%E5%8A%A0prop%E6%A0%A1%E9%AA%8C/</a>
+    <a href="https://bibifeng.github.io/2020/08/31/vue-i18n%E5%9B%BD%E9%99%85%E5%8C%96/" title="vue-i18n国际化">https://bibifeng.github.io/2020/08/31/vue-i18n%E5%9B%BD%E9%99%85%E5%8C%96/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -421,6 +415,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%9B%BD%E9%99%85%E5%8C%96/" rel="tag"># 国际化</a>
+          
+        </div>
+      
 
       
       
@@ -430,8 +430,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/15/uni%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%A1%B5%E9%9D%A2%E8%8E%B7%E5%8F%96%E4%BC%A0%E5%8F%82/" rel="next" title="uni小程序页面获取传参">
-                <i class="fa fa-chevron-left"></i> uni小程序页面获取传参
+              <a href="/2020/08/10/%E8%A7%A3%E5%86%B3uni%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%9C%A8onShareAppMessage%E4%B8%AD%E5%88%86%E4%BA%AB%E4%BC%A0%E5%8F%82%E6%97%A0%E6%B3%95%E6%8C%89%E9%A2%84%E8%AE%BE%E7%9A%84url%E4%BC%A0%E5%8F%82%E8%BF%9B%E8%A1%8C%E7%9A%84%E9%97%AE%E9%A2%98/" rel="next" title="解决uni微信小程序在onShareAppMessage中分享传参无法按预设的url传参进行的问题">
+                <i class="fa fa-chevron-left"></i> 解决uni微信小程序在onShareAppMessage中分享传参无法按预设的url传参进行的问题
               </a>
             
           </div>
@@ -439,10 +439,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93%E5%B0%8F%E5%BF%83%E6%9C%BA%EF%BC%9Afor%E5%BE%AA%E7%8E%AF%E5%B0%86%E6%8E%A5%E5%8F%A3%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5push%E8%BF%9B%E6%95%B0%E7%BB%84/" rel="prev" title="每天一道小心机：for循环将接口多个字段push进数组">
-                每天一道小心机：for循环将接口多个字段push进数组 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -494,8 +490,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -555,6 +560,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装vue-i18n依赖包"><span class="nav-number">1.</span> <span class="nav-text">安装vue-i18n依赖包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见业务场景"><span class="nav-number">3.</span> <span class="nav-text">常见业务场景</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

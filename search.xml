@@ -366,4 +366,46 @@
         <category>小程序</category>
       </categories>
   </entry>
+  <entry>
+    <title>vue-i18n国际化</title>
+    <url>/2020/08/31/vue-i18n%E5%9B%BD%E9%99%85%E5%8C%96/</url>
+    <content><![CDATA[<blockquote>
+<p>在vue项目中使用vue-i18n进行国际化（业务需求，本文例子中只考虑中英互译）</p>
+</blockquote>
+<a id="more"></a>
+
+<h4 id="安装vue-i18n依赖包"><a href="#安装vue-i18n依赖包" class="headerlink" title="安装vue-i18n依赖包"></a>安装vue-i18n依赖包</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 这里指定了版本，--save写进依赖项</span><br><span class="line">npm i vue-i18n@8.18.1 --save</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>在项目的src目录下创建一个文件夹用来存放国际化相关的公共配置文件（我以<code>language</code>文件夹为例）</p>
+<p>在<code>/src/language</code>文件夹中，新建三个文件：<code>index.js</code>、<code>en-config.json</code>、<code>zh-config.json</code></p>
+<p>index.js</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"><span class="keyword">import</span> VueI18n <span class="keyword">from</span> <span class="string">'vue-i18n'</span>;</span><br><span class="line"><span class="comment">// 公共翻译配置 - 中文</span></span><br><span class="line"><span class="keyword">import</span> zh <span class="keyword">from</span> <span class="string">'./zh-config'</span>;</span><br><span class="line"><span class="comment">// 公共翻译配置 - 英文</span></span><br><span class="line"><span class="keyword">import</span> en <span class="keyword">from</span> <span class="string">'./en-config'</span>;</span><br><span class="line">Vue.use(VueI18n);</span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line"><span class="keyword">const</span> sysLang = navigator.language.split(<span class="string">'-'</span>)[<span class="number">0</span>]; <span class="comment">// 获取当前系统语言</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> i18n = <span class="keyword">new</span> VueI18n(&#123;</span><br><span class="line">	locale: sysLang === <span class="string">'zh'</span> ? <span class="string">'zh'</span> : <span class="string">'en'</span>, <span class="comment">// 当前系统语言为中文（zh开头）时，显示中文，其他一律显示英文（业务需要）</span></span><br><span class="line">	fallbackLocale: <span class="string">'zh'</span>, <span class="comment">// 版本回退中文</span></span><br><span class="line">	messages: &#123;</span><br><span class="line">		zh,</span><br><span class="line">		en,</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>zh-config.json 中文配置文件</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"info"</span>: &#123;</span><br><span class="line">		<span class="attr">"name"</span>: <span class="string">"名称"</span>,</span><br><span class="line">		<span class="attr">"sex"</span>: <span class="string">"性别"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>en-config.json 英文配置文件</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"info"</span>: &#123;</span><br><span class="line">		<span class="attr">"name"</span>: <span class="string">"name"</span>,</span><br><span class="line">		<span class="attr">"sex"</span>: <span class="string">"sex"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在项目入口文件 <code>main.js</code> 引入<code>vue-i18n</code>并实例化</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; i18n &#125; <span class="keyword">from</span> <span class="string">'./language/index'</span>;</span><br><span class="line"><span class="comment">// 此处省略其他无关代码...</span></span><br><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    i18n,</span><br><span class="line">    <span class="comment">// 此处省略其他无关代码...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>全局使用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;telplate&gt;</span><br><span class="line">    &lt;!-- 姓名：张三 --&gt;</span><br><span class="line">    &lt;!-- name：张三 --&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123; $t(&#39;info.name&#39;) &#125;&#125;: 张三&lt;&#x2F;p&gt; </span><br><span class="line">&lt;&#x2F;telplate&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="常见业务场景"><a href="#常见业务场景" class="headerlink" title="常见业务场景"></a>常见业务场景</h4><p>如果项目中需要国际化的内容不仅仅是固定的一些文字，比如不同的业务有不同的翻译配置，不仅仅是刚刚上面定义的那些，这时候我们就需要在业务里面写翻译配置文件了</p>
+<p>比如我需要在我的业务文件<code>demo.vue</code>中使用国际化</p>
+<p>那么在与<code>demo.vue</code>同级目录下新建两个业务翻译配置文件：</p>
+<p><code>demo-en.json</code>英文配置</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"demo"</span>: <span class="string">"demo"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>demo-zh.json</code>中文配置</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"demo"</span>: <span class="string">"业务示例"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>demo.vue 在业务代码中追加业务翻译配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123; $t(&#39;demo&#39;) &#125;&#125;&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	import zhMap from &#39;.&#x2F;demo-zh&#39;;</span><br><span class="line">	import enMap from &#39;.&#x2F;demo-en&#39;;</span><br><span class="line">	export default &#123;</span><br><span class="line">	    beforeCreate() &#123;</span><br><span class="line">            let lang &#x3D; this.$i18n.locale; &#x2F;&#x2F; 获取当前语言</span><br><span class="line">            if (lang &#x3D;&#x3D;&#x3D; &#39;cn&#39;) &#123;</span><br><span class="line">                &#x2F;&#x2F; 追加自己业务的中文配置</span><br><span class="line">                this.$i18n.mergeLocaleMessage(lang, zhMap);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                &#x2F;&#x2F; 英文</span><br><span class="line">                this.$i18n.mergeLocaleMessage(lang, enMap);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>国际化</tag>
+      </tags>
+  </entry>
 </search>
