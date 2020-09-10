@@ -27,18 +27,17 @@
       </categories>
   </entry>
   <entry>
-    <title>elementUI下拉选择框选项是对象时的存取值逻辑</title>
-    <url>/2020/06/08/elementUI%E4%B8%8B%E6%8B%89%E9%80%89%E6%8B%A9%E6%A1%86%E9%80%89%E9%A1%B9%E6%98%AF%E5%AF%B9%E8%B1%A1%E6%97%B6%E7%9A%84%E5%AD%98%E5%8F%96%E5%80%BC%E9%80%BB%E8%BE%91/</url>
-    <content><![CDATA[<p>场景：如果下拉框的选项数据是一个对象数组的话，并且后台需要保存对象中的好几个字段，该如何存取值</p>
+    <title>uni小程序富文本组件处理图片宽度溢出</title>
+    <url>/2020/05/15/uni%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BB%84%E4%BB%B6%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87%E5%AE%BD%E5%BA%A6%E6%BA%A2%E5%87%BA/</url>
+    <content><![CDATA[<p>接口返回文本编辑器的内容字段后，进行如下处理：</p>
 <a id="more"></a>
 
-<p>举例：假设选项数据是类似于下面这种对象数组的JSON格式</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">objArr = [</span><br><span class="line">    &#123;</span><br><span class="line">        id: <span class="string">'1'</span>,</span><br><span class="line">        name: <span class="string">'语文'</span>,</span><br><span class="line">        grade: <span class="string">'三年级'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        id: <span class="string">'2'</span>,</span><br><span class="line">        name: <span class="string">'数学'</span>,</span><br><span class="line">        grade: <span class="string">'三年级'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let str;</span><br><span class="line">str &#x3D; res.data.content || &#39;&#39;; &#x2F;&#x2F; 获取接口返回</span><br><span class="line">str &#x3D; str.replace(&#x2F;&lt;&#x2F;g, &#39;&lt;&#39;) </span><br><span class="line">.replace(&#x2F;&gt;&#x2F;g, &#39;&gt;&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(height&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(width&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(style&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(alt&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)&#x2F;ig, &#39;&lt;img style&#x3D;&quot;width: 100%;&quot; $1&#39;);</span><br></pre></td></tr></table></figure>
 
-<p>这里如果下拉选项只需展示name值，但保存的时候需要同时把id和name传给后台，该怎么做</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;el-form-item prop&#x3D;&quot;subject&quot; label&#x3D;&quot;科目&quot;&gt;</span><br><span class="line">        &#x2F;&#x2F; 注意 value-key 与 下面的 key 绑定的是同一个字段， 区别是一个不需要冒号，一个需要冒号</span><br><span class="line">        &lt;el-select v-model&#x3D;&quot;form.chooseObj&quot; value-key&#x3D;&quot;id&quot; placeholder&#x3D;&quot;请选择&quot; class&#x3D;&quot;border-bottom&quot;&gt;</span><br><span class="line">            &lt;el-option :label&#x3D;&quot;item.name&quot; </span><br><span class="line">                       :value&#x3D;&quot;&#123;name: item.name, id: item.id&#125;&quot;</span><br><span class="line">                       v-for&#x3D;&quot;item in objArr&quot;</span><br><span class="line">                       :key&#x3D;&quot;item.id&quot;&gt;&lt;&#x2F;el-option&gt;</span><br><span class="line">            &#x2F;&#x2F; 注意 value的写法，可以直接写成 :value&#x3D;&quot;item&quot; ,如果不希望form.chooseObj里面的数据太杂，也可以写成上面的这种</span><br><span class="line">        &lt;&#x2F;el-select&gt;</span><br><span class="line">    &lt;&#x2F;el-form-item&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">		return &#123;</span><br><span class="line">			form: &#123; </span><br><span class="line">                chooseObj: &#123;&#125;, &#x2F;&#x2F; 选中的数据对象</span><br><span class="line">             &#125;,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    created() &#123;</span><br><span class="line">        &#x2F;&#x2F; 省略接口请求，假设请求返回对象data，里面包含选项的 id 和 name</span><br><span class="line">        let data &#x3D; &#123;</span><br><span class="line">            id: &#39;1&#39;,</span><br><span class="line">            name: &#39;语文&#39;</span><br><span class="line">        &#125;;</span><br><span class="line">        this.getData(data);</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        &#x2F;&#x2F; 从接口获取当前所选的数据，渲染至页面</span><br><span class="line">        getData(data) &#123;</span><br><span class="line">            this.form.chooseObj.id &#x3D; data.id;</span><br><span class="line">            this.form.chooseObj.name &#x3D; data.name;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#x2F;&#x2F; 保存时</span><br><span class="line">        save() &#123;</span><br><span class="line">            let id &#x3D; this.form.chooseObj.id,</span><br><span class="line">                name &#x3D; this.form.chooseObj.name;</span><br><span class="line">            &#x2F;&#x2F; 保存接口请求发起...</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+<p>处理后宽度就不会溢出了：<br><img src="/.io//pic.png" alt="pic"></p>
+]]></content>
       <categories>
-        <category>ElementUI</category>
+        <category>小程序</category>
       </categories>
   </entry>
   <entry>
@@ -80,17 +79,54 @@
       </categories>
   </entry>
   <entry>
-    <title>uni小程序富文本组件处理图片宽度溢出</title>
-    <url>/2020/05/15/uni%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BB%84%E4%BB%B6%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87%E5%AE%BD%E5%BA%A6%E6%BA%A2%E5%87%BA/</url>
-    <content><![CDATA[<p>接口返回文本编辑器的内容字段后，进行如下处理：</p>
+    <title>elementUI下拉选择框选项是对象时的存取值逻辑</title>
+    <url>/2020/06/08/elementUI%E4%B8%8B%E6%8B%89%E9%80%89%E6%8B%A9%E6%A1%86%E9%80%89%E9%A1%B9%E6%98%AF%E5%AF%B9%E8%B1%A1%E6%97%B6%E7%9A%84%E5%AD%98%E5%8F%96%E5%80%BC%E9%80%BB%E8%BE%91/</url>
+    <content><![CDATA[<p>场景：如果下拉框的选项数据是一个对象数组的话，并且后台需要保存对象中的好几个字段，该如何存取值</p>
 <a id="more"></a>
 
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let str;</span><br><span class="line">str &#x3D; res.data.content || &#39;&#39;; &#x2F;&#x2F; 获取接口返回</span><br><span class="line">str &#x3D; str.replace(&#x2F;&lt;&#x2F;g, &#39;&lt;&#39;) </span><br><span class="line">.replace(&#x2F;&gt;&#x2F;g, &#39;&gt;&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(height&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(width&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(style&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(alt&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)&#x2F;ig, &#39;&lt;img style&#x3D;&quot;width: 100%;&quot; $1&#39;);</span><br></pre></td></tr></table></figure>
+<p>举例：假设选项数据是类似于下面这种对象数组的JSON格式</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">objArr = [</span><br><span class="line">    &#123;</span><br><span class="line">        id: <span class="string">'1'</span>,</span><br><span class="line">        name: <span class="string">'语文'</span>,</span><br><span class="line">        grade: <span class="string">'三年级'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        id: <span class="string">'2'</span>,</span><br><span class="line">        name: <span class="string">'数学'</span>,</span><br><span class="line">        grade: <span class="string">'三年级'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
-<p>处理后宽度就不会溢出了：<br><img src="/.io//pic.png" alt="pic"></p>
-]]></content>
+<p>这里如果下拉选项只需展示name值，但保存的时候需要同时把id和name传给后台，该怎么做</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;el-form-item prop&#x3D;&quot;subject&quot; label&#x3D;&quot;科目&quot;&gt;</span><br><span class="line">        &#x2F;&#x2F; 注意 value-key 与 下面的 key 绑定的是同一个字段， 区别是一个不需要冒号，一个需要冒号</span><br><span class="line">        &lt;el-select v-model&#x3D;&quot;form.chooseObj&quot; value-key&#x3D;&quot;id&quot; placeholder&#x3D;&quot;请选择&quot; class&#x3D;&quot;border-bottom&quot;&gt;</span><br><span class="line">            &lt;el-option :label&#x3D;&quot;item.name&quot; </span><br><span class="line">                       :value&#x3D;&quot;&#123;name: item.name, id: item.id&#125;&quot;</span><br><span class="line">                       v-for&#x3D;&quot;item in objArr&quot;</span><br><span class="line">                       :key&#x3D;&quot;item.id&quot;&gt;&lt;&#x2F;el-option&gt;</span><br><span class="line">            &#x2F;&#x2F; 注意 value的写法，可以直接写成 :value&#x3D;&quot;item&quot; ,如果不希望form.chooseObj里面的数据太杂，也可以写成上面的这种</span><br><span class="line">        &lt;&#x2F;el-select&gt;</span><br><span class="line">    &lt;&#x2F;el-form-item&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">		return &#123;</span><br><span class="line">			form: &#123; </span><br><span class="line">                chooseObj: &#123;&#125;, &#x2F;&#x2F; 选中的数据对象</span><br><span class="line">             &#125;,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    created() &#123;</span><br><span class="line">        &#x2F;&#x2F; 省略接口请求，假设请求返回对象data，里面包含选项的 id 和 name</span><br><span class="line">        let data &#x3D; &#123;</span><br><span class="line">            id: &#39;1&#39;,</span><br><span class="line">            name: &#39;语文&#39;</span><br><span class="line">        &#125;;</span><br><span class="line">        this.getData(data);</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        &#x2F;&#x2F; 从接口获取当前所选的数据，渲染至页面</span><br><span class="line">        getData(data) &#123;</span><br><span class="line">            this.form.chooseObj.id &#x3D; data.id;</span><br><span class="line">            this.form.chooseObj.name &#x3D; data.name;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#x2F;&#x2F; 保存时</span><br><span class="line">        save() &#123;</span><br><span class="line">            let id &#x3D; this.form.chooseObj.id,</span><br><span class="line">                name &#x3D; this.form.chooseObj.name;</span><br><span class="line">            &#x2F;&#x2F; 保存接口请求发起...</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>小程序</category>
+        <category>ElementUI</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>npm设置淘宝镜像</title>
+    <url>/2020/09/08/npm%E8%AE%BE%E7%BD%AE%E6%B7%98%E5%AE%9D%E9%95%9C%E5%83%8F/</url>
+    <content><![CDATA[<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><blockquote>
+<p>cnpm形式</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>将npm配置为淘宝镜像</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="查看当前配置"><a href="#查看当前配置" class="headerlink" title="查看当前配置"></a>查看当前配置</h3><blockquote>
+<p>cnpm查看</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cnpm config get registry</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>npm查看当前配置</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config get registry</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除淘宝镜像配置"><a href="#删除淘宝镜像配置" class="headerlink" title="删除淘宝镜像配置"></a>删除淘宝镜像配置</h3><blockquote>
+<p>删除cnpm</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm uninstall cnpm -g</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>删除当前npm的淘宝镜像配置</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config delete registry</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Node.js</category>
       </categories>
   </entry>
   <entry>
@@ -243,6 +279,68 @@
       </categories>
   </entry>
   <entry>
+    <title>vue-i18n国际化</title>
+    <url>/2020/08/31/vue-i18n%E5%9B%BD%E9%99%85%E5%8C%96/</url>
+    <content><![CDATA[<blockquote>
+<p>在vue项目中使用vue-i18n进行国际化（业务需求，本文例子中只考虑中英互译）</p>
+</blockquote>
+<a id="more"></a>
+
+<h4 id="安装vue-i18n依赖包"><a href="#安装vue-i18n依赖包" class="headerlink" title="安装vue-i18n依赖包"></a>安装vue-i18n依赖包</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 这里指定了版本，--save写进依赖项</span><br><span class="line">npm i vue-i18n@8.18.1 --save</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>在项目的src目录下创建一个文件夹用来存放国际化相关的公共配置文件（我以<code>language</code>文件夹为例）</p>
+<p>在<code>/src/language</code>文件夹中，新建三个文件：<code>index.js</code>、<code>en-config.json</code>、<code>zh-config.json</code></p>
+<p>index.js</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"><span class="keyword">import</span> VueI18n <span class="keyword">from</span> <span class="string">'vue-i18n'</span>;</span><br><span class="line"><span class="comment">// 公共翻译配置 - 中文</span></span><br><span class="line"><span class="keyword">import</span> zh <span class="keyword">from</span> <span class="string">'./zh-config'</span>;</span><br><span class="line"><span class="comment">// 公共翻译配置 - 英文</span></span><br><span class="line"><span class="keyword">import</span> en <span class="keyword">from</span> <span class="string">'./en-config'</span>;</span><br><span class="line">Vue.use(VueI18n);</span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line"><span class="keyword">const</span> sysLang = navigator.language.split(<span class="string">'-'</span>)[<span class="number">0</span>]; <span class="comment">// 获取当前系统语言</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> i18n = <span class="keyword">new</span> VueI18n(&#123;</span><br><span class="line">	locale: sysLang === <span class="string">'zh'</span> ? <span class="string">'zh'</span> : <span class="string">'en'</span>, <span class="comment">// 当前系统语言为中文（zh开头）时，显示中文，其他一律显示英文（业务需要）</span></span><br><span class="line">	fallbackLocale: <span class="string">'zh'</span>, <span class="comment">// 版本回退中文</span></span><br><span class="line">	messages: &#123;</span><br><span class="line">		zh,</span><br><span class="line">		en,</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>zh-config.json 中文配置文件</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"info"</span>: &#123;</span><br><span class="line">		<span class="attr">"name"</span>: <span class="string">"名称"</span>,</span><br><span class="line">		<span class="attr">"sex"</span>: <span class="string">"性别"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>en-config.json 英文配置文件</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"info"</span>: &#123;</span><br><span class="line">		<span class="attr">"name"</span>: <span class="string">"name"</span>,</span><br><span class="line">		<span class="attr">"sex"</span>: <span class="string">"sex"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在项目入口文件 <code>main.js</code> 引入<code>vue-i18n</code>并实例化</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; i18n &#125; <span class="keyword">from</span> <span class="string">'./language/index'</span>;</span><br><span class="line"><span class="comment">// 此处省略其他无关代码...</span></span><br><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    i18n,</span><br><span class="line">    <span class="comment">// 此处省略其他无关代码...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>全局使用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;telplate&gt;</span><br><span class="line">    &lt;!-- 姓名：张三 --&gt;</span><br><span class="line">    &lt;!-- name：张三 --&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123; $t(&#39;info.name&#39;) &#125;&#125;: 张三&lt;&#x2F;p&gt; </span><br><span class="line">&lt;&#x2F;telplate&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="常见业务场景"><a href="#常见业务场景" class="headerlink" title="常见业务场景"></a>常见业务场景</h4><p>如果项目中需要国际化的内容不仅仅是固定的一些文字，比如不同的业务有不同的翻译配置，不仅仅是刚刚上面定义的那些，这时候我们就需要在业务里面写翻译配置文件了</p>
+<p>比如我需要在我的业务文件<code>demo.vue</code>中使用国际化</p>
+<p>那么在与<code>demo.vue</code>同级目录下新建两个业务翻译配置文件：</p>
+<p><code>demo-en.json</code>英文配置</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"demo"</span>: <span class="string">"demo"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>demo-zh.json</code>中文配置</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"demo"</span>: <span class="string">"业务示例"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>demo.vue 在业务代码中追加业务翻译配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123; $t(&#39;demo&#39;) &#125;&#125;&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	import zhMap from &#39;.&#x2F;demo-zh&#39;;</span><br><span class="line">	import enMap from &#39;.&#x2F;demo-en&#39;;</span><br><span class="line">	export default &#123;</span><br><span class="line">	    beforeCreate() &#123;</span><br><span class="line">            let lang &#x3D; this.$i18n.locale; &#x2F;&#x2F; 获取当前语言</span><br><span class="line">            if (lang &#x3D;&#x3D;&#x3D; &#39;cn&#39;) &#123;</span><br><span class="line">                &#x2F;&#x2F; 追加自己业务的中文配置</span><br><span class="line">                this.$i18n.mergeLocaleMessage(lang, zhMap);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                &#x2F;&#x2F; 英文</span><br><span class="line">                this.$i18n.mergeLocaleMessage(lang, enMap);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>国际化</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>每天一道小心机：for循环将接口多个字段push进数组</title>
+    <url>/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93%E5%B0%8F%E5%BF%83%E6%9C%BA%EF%BC%9Afor%E5%BE%AA%E7%8E%AF%E5%B0%86%E6%8E%A5%E5%8F%A3%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5push%E8%BF%9B%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<blockquote>
+<p>场景：接口将1~12个月份对应的值用12个字段返回，这12个字段长这样：<code>field1、field2 ... field12</code>，但前端想要将12个字段组装为一个数组去循环生成相应元素，怎么做？</p>
+</blockquote>
+<a id="more"></a>
+
+<p>json数据：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  field1: '12',</span><br><span class="line">  field2: '2',</span><br><span class="line">  field3: '36',</span><br><span class="line">  <span class="comment">// ... 中间省略</span></span><br><span class="line">  field12: '324'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">12</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> fieldIndex = <span class="string">'field'</span> + (i + <span class="number">1</span>); <span class="comment">// 加上1是因为接口字段从field1开始，没有field0</span></span><br><span class="line">    arr.push(data[fieldIndex]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：push的时候不能直接用<code>data.fieldIndex</code>，这样写实际上js会读取data里面叫<code>fieldIndex</code>变量的值，但在情境中<code>fieldIndex</code>是动态值，因此只能用<code>data[fieldIndex]</code>的方式去访问，又是一个小细节-。-</p>
+]]></content>
+      <categories>
+        <category>每天一道小心机</category>
+      </categories>
+  </entry>
+  <entry>
     <title>微信小程序(uni)通过地图选择地址、根据地址查看地图(进行导航)</title>
     <url>/2020/06/18/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-uni-%E9%80%9A%E8%BF%87%E5%9C%B0%E5%9B%BE%E9%80%89%E6%8B%A9%E5%9C%B0%E5%9D%80%E3%80%81%E6%A0%B9%E6%8D%AE%E5%9C%B0%E5%9D%80%E6%9F%A5%E7%9C%8B%E5%9C%B0%E5%9B%BE-%E8%BF%9B%E8%A1%8C%E5%AF%BC%E8%88%AA/</url>
     <content><![CDATA[<blockquote>
@@ -271,26 +369,6 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> QQMap <span class="keyword">from</span> <span class="string">'./qqmap-wx-jssdk.js'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            mapsdk: <span class="literal">null</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    onLoad(e) &#123;</span><br><span class="line">        <span class="comment">// 实例化 腾讯地图构造函数</span></span><br><span class="line">        <span class="keyword">this</span>.mapsdk = <span class="keyword">new</span> QQMapWX(&#123;</span><br><span class="line">            key: <span class="string">'申请的密钥'</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        <span class="comment">// 在地图中查看地址</span></span><br><span class="line">        addressInMap() &#123;</span><br><span class="line">            <span class="keyword">this</span>.mapsdk.geocoder(&#123;</span><br><span class="line">                address: <span class="string">'地址：如广东省深圳市深圳大学'</span>,</span><br><span class="line">                success: <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="comment">// 调起地图</span></span><br><span class="line">                    wx.openLocation(&#123;</span><br><span class="line">                        latitude: res.result.location.lat,</span><br><span class="line">                        longitude: res.result.location.lng,</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;,</span><br><span class="line">                fail: <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="comment">// 这里是防止地址不合法，怕查不到对应经纬度，提示一下用户</span></span><br><span class="line">                    uni.showToast(&#123;</span><br><span class="line">                        title: <span class="string">'无法定位到该地址，请检查地址准确性'</span>,</span><br><span class="line">                        icon: <span class="string">'none'</span>,</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;,</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>小程序</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>每天一道小心机：for循环将接口多个字段push进数组</title>
-    <url>/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93%E5%B0%8F%E5%BF%83%E6%9C%BA%EF%BC%9Afor%E5%BE%AA%E7%8E%AF%E5%B0%86%E6%8E%A5%E5%8F%A3%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5push%E8%BF%9B%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<blockquote>
-<p>场景：接口将1~12个月份对应的值用12个字段返回，这12个字段长这样：<code>field1、field2 ... field12</code>，但前端想要将12个字段组装为一个数组去循环生成相应元素，怎么做？</p>
-</blockquote>
-<a id="more"></a>
-
-<p>json数据：</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  field1: '12',</span><br><span class="line">  field2: '2',</span><br><span class="line">  field3: '36',</span><br><span class="line">  <span class="comment">// ... 中间省略</span></span><br><span class="line">  field12: '324'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>代码：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">12</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> fieldIndex = <span class="string">'field'</span> + (i + <span class="number">1</span>); <span class="comment">// 加上1是因为接口字段从field1开始，没有field0</span></span><br><span class="line">    arr.push(data[fieldIndex]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意：push的时候不能直接用<code>data.fieldIndex</code>，这样写实际上js会读取data里面叫<code>fieldIndex</code>变量的值，但在情境中<code>fieldIndex</code>是动态值，因此只能用<code>data[fieldIndex]</code>的方式去访问，又是一个小细节-。-</p>
-]]></content>
-      <categories>
-        <category>每天一道小心机</category>
       </categories>
   </entry>
   <entry>
@@ -364,84 +442,6 @@
 ]]></content>
       <categories>
         <category>小程序</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>vue-i18n国际化</title>
-    <url>/2020/08/31/vue-i18n%E5%9B%BD%E9%99%85%E5%8C%96/</url>
-    <content><![CDATA[<blockquote>
-<p>在vue项目中使用vue-i18n进行国际化（业务需求，本文例子中只考虑中英互译）</p>
-</blockquote>
-<a id="more"></a>
-
-<h4 id="安装vue-i18n依赖包"><a href="#安装vue-i18n依赖包" class="headerlink" title="安装vue-i18n依赖包"></a>安装vue-i18n依赖包</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 这里指定了版本，--save写进依赖项</span><br><span class="line">npm i vue-i18n@8.18.1 --save</span><br></pre></td></tr></table></figure>
-
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>在项目的src目录下创建一个文件夹用来存放国际化相关的公共配置文件（我以<code>language</code>文件夹为例）</p>
-<p>在<code>/src/language</code>文件夹中，新建三个文件：<code>index.js</code>、<code>en-config.json</code>、<code>zh-config.json</code></p>
-<p>index.js</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"><span class="keyword">import</span> VueI18n <span class="keyword">from</span> <span class="string">'vue-i18n'</span>;</span><br><span class="line"><span class="comment">// 公共翻译配置 - 中文</span></span><br><span class="line"><span class="keyword">import</span> zh <span class="keyword">from</span> <span class="string">'./zh-config'</span>;</span><br><span class="line"><span class="comment">// 公共翻译配置 - 英文</span></span><br><span class="line"><span class="keyword">import</span> en <span class="keyword">from</span> <span class="string">'./en-config'</span>;</span><br><span class="line">Vue.use(VueI18n);</span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line"><span class="keyword">const</span> sysLang = navigator.language.split(<span class="string">'-'</span>)[<span class="number">0</span>]; <span class="comment">// 获取当前系统语言</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> i18n = <span class="keyword">new</span> VueI18n(&#123;</span><br><span class="line">	locale: sysLang === <span class="string">'zh'</span> ? <span class="string">'zh'</span> : <span class="string">'en'</span>, <span class="comment">// 当前系统语言为中文（zh开头）时，显示中文，其他一律显示英文（业务需要）</span></span><br><span class="line">	fallbackLocale: <span class="string">'zh'</span>, <span class="comment">// 版本回退中文</span></span><br><span class="line">	messages: &#123;</span><br><span class="line">		zh,</span><br><span class="line">		en,</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>zh-config.json 中文配置文件</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"info"</span>: &#123;</span><br><span class="line">		<span class="attr">"name"</span>: <span class="string">"名称"</span>,</span><br><span class="line">		<span class="attr">"sex"</span>: <span class="string">"性别"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>en-config.json 英文配置文件</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"info"</span>: &#123;</span><br><span class="line">		<span class="attr">"name"</span>: <span class="string">"name"</span>,</span><br><span class="line">		<span class="attr">"sex"</span>: <span class="string">"sex"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在项目入口文件 <code>main.js</code> 引入<code>vue-i18n</code>并实例化</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; i18n &#125; <span class="keyword">from</span> <span class="string">'./language/index'</span>;</span><br><span class="line"><span class="comment">// 此处省略其他无关代码...</span></span><br><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    i18n,</span><br><span class="line">    <span class="comment">// 此处省略其他无关代码...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>全局使用</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;telplate&gt;</span><br><span class="line">    &lt;!-- 姓名：张三 --&gt;</span><br><span class="line">    &lt;!-- name：张三 --&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123; $t(&#39;info.name&#39;) &#125;&#125;: 张三&lt;&#x2F;p&gt; </span><br><span class="line">&lt;&#x2F;telplate&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="常见业务场景"><a href="#常见业务场景" class="headerlink" title="常见业务场景"></a>常见业务场景</h4><p>如果项目中需要国际化的内容不仅仅是固定的一些文字，比如不同的业务有不同的翻译配置，不仅仅是刚刚上面定义的那些，这时候我们就需要在业务里面写翻译配置文件了</p>
-<p>比如我需要在我的业务文件<code>demo.vue</code>中使用国际化</p>
-<p>那么在与<code>demo.vue</code>同级目录下新建两个业务翻译配置文件：</p>
-<p><code>demo-en.json</code>英文配置</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"demo"</span>: <span class="string">"demo"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>demo-zh.json</code>中文配置</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"demo"</span>: <span class="string">"业务示例"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>demo.vue 在业务代码中追加业务翻译配置</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123; $t(&#39;demo&#39;) &#125;&#125;&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	import zhMap from &#39;.&#x2F;demo-zh&#39;;</span><br><span class="line">	import enMap from &#39;.&#x2F;demo-en&#39;;</span><br><span class="line">	export default &#123;</span><br><span class="line">	    beforeCreate() &#123;</span><br><span class="line">            let lang &#x3D; this.$i18n.locale; &#x2F;&#x2F; 获取当前语言</span><br><span class="line">            if (lang &#x3D;&#x3D;&#x3D; &#39;cn&#39;) &#123;</span><br><span class="line">                &#x2F;&#x2F; 追加自己业务的中文配置</span><br><span class="line">                this.$i18n.mergeLocaleMessage(lang, zhMap);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                &#x2F;&#x2F; 英文</span><br><span class="line">                this.$i18n.mergeLocaleMessage(lang, enMap);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>国际化</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>npm设置淘宝镜像</title>
-    <url>/2020/09/08/npm%E8%AE%BE%E7%BD%AE%E6%B7%98%E5%AE%9D%E9%95%9C%E5%83%8F/</url>
-    <content><![CDATA[<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><blockquote>
-<p>cnpm形式</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>将npm配置为淘宝镜像</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<h3 id="查看当前配置"><a href="#查看当前配置" class="headerlink" title="查看当前配置"></a>查看当前配置</h3><blockquote>
-<p>cnpm查看</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cnpm config get registry</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>npm查看当前配置</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config get registry</span><br></pre></td></tr></table></figure>
-
-<h3 id="删除淘宝镜像配置"><a href="#删除淘宝镜像配置" class="headerlink" title="删除淘宝镜像配置"></a>删除淘宝镜像配置</h3><blockquote>
-<p>删除cnpm</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm uninstall cnpm -g</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>删除当前npm的淘宝镜像配置</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config delete registry</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Node.js</category>
       </categories>
   </entry>
 </search>
