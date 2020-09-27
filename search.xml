@@ -483,4 +483,13 @@
         <category>小程序</category>
       </categories>
   </entry>
+  <entry>
+    <title>JS获取当前日期时间以及格式化</title>
+    <url>/2020/09/27/JS%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E4%BB%A5%E5%8F%8A%E6%A0%BC%E5%BC%8F%E5%8C%96/</url>
+    <content><![CDATA[<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCurrentDate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> val = <span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">        timer = <span class="string">''</span>,</span><br><span class="line">        year = val.getFullYear(),</span><br><span class="line">        month = val.getMonth() + <span class="number">1</span>,</span><br><span class="line">        day = val.getDate(),</span><br><span class="line">        hour = val.getHours() &lt; <span class="number">10</span> ? <span class="string">'0'</span> + val.getHours() : val.getHours(),</span><br><span class="line">        minute = val.getMinutes() &lt; <span class="number">10</span> ? <span class="string">'0'</span> + val.getMinutes() : val.getMinutes(),</span><br><span class="line">        second = val.getSeconds() &lt; <span class="number">10</span> ? <span class="string">'0'</span> + val.getSeconds() : val.getSeconds();</span><br><span class="line">    month &gt;= <span class="number">1</span> &amp;&amp; month &lt;= <span class="number">9</span> ? (month = <span class="string">'0'</span> + month) : <span class="string">''</span>;</span><br><span class="line">    day &gt;= <span class="number">0</span> &amp;&amp; day &lt;= <span class="number">9</span> ? (day = <span class="string">'0'</span> + day) : <span class="string">''</span>;</span><br><span class="line">    timer = year + <span class="string">'-'</span> + month + <span class="string">'-'</span> + day + <span class="string">' '</span> + hour + <span class="string">':'</span> + minute + <span class="string">':'</span> + second;</span><br><span class="line">    <span class="keyword">return</span> timer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+  </entry>
 </search>
