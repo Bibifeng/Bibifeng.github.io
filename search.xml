@@ -492,4 +492,27 @@
         <category>JS</category>
       </categories>
   </entry>
+  <entry>
+    <title>关于换行的3个css属性</title>
+    <url>/2020/10/10/%E5%85%B3%E4%BA%8E%E6%8D%A2%E8%A1%8C%E7%9A%843%E4%B8%AAcss%E5%B1%9E%E6%80%A7/</url>
+    <content><![CDATA[<blockquote>
+<p>white-space 控制空白字符的显示，同时还能控制是否自动换行</p>
+</blockquote>
+<p>可选值：<code>normal | nowrap | pre | pre-wrap | pre-line</code></p>
+<blockquote>
+<p>word-break 控制单词如何被拆分换行</p>
+</blockquote>
+<p>可选值：<code>normal | break-all | keep-all</code></p>
+<blockquote>
+<p>word-wrap（overflow-wrap）控制长度超过一行的单词是否被拆分换行</p>
+</blockquote>
+<p>可选值：<code>normal | break-word</code></p>
+<h4 id="文本超长显示省略号"><a href="#文本超长显示省略号" class="headerlink" title="文本超长显示省略号"></a>文本超长显示省略号</h4><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.text-overflow</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">    <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：容器的<code>width</code>或者<code>max-width</code>必须有具体的值</p>
+]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+  </entry>
 </search>
