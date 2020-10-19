@@ -85,13 +85,13 @@
 <meta property="og:url" content="https://bibifeng.github.io/2020/05/15/uni%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BB%84%E4%BB%B6%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87%E5%AE%BD%E5%BA%A6%E6%BA%A2%E5%87%BA/index.html">
 <meta property="og:site_name" content="Bibifeng&#39;s blog">
 <meta property="og:description" content="接口返回文本编辑器的内容字段后，进行如下处理：">
-<meta property="og:image" content="https://bibifeng.github.io/.io//pic.png">
+<meta property="og:image" content="https://bibifeng.github.io/2020/05/15/uni%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BB%84%E4%BB%B6%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87%E5%AE%BD%E5%BA%A6%E6%BA%A2%E5%87%BA/pic.png">
 <meta property="article:published_time" content="2020-05-15T07:17:22.000Z">
 <meta property="article:modified_time" content="2020-06-06T06:11:51.580Z">
 <meta property="article:author" content="bibifeng">
 <meta property="article:tag" content="bibifeng">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://bibifeng.github.io/.io//pic.png">
+<meta name="twitter:image" content="https://bibifeng.github.io/2020/05/15/uni%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BB%84%E4%BB%B6%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87%E5%AE%BD%E5%BA%A6%E6%BA%A2%E5%87%BA/pic.png">
 
 
 
@@ -377,7 +377,7 @@
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let str;</span><br><span class="line">str &#x3D; res.data.content || &#39;&#39;; &#x2F;&#x2F; 获取接口返回</span><br><span class="line">str &#x3D; str.replace(&#x2F;&lt;&#x2F;g, &#39;&lt;&#39;) </span><br><span class="line">.replace(&#x2F;&gt;&#x2F;g, &#39;&gt;&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(height&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(width&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(style&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(alt&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)&#x2F;ig, &#39;&lt;img style&#x3D;&quot;width: 100%;&quot; $1&#39;);</span><br></pre></td></tr></table></figure>
 
-<p>处理后宽度就不会溢出了：<br><img src="/.io//pic.png" alt="pic"></p>
+<p>处理后宽度就不会溢出了：<br><img src="/2020/05/15/uni%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BB%84%E4%BB%B6%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87%E5%AE%BD%E5%BA%A6%E6%BA%A2%E5%87%BA/pic.png" alt="pic"></p>
 
       
     </div>

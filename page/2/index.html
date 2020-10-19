@@ -294,7 +294,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/06/06/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B5%8CH5%E4%BC%A0%E5%8F%82/" itemprop="url">小程序嵌H5传参</a></h1>
+                <a class="post-title-link" href="/2020/06/06/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B5%8CH5%E4%BC%A0%E5%8F%82/" itemprop="url">小程序嵌H5页面流程以及互相传参逻辑</a></h1>
         
 
         <div class="post-meta">
@@ -367,7 +367,12 @@
 
       
         
-          <p>小程序嵌H5之前，必须要先配置H5对应的域名，以及在H5域名服务器下放入小程序提供的校验文件，具体查看官方文档</p>
+          <h3 id="小程序嵌H5页面流程"><a href="#小程序嵌H5页面流程" class="headerlink" title="小程序嵌H5页面流程"></a>小程序嵌H5页面流程</h3><p>将H5页面对应的域名配置到小程序后台的业务域名中。举个例子，如果H5的url是<code>https://www.baidu.com/news/list</code>，那就需要把<code>https://www.baidu.com</code>加入配置名单中，如下图所示：</p>
+<p><img src="/2020/06/06/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B5%8CH5%E4%BC%A0%E5%8F%82/com.jpg" alt="业务域名"></p>
+<p>注意必须要把小程序提供的校验文件放在H5域名服务器根目录下之后，才能添加域名配置，点击上图中的修改会弹出下图，按提示操作即可。</p>
+<p><img src="/2020/06/06/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B5%8CH5%E4%BC%A0%E5%8F%82/com2.jpg" alt="校验文件"></p>
+<p>保存成功以后，在微信开发者工具右上角的详情中，可以看到项目配置里面的webview域名已经更新了</p>
+<p><img src="/2020/06/06/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B5%8CH5%E4%BC%A0%E5%8F%82/com3.jpg" alt="微信开发者工具"></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/06/06/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B5%8CH5%E4%BC%A0%E5%8F%82/#more" rel="contents">

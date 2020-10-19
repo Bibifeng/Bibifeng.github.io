@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JS获取当前日期时间以及格式化</title>
+    <url>/2020/09/27/JS%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E4%BB%A5%E5%8F%8A%E6%A0%BC%E5%BC%8F%E5%8C%96/</url>
+    <content><![CDATA[<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCurrentDate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> val = <span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">        timer = <span class="string">''</span>,</span><br><span class="line">        year = val.getFullYear(),</span><br><span class="line">        month = val.getMonth() + <span class="number">1</span>,</span><br><span class="line">        day = val.getDate(),</span><br><span class="line">        hour = val.getHours() &lt; <span class="number">10</span> ? <span class="string">'0'</span> + val.getHours() : val.getHours(),</span><br><span class="line">        minute = val.getMinutes() &lt; <span class="number">10</span> ? <span class="string">'0'</span> + val.getMinutes() : val.getMinutes(),</span><br><span class="line">        second = val.getSeconds() &lt; <span class="number">10</span> ? <span class="string">'0'</span> + val.getSeconds() : val.getSeconds();</span><br><span class="line">    month &gt;= <span class="number">1</span> &amp;&amp; month &lt;= <span class="number">9</span> ? (month = <span class="string">'0'</span> + month) : <span class="string">''</span>;</span><br><span class="line">    day &gt;= <span class="number">0</span> &amp;&amp; day &lt;= <span class="number">9</span> ? (day = <span class="string">'0'</span> + day) : <span class="string">''</span>;</span><br><span class="line">    timer = year + <span class="string">'-'</span> + month + <span class="string">'-'</span> + day + <span class="string">' '</span> + hour + <span class="string">':'</span> + minute + <span class="string">':'</span> + second;</span><br><span class="line">    <span class="keyword">return</span> timer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+  </entry>
+  <entry>
     <title>ElementUI给循环表单项添加prop校验</title>
     <url>/2020/05/19/ElementUI%E7%BB%99%E5%BE%AA%E7%8E%AF%E8%A1%A8%E5%8D%95%E9%A1%B9%E6%B7%BB%E5%8A%A0prop%E6%A0%A1%E9%AA%8C/</url>
     <content><![CDATA[<p>场景：饿了么表单项是循环生成的，但是需要给这些表单项都加上校验（校验规则相同），下面是一个循环生成1~12月份的输入框表单项的表单示例，代码如下：</p>
@@ -42,6 +51,42 @@
       </categories>
   </entry>
   <entry>
+    <title>npm设置淘宝镜像</title>
+    <url>/2020/09/08/npm%E8%AE%BE%E7%BD%AE%E6%B7%98%E5%AE%9D%E9%95%9C%E5%83%8F/</url>
+    <content><![CDATA[<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><blockquote>
+<p>cnpm形式</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>将npm配置为淘宝镜像</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="查看当前配置"><a href="#查看当前配置" class="headerlink" title="查看当前配置"></a>查看当前配置</h3><blockquote>
+<p>cnpm查看</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cnpm config get registry</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>npm查看当前配置</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config get registry</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除淘宝镜像配置"><a href="#删除淘宝镜像配置" class="headerlink" title="删除淘宝镜像配置"></a>删除淘宝镜像配置</h3><blockquote>
+<p>删除cnpm</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm uninstall cnpm -g</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>删除当前npm的淘宝镜像配置</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config delete registry</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+  </entry>
+  <entry>
     <title>pdf.js+canvas+vue实现h5预览pdf文件（支持放大缩小）</title>
     <url>/2020/07/07/pdf-js-canvas-vue%E5%AE%9E%E7%8E%B0h5%E9%A2%84%E8%A7%88pdf%E6%96%87%E4%BB%B6%EF%BC%88%E6%94%AF%E6%8C%81%E6%94%BE%E5%A4%A7%E7%BC%A9%E5%B0%8F%EF%BC%89/</url>
     <content><![CDATA[<blockquote>
@@ -80,42 +125,6 @@
       </categories>
   </entry>
   <entry>
-    <title>npm设置淘宝镜像</title>
-    <url>/2020/09/08/npm%E8%AE%BE%E7%BD%AE%E6%B7%98%E5%AE%9D%E9%95%9C%E5%83%8F/</url>
-    <content><![CDATA[<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><blockquote>
-<p>cnpm形式</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>将npm配置为淘宝镜像</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<h3 id="查看当前配置"><a href="#查看当前配置" class="headerlink" title="查看当前配置"></a>查看当前配置</h3><blockquote>
-<p>cnpm查看</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cnpm config get registry</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>npm查看当前配置</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config get registry</span><br></pre></td></tr></table></figure>
-
-<h3 id="删除淘宝镜像配置"><a href="#删除淘宝镜像配置" class="headerlink" title="删除淘宝镜像配置"></a>删除淘宝镜像配置</h3><blockquote>
-<p>删除cnpm</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm uninstall cnpm -g</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>删除当前npm的淘宝镜像配置</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config delete registry</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
-  </entry>
-  <entry>
     <title>uni小程序富文本组件处理图片宽度溢出</title>
     <url>/2020/05/15/uni%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BB%84%E4%BB%B6%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87%E5%AE%BD%E5%BA%A6%E6%BA%A2%E5%87%BA/</url>
     <content><![CDATA[<p>接口返回文本编辑器的内容字段后，进行如下处理：</p>
@@ -123,7 +132,7 @@
 
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let str;</span><br><span class="line">str &#x3D; res.data.content || &#39;&#39;; &#x2F;&#x2F; 获取接口返回</span><br><span class="line">str &#x3D; str.replace(&#x2F;&lt;&#x2F;g, &#39;&lt;&#39;) </span><br><span class="line">.replace(&#x2F;&gt;&#x2F;g, &#39;&gt;&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(height&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(width&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(style&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)((?:(alt&#x3D;&quot;[^&quot;]+&quot;)))&#x2F;ig, &#39;&lt;img$1&#39;)</span><br><span class="line">.replace(&#x2F;&lt;img([\s\w&quot;-&#x3D;\&#x2F;\.:;]+)&#x2F;ig, &#39;&lt;img style&#x3D;&quot;width: 100%;&quot; $1&#39;);</span><br></pre></td></tr></table></figure>
 
-<p>处理后宽度就不会溢出了：<br><img src="/.io//pic.png" alt="pic"></p>
+<p>处理后宽度就不会溢出了：<br><img src="/2020/05/15/uni%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BB%84%E4%BB%B6%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87%E5%AE%BD%E5%BA%A6%E6%BA%A2%E5%87%BA/pic.png" alt="pic"></p>
 ]]></content>
       <categories>
         <category>小程序</category>
@@ -162,6 +171,104 @@
 
 <p>注意一定要对scene字段进行decodeURIComponent处理</p>
 <p>关于二维码限制传参长度（只有几十个字符）的问题，一般的做法是，将所需的传参先走我们自己的接口，在后台临时存储，然后后台生成一个类似缓存ID的标识（长度一定不能超过微信的限制），再把缓存ID通过生成二维码的接口传过去去获取二维码。在扫码打开后的页面，通过decodeURIComponent(e.scene)获取到的值，就是缓存ID，此时再通过自己的接口，用缓存ID去查询生成二维码时候的传参</p>
+]]></content>
+      <categories>
+        <category>小程序</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>关于换行的3个css属性</title>
+    <url>/2020/10/10/%E5%85%B3%E4%BA%8E%E6%8D%A2%E8%A1%8C%E7%9A%843%E4%B8%AAcss%E5%B1%9E%E6%80%A7/</url>
+    <content><![CDATA[<blockquote>
+<p>white-space 控制空白字符的显示，同时还能控制是否自动换行</p>
+</blockquote>
+<p>可选值：<code>normal | nowrap | pre | pre-wrap | pre-line</code></p>
+<blockquote>
+<p>word-break 控制单词如何被拆分换行</p>
+</blockquote>
+<p>可选值：<code>normal | break-all | keep-all</code></p>
+<blockquote>
+<p>word-wrap（overflow-wrap）控制长度超过一行的单词是否被拆分换行</p>
+</blockquote>
+<p>可选值：<code>normal | break-word</code></p>
+<h4 id="文本超长显示省略号"><a href="#文本超长显示省略号" class="headerlink" title="文本超长显示省略号"></a>文本超长显示省略号</h4><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.text-overflow</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">    <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：容器的<code>width</code>或者<code>max-width</code>必须有具体的值</p>
+]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>小程序(uni)在页面传参时布尔值失效的问题</title>
+    <url>/2020/06/05/%E5%B0%8F%E7%A8%8B%E5%BA%8F-uni-%E5%9C%A8%E9%A1%B5%E9%9D%A2%E4%BC%A0%E5%8F%82%E6%97%B6%E5%B8%83%E5%B0%94%E5%80%BC%E5%A4%B1%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>在开发过程中发现了一个不太起眼但很重要的问题，也是踩坑踩过来的。先看下面这段小程序A页面传值到B页面的代码</p>
+<a id="more"></a>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// A页面</span></span><br><span class="line">methods: &#123;</span><br><span class="line">    viewB() &#123;</span><br><span class="line">        <span class="keyword">let</span> id = <span class="string">'123'</span>,</span><br><span class="line">            isHide = <span class="literal">true</span>,</span><br><span class="line">        uni.navigateTo(&#123;</span><br><span class="line">            url: <span class="string">'/pages/demo/b?id='</span> + id + <span class="string">'&amp;isHide='</span> isHide,</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// B页面 接收值</span></span><br><span class="line">onLoad(e) &#123;</span><br><span class="line">    <span class="keyword">this</span>.isHide = e.isHide;</span><br><span class="line">    <span class="keyword">this</span>.id = e.id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看起来没什么问题，传参有两个，字符传类型<code>id</code> 和 布尔值类型<code>isHide</code>。在B页面的onLoad周期中也能正常接收到这两个值。</p>
+<p>因为<code>isHide</code>是A页面去控制B页面的按钮是否显示的，但是在B页面中发现无论<code>isHide</code>是<code>true</code>还是<code>false</code>，都无法正常控制按钮的显示与隐藏</p>
+<p>仔细排查确认代码没写错之后，<strong>在小程序调试工具中偶然发现A页面带过来的布尔类型<code>isHide</code>，到了B页面却莫名其妙的变成了字符串类型</strong></p>
+<p>也就是说，在A页面 <code>isHide: true;</code> 但是在B页面 <code>isHide: &#39;true&#39;</code>;</p>
+<p>初步猜想是url传参的时候，布尔值被转成了字符串，所以我又尝试了以对象的形式去传参，如下代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// A页面</span></span><br><span class="line">methods: &#123;</span><br><span class="line">    viewB() &#123;</span><br><span class="line">        <span class="keyword">let</span> params: &#123;</span><br><span class="line">            id: <span class="string">'123'</span>,</span><br><span class="line">            isHide: <span class="literal">true</span>,</span><br><span class="line">        &#125;</span><br><span class="line">        uni.navigateTo(&#123;</span><br><span class="line">            url: <span class="string">'/pages/demo/b?params='</span> + <span class="built_in">encodeURIComponent</span>(<span class="built_in">JSON</span>.stringify(params)),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// B页面 接收值</span></span><br><span class="line">onLoad(e) &#123;</span><br><span class="line">    <span class="keyword">let</span> obj = <span class="built_in">JSON</span>.parse(<span class="built_in">decodeURIComponent</span>(e.params));</span><br><span class="line">    <span class="keyword">this</span>.isHide = obj.isHide; <span class="comment">// 这里拿到的isHide不会被转成字符串</span></span><br><span class="line">    <span class="keyword">this</span>.id = obj.id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样页面就正常了</p>
+]]></content>
+      <categories>
+        <category>小程序</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>小程序(基于uni)常用的应用生命周期&amp;页面生命周期</title>
+    <url>/2020/05/11/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%9F%BA%E4%BA%8Euni-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E9%A1%B5%E9%9D%A2%E5%91%A8%E6%9C%9F/</url>
+    <content><![CDATA[<blockquote>
+<p>常用应用生命周期</p>
+</blockquote>
+<a id="more"></a>
+
+<table>
+<thead>
+<tr>
+<th align="left">函数名</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">onLaunch</td>
+<td align="left">当uni-app 初始化完成时触发（全局只触发一次）</td>
+</tr>
+<tr>
+<td align="left">onShow</td>
+<td align="left">当 uni-app 启动，或从后台进入前台显示</td>
+</tr>
+<tr>
+<td align="left">onHide</td>
+<td align="left">当 uni-app 从前台进入后台</td>
+</tr>
+<tr>
+<td align="left">onError</td>
+<td align="left">当 uni-app 报错时触发</td>
+</tr>
+</tbody></table>
+<ul>
+<li>应用生命周期仅可在App.vue中监听，在其它页面监听无效</li>
+<li>调用顺序：onLaunch &gt; onShow &gt; onHide</li>
+</ul>
+<blockquote>
+<p>常用页面生命周期</p>
+</blockquote>
+<p>详见uni官方文档</p>
+<ul>
+<li>当每进入/切换到一个新的页面的时候，就会调用页面生命周期函数</li>
+<li>调用顺序：onLoad &gt; onReady &gt; onShow &gt; onHide</li>
+</ul>
+<p>参考来源：<br><em><a href="https://www.jianshu.com/p/3f43eaa83bbd" target="_blank" rel="noopener">https://www.jianshu.com/p/3f43eaa83bbd</a></em></p>
 ]]></content>
       <categories>
         <category>小程序</category>
@@ -249,96 +356,42 @@
       </categories>
   </entry>
   <entry>
-    <title>小程序(基于uni)常用的应用生命周期&amp;页面生命周期</title>
-    <url>/2020/05/11/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%9F%BA%E4%BA%8Euni-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E9%A1%B5%E9%9D%A2%E5%91%A8%E6%9C%9F/</url>
-    <content><![CDATA[<blockquote>
-<p>常用应用生命周期</p>
-</blockquote>
-<a id="more"></a>
-
-<table>
-<thead>
-<tr>
-<th align="left">函数名</th>
-<th align="left">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">onLaunch</td>
-<td align="left">当uni-app 初始化完成时触发（全局只触发一次）</td>
-</tr>
-<tr>
-<td align="left">onShow</td>
-<td align="left">当 uni-app 启动，或从后台进入前台显示</td>
-</tr>
-<tr>
-<td align="left">onHide</td>
-<td align="left">当 uni-app 从前台进入后台</td>
-</tr>
-<tr>
-<td align="left">onError</td>
-<td align="left">当 uni-app 报错时触发</td>
-</tr>
-</tbody></table>
-<ul>
-<li>应用生命周期仅可在App.vue中监听，在其它页面监听无效</li>
-<li>调用顺序：onLaunch &gt; onShow &gt; onHide</li>
-</ul>
-<blockquote>
-<p>常用页面生命周期</p>
-</blockquote>
-<p>详见uni官方文档</p>
-<ul>
-<li>当每进入/切换到一个新的页面的时候，就会调用页面生命周期函数</li>
-<li>调用顺序：onLoad &gt; onReady &gt; onShow &gt; onHide</li>
-</ul>
-<p>参考来源：<br><em><a href="https://www.jianshu.com/p/3f43eaa83bbd" target="_blank" rel="noopener">https://www.jianshu.com/p/3f43eaa83bbd</a></em></p>
-]]></content>
-      <categories>
-        <category>小程序</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>小程序(uni)在页面传参时布尔值失效的问题</title>
-    <url>/2020/06/05/%E5%B0%8F%E7%A8%8B%E5%BA%8F-uni-%E5%9C%A8%E9%A1%B5%E9%9D%A2%E4%BC%A0%E5%8F%82%E6%97%B6%E5%B8%83%E5%B0%94%E5%80%BC%E5%A4%B1%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>在开发过程中发现了一个不太起眼但很重要的问题，也是踩坑踩过来的。先看下面这段小程序A页面传值到B页面的代码</p>
-<a id="more"></a>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// A页面</span></span><br><span class="line">methods: &#123;</span><br><span class="line">    viewB() &#123;</span><br><span class="line">        <span class="keyword">let</span> id = <span class="string">'123'</span>,</span><br><span class="line">            isHide = <span class="literal">true</span>,</span><br><span class="line">        uni.navigateTo(&#123;</span><br><span class="line">            url: <span class="string">'/pages/demo/b?id='</span> + id + <span class="string">'&amp;isHide='</span> isHide,</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// B页面 接收值</span></span><br><span class="line">onLoad(e) &#123;</span><br><span class="line">    <span class="keyword">this</span>.isHide = e.isHide;</span><br><span class="line">    <span class="keyword">this</span>.id = e.id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>看起来没什么问题，传参有两个，字符传类型<code>id</code> 和 布尔值类型<code>isHide</code>。在B页面的onLoad周期中也能正常接收到这两个值。</p>
-<p>因为<code>isHide</code>是A页面去控制B页面的按钮是否显示的，但是在B页面中发现无论<code>isHide</code>是<code>true</code>还是<code>false</code>，都无法正常控制按钮的显示与隐藏</p>
-<p>仔细排查确认代码没写错之后，<strong>在小程序调试工具中偶然发现A页面带过来的布尔类型<code>isHide</code>，到了B页面却莫名其妙的变成了字符串类型</strong></p>
-<p>也就是说，在A页面 <code>isHide: true;</code> 但是在B页面 <code>isHide: &#39;true&#39;</code>;</p>
-<p>初步猜想是url传参的时候，布尔值被转成了字符串，所以我又尝试了以对象的形式去传参，如下代码：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// A页面</span></span><br><span class="line">methods: &#123;</span><br><span class="line">    viewB() &#123;</span><br><span class="line">        <span class="keyword">let</span> params: &#123;</span><br><span class="line">            id: <span class="string">'123'</span>,</span><br><span class="line">            isHide: <span class="literal">true</span>,</span><br><span class="line">        &#125;</span><br><span class="line">        uni.navigateTo(&#123;</span><br><span class="line">            url: <span class="string">'/pages/demo/b?params='</span> + <span class="built_in">encodeURIComponent</span>(<span class="built_in">JSON</span>.stringify(params)),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// B页面 接收值</span></span><br><span class="line">onLoad(e) &#123;</span><br><span class="line">    <span class="keyword">let</span> obj = <span class="built_in">JSON</span>.parse(<span class="built_in">decodeURIComponent</span>(e.params));</span><br><span class="line">    <span class="keyword">this</span>.isHide = obj.isHide; <span class="comment">// 这里拿到的isHide不会被转成字符串</span></span><br><span class="line">    <span class="keyword">this</span>.id = obj.id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样页面就正常了</p>
-]]></content>
-      <categories>
-        <category>小程序</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>小程序嵌H5传参</title>
+    <title>小程序嵌H5页面流程以及互相传参逻辑</title>
     <url>/2020/06/06/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B5%8CH5%E4%BC%A0%E5%8F%82/</url>
-    <content><![CDATA[<p>小程序嵌H5之前，必须要先配置H5对应的域名，以及在H5域名服务器下放入小程序提供的校验文件，具体查看官方文档</p>
+    <content><![CDATA[<h3 id="小程序嵌H5页面流程"><a href="#小程序嵌H5页面流程" class="headerlink" title="小程序嵌H5页面流程"></a>小程序嵌H5页面流程</h3><p>将H5页面对应的域名配置到小程序后台的业务域名中。举个例子，如果H5的url是<code>https://www.baidu.com/news/list</code>，那就需要把<code>https://www.baidu.com</code>加入配置名单中，如下图所示：</p>
+<p><img src="/2020/06/06/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B5%8CH5%E4%BC%A0%E5%8F%82/com.jpg" alt="业务域名"></p>
+<p>注意必须要把小程序提供的校验文件放在H5域名服务器根目录下之后，才能添加域名配置，点击上图中的修改会弹出下图，按提示操作即可。</p>
+<p><img src="/2020/06/06/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B5%8CH5%E4%BC%A0%E5%8F%82/com2.jpg" alt="校验文件"></p>
+<p>保存成功以后，在微信开发者工具右上角的详情中，可以看到项目配置里面的webview域名已经更新了</p>
+<p><img src="/2020/06/06/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B5%8CH5%E4%BC%A0%E5%8F%82/com3.jpg" alt="微信开发者工具"></p>
 <a id="more"></a>
 
-<p>因为 我没操作过。。。</p>
-<p>这里只说代码传参</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 小程序页面，url就是要访问H5的url --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">web-view</span> <span class="attr">src</span>=<span class="string">"url"</span>&gt;</span><span class="tag">&lt;/<span class="name">web-view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在小程序页面中，添加<code>webview</code>组件</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 小程序页面，url就是要访问H5的url --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">web-view</span> <span class="attr">src</span>=<span class="string">"url"</span> <span class="attr">bindmessage</span>=<span class="string">"getH5Msg"</span>&gt;</span><span class="tag">&lt;/<span class="name">web-view</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>举个例子，我这里项目的url格式是下面这样子的：前半部分固定路径 + 传参 + 业务路由</p>
+<h3 id="小程序向H5传参（目前只能通过url向H5传递参数）"><a href="#小程序向H5传参（目前只能通过url向H5传递参数）" class="headerlink" title="小程序向H5传参（目前只能通过url向H5传递参数）"></a>小程序向H5传参（目前只能通过url向H5传递参数）</h3><p>举个例子，我这里项目的url格式是下面这样子的：前半部分固定路径 + 传参 + 业务路由</p>
 <p><code>https://xxxxx.com/demo/index.html?access_token={access_token}&amp;id={id}#/school/grade4/class4</code></p>
 <p><code>？</code>后的是传参，<code>#</code>后的是业务路由</p>
 <p>这里小程序给H5传了两个参数，<code>access_token</code> 和 <code>id</code></p>
 <p>H5获取参数如下：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// H5页面接收参数（项目用的是vue框架）</span></span><br><span class="line">created() &#123;</span><br><span class="line">    <span class="keyword">let</span> id = <span class="keyword">this</span>.getKey(<span class="string">'id'</span>);</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"> &#125;,</span><br><span class="line"> methods: &#123;</span><br><span class="line">    <span class="comment">// 获取小程序请求url中的传参</span></span><br><span class="line">    getKey(key) &#123;</span><br><span class="line">      <span class="keyword">let</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|&amp;)"</span> + key + <span class="string">"=([^&amp;]*)(&amp;|$)"</span>),</span><br><span class="line">          r = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>).match(reg);</span><br><span class="line">      <span class="keyword">if</span> (r !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">decodeURIComponent</span>(r[<span class="number">2</span>]);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// H5页面接收参数（项目用的是vue框架）</span></span><br><span class="line">created() &#123;</span><br><span class="line">    <span class="keyword">let</span> id = <span class="keyword">this</span>.getKey(<span class="string">'id'</span>);</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"> &#125;,</span><br><span class="line"> methods: &#123;</span><br><span class="line">    <span class="comment">// 获取小程序请求url中的传参</span></span><br><span class="line">    getKey(key) &#123;</span><br><span class="line">      <span class="keyword">let</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|&amp;)"</span> + key + <span class="string">"=([^&amp;]*)(&amp;|$)"</span>),</span><br><span class="line">          r = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>).match(reg);</span><br><span class="line">      <span class="keyword">if</span> (r !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">decodeURIComponent</span>(r[<span class="number">2</span>]);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="H5向小程序传参（小程序通过-bindmessage-绑定的方法监听）"><a href="#H5向小程序传参（小程序通过-bindmessage-绑定的方法监听）" class="headerlink" title="H5向小程序传参（小程序通过 bindmessage 绑定的方法监听）"></a>H5向小程序传参（小程序通过 bindmessage 绑定的方法监听）</h3><p>首先在vue项目的index.html中引入微信的JSSDK文件（版本可以不一样）</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://res.wx.qq.com/open/js/jweixin-1.6.0.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>引入之后便可通过<code>wx.miniProgram.xxx</code>使用微信提供的相关api</p>
+<ul>
+<li>比如调用<code>wx.miniProgram.getEnv</code>接口来判断是否在web-view环境</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wx.miniProgram.getEnv(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res.miniprogram) <span class="comment">// true</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>通过<code>wx.miniProgram.postMessage()</code>传递数据到小程序，调用后会在小程序触发<code>bindmessage</code>的监听</p>
+</li>
+<li><p>通过<code>wx.miniProgram.navigateTo({url: &#39;...&#39;})</code>可以直接从当前web-view跳转到小程序的其他页面</p>
+</li>
+</ul>
+]]></content>
       <categories>
         <category>小程序</category>
       </categories>
@@ -357,26 +410,6 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">showPic(url) &#123;</span><br><span class="line">    if (!url) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    uni.previewImage(&#123;</span><br><span class="line">        current: 0,</span><br><span class="line">        urls: [url],</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>小程序</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>每天一道小心机：for循环将接口多个字段push进数组</title>
-    <url>/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93%E5%B0%8F%E5%BF%83%E6%9C%BA%EF%BC%9Afor%E5%BE%AA%E7%8E%AF%E5%B0%86%E6%8E%A5%E5%8F%A3%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5push%E8%BF%9B%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<blockquote>
-<p>场景：接口将1~12个月份对应的值用12个字段返回，这12个字段长这样：<code>field1、field2 ... field12</code>，但前端想要将12个字段组装为一个数组去循环生成相应元素，怎么做？</p>
-</blockquote>
-<a id="more"></a>
-
-<p>json数据：</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  field1: '12',</span><br><span class="line">  field2: '2',</span><br><span class="line">  field3: '36',</span><br><span class="line">  <span class="comment">// ... 中间省略</span></span><br><span class="line">  field12: '324'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>代码：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">12</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> fieldIndex = <span class="string">'field'</span> + (i + <span class="number">1</span>); <span class="comment">// 加上1是因为接口字段从field1开始，没有field0</span></span><br><span class="line">    arr.push(data[fieldIndex]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意：push的时候不能直接用<code>data.fieldIndex</code>，这样写实际上js会读取data里面叫<code>fieldIndex</code>变量的值，但在情境中<code>fieldIndex</code>是动态值，因此只能用<code>data[fieldIndex]</code>的方式去访问，又是一个小细节-。-</p>
-]]></content>
-      <categories>
-        <category>每天一道小心机</category>
       </categories>
   </entry>
   <entry>
@@ -408,6 +441,26 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> QQMap <span class="keyword">from</span> <span class="string">'./qqmap-wx-jssdk.js'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            mapsdk: <span class="literal">null</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    onLoad(e) &#123;</span><br><span class="line">        <span class="comment">// 实例化 腾讯地图构造函数</span></span><br><span class="line">        <span class="keyword">this</span>.mapsdk = <span class="keyword">new</span> QQMapWX(&#123;</span><br><span class="line">            key: <span class="string">'申请的密钥'</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        <span class="comment">// 在地图中查看地址</span></span><br><span class="line">        addressInMap() &#123;</span><br><span class="line">            <span class="keyword">this</span>.mapsdk.geocoder(&#123;</span><br><span class="line">                address: <span class="string">'地址：如广东省深圳市深圳大学'</span>,</span><br><span class="line">                success: <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="comment">// 调起地图</span></span><br><span class="line">                    wx.openLocation(&#123;</span><br><span class="line">                        latitude: res.result.location.lat,</span><br><span class="line">                        longitude: res.result.location.lng,</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;,</span><br><span class="line">                fail: <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="comment">// 这里是防止地址不合法，怕查不到对应经纬度，提示一下用户</span></span><br><span class="line">                    uni.showToast(&#123;</span><br><span class="line">                        title: <span class="string">'无法定位到该地址，请检查地址准确性'</span>,</span><br><span class="line">                        icon: <span class="string">'none'</span>,</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;,</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>小程序</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>每天一道小心机：for循环将接口多个字段push进数组</title>
+    <url>/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93%E5%B0%8F%E5%BF%83%E6%9C%BA%EF%BC%9Afor%E5%BE%AA%E7%8E%AF%E5%B0%86%E6%8E%A5%E5%8F%A3%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5push%E8%BF%9B%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<blockquote>
+<p>场景：接口将1~12个月份对应的值用12个字段返回，这12个字段长这样：<code>field1、field2 ... field12</code>，但前端想要将12个字段组装为一个数组去循环生成相应元素，怎么做？</p>
+</blockquote>
+<a id="more"></a>
+
+<p>json数据：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  field1: '12',</span><br><span class="line">  field2: '2',</span><br><span class="line">  field3: '36',</span><br><span class="line">  <span class="comment">// ... 中间省略</span></span><br><span class="line">  field12: '324'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">12</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> fieldIndex = <span class="string">'field'</span> + (i + <span class="number">1</span>); <span class="comment">// 加上1是因为接口字段从field1开始，没有field0</span></span><br><span class="line">    arr.push(data[fieldIndex]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：push的时候不能直接用<code>data.fieldIndex</code>，这样写实际上js会读取data里面叫<code>fieldIndex</code>变量的值，但在情境中<code>fieldIndex</code>是动态值，因此只能用<code>data[fieldIndex]</code>的方式去访问，又是一个小细节-。-</p>
+]]></content>
+      <categories>
+        <category>每天一道小心机</category>
       </categories>
   </entry>
   <entry>
@@ -481,38 +534,6 @@
 ]]></content>
       <categories>
         <category>小程序</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>JS获取当前日期时间以及格式化</title>
-    <url>/2020/09/27/JS%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E4%BB%A5%E5%8F%8A%E6%A0%BC%E5%BC%8F%E5%8C%96/</url>
-    <content><![CDATA[<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCurrentDate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> val = <span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">        timer = <span class="string">''</span>,</span><br><span class="line">        year = val.getFullYear(),</span><br><span class="line">        month = val.getMonth() + <span class="number">1</span>,</span><br><span class="line">        day = val.getDate(),</span><br><span class="line">        hour = val.getHours() &lt; <span class="number">10</span> ? <span class="string">'0'</span> + val.getHours() : val.getHours(),</span><br><span class="line">        minute = val.getMinutes() &lt; <span class="number">10</span> ? <span class="string">'0'</span> + val.getMinutes() : val.getMinutes(),</span><br><span class="line">        second = val.getSeconds() &lt; <span class="number">10</span> ? <span class="string">'0'</span> + val.getSeconds() : val.getSeconds();</span><br><span class="line">    month &gt;= <span class="number">1</span> &amp;&amp; month &lt;= <span class="number">9</span> ? (month = <span class="string">'0'</span> + month) : <span class="string">''</span>;</span><br><span class="line">    day &gt;= <span class="number">0</span> &amp;&amp; day &lt;= <span class="number">9</span> ? (day = <span class="string">'0'</span> + day) : <span class="string">''</span>;</span><br><span class="line">    timer = year + <span class="string">'-'</span> + month + <span class="string">'-'</span> + day + <span class="string">' '</span> + hour + <span class="string">':'</span> + minute + <span class="string">':'</span> + second;</span><br><span class="line">    <span class="keyword">return</span> timer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>JS</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>关于换行的3个css属性</title>
-    <url>/2020/10/10/%E5%85%B3%E4%BA%8E%E6%8D%A2%E8%A1%8C%E7%9A%843%E4%B8%AAcss%E5%B1%9E%E6%80%A7/</url>
-    <content><![CDATA[<blockquote>
-<p>white-space 控制空白字符的显示，同时还能控制是否自动换行</p>
-</blockquote>
-<p>可选值：<code>normal | nowrap | pre | pre-wrap | pre-line</code></p>
-<blockquote>
-<p>word-break 控制单词如何被拆分换行</p>
-</blockquote>
-<p>可选值：<code>normal | break-all | keep-all</code></p>
-<blockquote>
-<p>word-wrap（overflow-wrap）控制长度超过一行的单词是否被拆分换行</p>
-</blockquote>
-<p>可选值：<code>normal | break-word</code></p>
-<h4 id="文本超长显示省略号"><a href="#文本超长显示省略号" class="headerlink" title="文本超长显示省略号"></a>文本超长显示省略号</h4><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.text-overflow</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">    <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意：容器的<code>width</code>或者<code>max-width</code>必须有具体的值</p>
-]]></content>
-      <categories>
-        <category>css</category>
       </categories>
   </entry>
 </search>
