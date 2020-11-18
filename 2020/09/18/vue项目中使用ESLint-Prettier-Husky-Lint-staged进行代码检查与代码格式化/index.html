@@ -79,14 +79,14 @@
 
 
 
-<meta name="description" content="常用应用生命周期">
+<meta name="description" content="Prettier 代码格式化局部安装 1npm i -D prettier">
 <meta property="og:type" content="article">
-<meta property="og:title" content="小程序(基于uni)常用的应用生命周期&amp;页面生命周期">
-<meta property="og:url" content="https://bibifeng.github.io/2020/05/11/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%9F%BA%E4%BA%8Euni-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E9%A1%B5%E9%9D%A2%E5%91%A8%E6%9C%9F/index.html">
+<meta property="og:title" content="vue项目中使用【eslint】【prettier】【husky】【lint-staged】进行代码检查与代码格式化">
+<meta property="og:url" content="https://bibifeng.github.io/2020/09/18/vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8ESLint-Prettier-Husky-Lint-staged%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%E4%B8%8E%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E5%8C%96/index.html">
 <meta property="og:site_name" content="Bibifeng&#39;s blog">
-<meta property="og:description" content="常用应用生命周期">
-<meta property="article:published_time" content="2020-05-11T01:26:41.000Z">
-<meta property="article:modified_time" content="2020-06-06T06:11:51.567Z">
+<meta property="og:description" content="Prettier 代码格式化局部安装 1npm i -D prettier">
+<meta property="article:published_time" content="2020-09-18T14:54:29.000Z">
+<meta property="article:modified_time" content="2020-11-18T10:03:06.793Z">
 <meta property="article:author" content="bibifeng">
 <meta property="article:tag" content="bibifeng">
 <meta name="twitter:card" content="summary">
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://bibifeng.github.io/2020/05/11/小程序-基于uni-的生命周期-页面周期/"/>
+  <link rel="canonical" href="https://bibifeng.github.io/2020/09/18/vue项目中使用ESLint-Prettier-Husky-Lint-staged进行代码检查与代码格式化/"/>
 
 
 
 
 
-  <title>小程序(基于uni)常用的应用生命周期&页面生命周期 | Bibifeng's blog</title>
+  <title>vue项目中使用【eslint】【prettier】【husky】【lint-staged】进行代码检查与代码格式化 | Bibifeng's blog</title>
   
 
 
@@ -276,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://bibifeng.github.io/2020/05/11/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%9F%BA%E4%BA%8Euni-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E9%A1%B5%E9%9D%A2%E5%91%A8%E6%9C%9F/">
+    <link itemprop="mainEntityOfPage" href="https://bibifeng.github.io/2020/09/18/vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8ESLint-Prettier-Husky-Lint-staged%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%E4%B8%8E%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="bibifeng">
@@ -293,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">小程序(基于uni)常用的应用生命周期&页面生命周期</h1>
+          <h1 class="post-title" itemprop="name headline">vue项目中使用【eslint】【prettier】【husky】【lint-staged】进行代码检查与代码格式化</h1>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-11T09:26:41+08:00">
-                2020-05-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-18T22:54:29+08:00">
+                2020-09-18
               </time>
             
 
@@ -328,8 +328,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" itemprop="url" rel="index">
-                    <span itemprop="name">小程序</span>
+                  <a href="/categories/eslint-prettier/" itemprop="url" rel="index">
+                    <span itemprop="name">eslint+prettier</span>
                   </a>
                 </span>
 
@@ -370,48 +370,63 @@
       
 
       
-        <blockquote>
-<p>常用应用生命周期</p>
-</blockquote>
+        <h3 id="Prettier-代码格式化"><a href="#Prettier-代码格式化" class="headerlink" title="Prettier 代码格式化"></a>Prettier 代码格式化</h3><p>局部安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D prettier</span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
 
-<table>
-<thead>
-<tr>
-<th align="left">函数名</th>
-<th align="left">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">onLaunch</td>
-<td align="left">当uni-app 初始化完成时触发（全局只触发一次）</td>
-</tr>
-<tr>
-<td align="left">onShow</td>
-<td align="left">当 uni-app 启动，或从后台进入前台显示</td>
-</tr>
-<tr>
-<td align="left">onHide</td>
-<td align="left">当 uni-app 从前台进入后台</td>
-</tr>
-<tr>
-<td align="left">onError</td>
-<td align="left">当 uni-app 报错时触发</td>
-</tr>
-</tbody></table>
+<p>在项目根目录下创建<code>.prettierrc.js</code>配置文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .prettierrc.js</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// 是否添加尾随逗号</span></span><br><span class="line">  trailingComma: <span class="string">'es5'</span>,</span><br><span class="line">  <span class="comment">// jsx使用单引号</span></span><br><span class="line">  jsxSingleQuote: <span class="literal">false</span>,</span><br><span class="line">  <span class="comment">// 对象大括号之间的空格  true- 例子：&#123; foo: bar &#125;</span></span><br><span class="line">  bracketSpacing: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">// 将&gt;多行JSX元素放在最后一行的末尾，而不是单独放在下一行（不适用于自闭元素）</span></span><br><span class="line">  jsxBracketSameLine: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">// 指定HTML文件的全局空白区域敏感度</span></span><br><span class="line">  htmlWhitespaceSensitivity: <span class="string">'css'</span>,</span><br><span class="line">  <span class="comment">// 使用单引号, 默认false(在jsx中配置无效, 默认都是双引号)</span></span><br><span class="line">  semi: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">// tab缩进大小,默认为2</span></span><br><span class="line">  tabWidth: <span class="number">4</span>,</span><br><span class="line">  <span class="comment">// 使用tab缩进，默认false</span></span><br><span class="line">  useTabs: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">// 使用单引号, 默认true</span></span><br><span class="line">  singleQuote: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">// 箭头函数的argument是否需要打括号，默认avoid，必要时需要括号</span></span><br><span class="line">  arrowParens: <span class="string">'avoid'</span>,</span><br><span class="line">  <span class="comment">// 指定代码换行的行长度</span></span><br><span class="line">  printWidth: <span class="number">240</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如果使用了webstorm编辑器，那么上面两个步骤走完之后，在文件中右键，应该会有<code>Reformat with Prettier</code>的字样，可以对当前的这个文件进行格式化</p>
+<p>如果想要项目全局一次性使用prettier格式化，可以在<code>package.json</code>中写入脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; package.json</span><br><span class="line"></span><br><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;prettier&quot;: &quot;prettier --write \&quot;src&#x2F;**&#x2F;*.&#123;js,vue&#125;\&quot;&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<p>如果<code>.prettierrc.js</code>配置文件中的缩进不生效，请查看是否与项目下的<code>.editorconfig</code>中的缩进有冲突</p>
+<h3 id="ESLint代码检查"><a href="#ESLint代码检查" class="headerlink" title="ESLint代码检查"></a>ESLint代码检查</h3><p>安装所需依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 推荐局部安装，因为每个项目的实际情况会不一样</span><br><span class="line">npm i -D eslint-plugin-vue eslint-plugin-vue-scoped-css eslint-plugin-jsdoc babel-eslint eslint</span><br><span class="line">&#x2F;&#x2F; 下面是执行代码检查脚本所需的依赖</span><br><span class="line">npm i -D @vue&#x2F;cli-plugin-eslint @vue&#x2F;cli-service</span><br></pre></td></tr></table></figure>
+
+<p>简单说下每个依赖包的用处</p>
 <ul>
-<li>应用生命周期仅可在App.vue中监听，在其它页面监听无效</li>
-<li>调用顺序：onLaunch &gt; onShow &gt; onHide</li>
+<li><code>eslint-plugin-vue</code> Vue官方提供了一个官方插件，更好处理.vue文件中的js代码</li>
 </ul>
-<blockquote>
-<p>常用页面生命周期</p>
+<p>项目下新建ESlint配置文件<code>.eslintrc.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .eslintrc.js</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	<span class="string">"root"</span>: <span class="literal">true</span>,</span><br><span class="line">	<span class="string">"env"</span>: &#123;</span><br><span class="line">		<span class="string">"node"</span>: <span class="literal">true</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="string">"rules"</span>: &#123;</span><br><span class="line">		<span class="string">"no-console"</span>: [<span class="string">"warn"</span>, &#123; <span class="string">"allow"</span>: [<span class="string">"warn"</span>, <span class="string">"error"</span>, <span class="string">"info"</span>] &#125;],</span><br><span class="line">		<span class="string">"no-debugger"</span>: <span class="number">1</span>,</span><br><span class="line">		<span class="string">"semi"</span>: [<span class="number">2</span>, <span class="string">"always"</span>],</span><br><span class="line">		<span class="string">"vue/no-use-v-if-with-v-for"</span>: [<span class="number">2</span>, &#123; <span class="string">"allowUsingIterationVar"</span>: <span class="literal">false</span> &#125;],</span><br><span class="line">		<span class="string">"comma-dangle"</span>: <span class="string">"off"</span>,</span><br><span class="line">		<span class="string">"one-var"</span>: [</span><br><span class="line">			<span class="string">"warn"</span>,</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="string">"var"</span>: <span class="string">"always"</span>,</span><br><span class="line">				<span class="string">"let"</span>: <span class="string">"always"</span>,</span><br><span class="line">				<span class="string">"const"</span>: <span class="string">"never"</span></span><br><span class="line">			&#125;</span><br><span class="line">		],</span><br><span class="line">		<span class="string">"no-throw-literal"</span>: <span class="number">0</span>,</span><br><span class="line">		<span class="string">"no-new-wrappers"</span>: <span class="number">2</span>,</span><br><span class="line">		<span class="string">"no-useless-escape"</span>: <span class="number">0</span>,</span><br><span class="line">		<span class="string">"no-redeclare"</span>: <span class="number">2</span>,</span><br><span class="line">		<span class="string">"no-tabs"</span>: <span class="number">0</span>,</span><br><span class="line">		<span class="string">"no-mixed-spaces-and-tabs"</span>: <span class="number">1</span>,</span><br><span class="line">		<span class="string">"space-before-function-paren"</span>: [<span class="number">0</span>, <span class="string">"always"</span>],</span><br><span class="line">		<span class="string">"no-unused-vars"</span>: <span class="number">1</span>,</span><br><span class="line">		<span class="string">"vue-scoped-css/require-scoped"</span>: <span class="number">2</span>,</span><br><span class="line">		<span class="string">"no-dupe-keys"</span>: <span class="number">2</span>,</span><br><span class="line">		<span class="string">"no-func-assign"</span>: <span class="number">2</span>,</span><br><span class="line">		<span class="string">"valid-typeof"</span>: <span class="number">2</span>,</span><br><span class="line">		<span class="string">"no-shadow"</span>: <span class="number">0</span>,</span><br><span class="line">		<span class="string">"no-prototype-builtins"</span>: <span class="number">0</span>,</span><br><span class="line">		<span class="string">"no-undef"</span>: <span class="number">0</span>,</span><br><span class="line">		<span class="string">"no-irregular-whitespace"</span>: <span class="number">1</span>,</span><br><span class="line">		<span class="string">"vue/custom-event-name-casing"</span>: <span class="number">1</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="string">"overrides"</span>: [</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="string">"files"</span>: [<span class="string">"*.vue"</span>],</span><br><span class="line">			<span class="string">"rules"</span>: &#123;</span><br><span class="line">				<span class="string">"indent"</span>: <span class="string">"off"</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	],</span><br><span class="line">	<span class="string">"parserOptions"</span>: &#123;</span><br><span class="line">		<span class="string">"parser"</span>: <span class="string">"babel-eslint"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="string">"extends"</span>: [<span class="string">"plugin:vue/essential"</span>, <span class="string">"plugin:vue-scoped-css/base"</span>, <span class="string">"eslint:recommended"</span>, <span class="string">"plugin:jsdoc/recommended"</span>]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在项目根目录下的<code>package.json</code>中配置检查脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;lint&quot;: &quot;vue-cli-service lint&quot;,</span><br><span class="line">    &quot;lint-fix&quot;: &quot;eslint --fix --ext .vue,.js&quot;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>执行<code>npm run lint</code>可进行src目录下的所有代码检查</p>
+<p>如果要单独检查某个文件夹，可使用<code>npm run lint ./src/xxx</code></p>
+<p>使用<code>npm run lint-fix</code>时后面必须要指定路径，这里配置是为了配合下面的<code>lint-staged</code>使用的</p>
+<h3 id="使用Husky和lint-staged执行git提交前的代码规范检查"><a href="#使用Husky和lint-staged执行git提交前的代码规范检查" class="headerlink" title="使用Husky和lint-staged执行git提交前的代码规范检查"></a>使用Husky和lint-staged执行git提交前的代码规范检查</h3><p>局部安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D husky lint-staged</span><br></pre></td></tr></table></figure>
+
+<p><code>husky</code>是一种帮助我们使用<code>git hooks</code>的工具，其中<code>pre-commit</code>就是众多<code>hooks</code>中的其中一个，可以在<code>git commit</code>之前自定义做一些事情，比如进行代码格式化与标准规范检查</p>
+<p><code>lint-staged</code>是用来对<code>git add</code>之后进入暂存区的文件进行eslint检查的，如果不使用<code>lint-staged</code>，每次执行全局检查，当项目大到一定程度时就很耗时了。<code>lint-staged</code>只会对你需要提交的代码文件进行检查</p>
+<p>在<code>package.json</code>进行相关配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&quot;husky&quot;: &#123;</span><br><span class="line">	&quot;hooks&quot;: &#123;</span><br><span class="line">		&quot;pre-commit&quot;: &quot;lint-staged&quot;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br><span class="line">&quot;lint-staged&quot;: &#123;</span><br><span class="line">	&quot;src&#x2F;**&#x2F;*.&#123;js,vue,ts.tsx&#125;&quot;: [</span><br><span class="line">		&quot;npm run prettier&quot;,</span><br><span class="line">		&quot;npm run lint-fix&quot;,</span><br><span class="line">		&quot;git add&quot;</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：这里的<code>npm run prettier</code>和<code>npm run lint-fix</code>都是上面写prettier和eslint的时候在package.json中配置好的脚本</p>
+<p>配置完之后，我们每次提交代码时将会先对暂存区的文件进行prettier格式化，然后进行eslint语法检查，最后提交文件，如果语法检查出现error，将会提示错误信息，并且中断此次提交。需要手动修复error之后再次进行提交</p>
+<p>另外，husky里面的东西可以单独写在一个叫<code>.huskyrc</code>文件里面，存放位置为项目根目录下</p>
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><blockquote>
+<p>eslint-loader</p>
 </blockquote>
-<p>详见uni官方文档</p>
-<ul>
-<li>当每进入/切换到一个新的页面的时候，就会调用页面生命周期函数</li>
-<li>调用顺序：onLoad &gt; onReady &gt; onShow &gt; onHide</li>
-</ul>
-<p>参考来源：<br><em><a href="https://www.jianshu.com/p/3f43eaa83bbd" target="_blank" rel="noopener">https://www.jianshu.com/p/3f43eaa83bbd</a></em></p>
+<p>Vue CLI 是支持热更新的，即修改文件后触发 webpack 打包逻辑，使用 eslint-loader 能够让 webpack 工作前执行 ESLint 检查</p>
+<blockquote>
+<p>eslint-plugin-prettier</p>
+</blockquote>
+<p>eslint-plugin-prettier 是 Prettier 为 ESLint 开发的插件，使用它，可以在 eslint 中起到 prettier 检查</p>
+<blockquote>
+<p>eslint-config-prettier</p>
+</blockquote>
+<p>把格式化相关的事情都交给 prettier 去做，使用这个工具可以屏蔽掉 ESLint 与格式化相关的 rule</p>
+<blockquote>
+<p>prettier-eslint</p>
+</blockquote>
+<p>ESLint 本身有 fix 的功能，即eslint –fix，如果想让执行该功能的时候，也调用 prettier 的 fix 功能（即prettier –write），可以使用该工具</p>
 
       
     </div>
@@ -432,7 +447,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://bibifeng.github.io/2020/05/11/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%9F%BA%E4%BA%8Euni-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E9%A1%B5%E9%9D%A2%E5%91%A8%E6%9C%9F/" title="小程序(基于uni)常用的应用生命周期&页面生命周期">https://bibifeng.github.io/2020/05/11/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%9F%BA%E4%BA%8Euni-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E9%A1%B5%E9%9D%A2%E5%91%A8%E6%9C%9F/</a>
+    <a href="https://bibifeng.github.io/2020/09/18/vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8ESLint-Prettier-Husky-Lint-staged%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%E4%B8%8E%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E5%8C%96/" title="vue项目中使用【eslint】【prettier】【husky】【lint-staged】进行代码检查与代码格式化">https://bibifeng.github.io/2020/09/18/vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8ESLint-Prettier-Husky-Lint-staged%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%E4%B8%8E%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E5%8C%96/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -454,14 +469,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2020/09/08/npm%E8%AE%BE%E7%BD%AE%E6%B7%98%E5%AE%9D%E9%95%9C%E5%83%8F/" rel="next" title="npm设置淘宝镜像">
+                <i class="fa fa-chevron-left"></i> npm设置淘宝镜像
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/05/15/uni%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BB%84%E4%BB%B6%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87%E5%AE%BD%E5%BA%A6%E6%BA%A2%E5%87%BA/" rel="prev" title="uni小程序富文本组件处理图片宽度溢出">
-                uni小程序富文本组件处理图片宽度溢出 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/09/27/JS%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E4%BB%A5%E5%8F%8A%E6%A0%BC%E5%BC%8F%E5%8C%96/" rel="prev" title="JS获取当前日期时间以及格式化">
+                JS获取当前日期时间以及格式化 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -514,8 +533,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -566,6 +594,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prettier-代码格式化"><span class="nav-number">1.</span> <span class="nav-text">Prettier 代码格式化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ESLint代码检查"><span class="nav-number">2.</span> <span class="nav-text">ESLint代码检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Husky和lint-staged执行git提交前的代码规范检查"><span class="nav-number">3.</span> <span class="nav-text">使用Husky和lint-staged执行git提交前的代码规范检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展"><span class="nav-number">4.</span> <span class="nav-text">扩展</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
