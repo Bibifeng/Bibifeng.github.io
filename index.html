@@ -1179,7 +1179,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/09/08/npm%E8%AE%BE%E7%BD%AE%E6%B7%98%E5%AE%9D%E9%95%9C%E5%83%8F/" itemprop="url">npm设置淘宝镜像</a></h1>
+                <a class="post-title-link" href="/2020/09/08/npm%E8%AE%BE%E7%BD%AE%E6%B7%98%E5%AE%9D%E9%95%9C%E5%83%8F/" itemprop="url">npm设置淘宝镜像以及nrm镜像源管理</a></h1>
         
 
         <div class="post-meta">
@@ -1252,14 +1252,9 @@
 
       
         
-          <h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><blockquote>
-<p>cnpm形式</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>将npm配置为淘宝镜像</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+          <h3 id="cnpm形式"><a href="#cnpm形式" class="headerlink" title="cnpm形式"></a>cnpm形式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 安装cnpm</span><br><span class="line">npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org</span><br><span class="line"></span><br><span class="line"># 查看当前配置</span><br><span class="line">cnpm config get registry</span><br><span class="line"></span><br><span class="line"># 删除cnpm</span><br><span class="line">npm uninstall cnpm -g</span><br></pre></td></tr></table></figure>
+
+<h3 id="将npm配置为淘宝镜像"><a href="#将npm配置为淘宝镜像" class="headerlink" title="将npm配置为淘宝镜像"></a>将npm配置为淘宝镜像</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 将npm源指向淘宝镜像</span><br><span class="line">npm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org</span><br><span class="line"></span><br><span class="line"># 查看当前配置</span><br><span class="line">npm config get registry</span><br><span class="line"></span><br><span class="line"># 删除当前npm的淘宝镜像配置</span><br><span class="line">npm config delete registry</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/09/08/npm%E8%AE%BE%E7%BD%AE%E6%B7%98%E5%AE%9D%E9%95%9C%E5%83%8F/#more" rel="contents">
@@ -1841,7 +1836,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

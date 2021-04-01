@@ -83,37 +83,15 @@
       </categories>
   </entry>
   <entry>
-    <title>npm设置淘宝镜像</title>
+    <title>npm设置淘宝镜像以及nrm镜像源管理</title>
     <url>/2020/09/08/npm%E8%AE%BE%E7%BD%AE%E6%B7%98%E5%AE%9D%E9%95%9C%E5%83%8F/</url>
-    <content><![CDATA[<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><blockquote>
-<p>cnpm形式</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>将npm配置为淘宝镜像</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h3 id="cnpm形式"><a href="#cnpm形式" class="headerlink" title="cnpm形式"></a>cnpm形式</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 安装cnpm</span><br><span class="line">npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org</span><br><span class="line"></span><br><span class="line"># 查看当前配置</span><br><span class="line">cnpm config get registry</span><br><span class="line"></span><br><span class="line"># 删除cnpm</span><br><span class="line">npm uninstall cnpm -g</span><br></pre></td></tr></table></figure>
+
+<h3 id="将npm配置为淘宝镜像"><a href="#将npm配置为淘宝镜像" class="headerlink" title="将npm配置为淘宝镜像"></a>将npm配置为淘宝镜像</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 将npm源指向淘宝镜像</span><br><span class="line">npm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org</span><br><span class="line"></span><br><span class="line"># 查看当前配置</span><br><span class="line">npm config get registry</span><br><span class="line"></span><br><span class="line"># 删除当前npm的淘宝镜像配置</span><br><span class="line">npm config delete registry</span><br></pre></td></tr></table></figure>
 
 <a id="more"></a>
 
-<h3 id="查看当前配置"><a href="#查看当前配置" class="headerlink" title="查看当前配置"></a>查看当前配置</h3><blockquote>
-<p>cnpm查看</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cnpm config get registry</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>npm查看当前配置</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config get registry</span><br></pre></td></tr></table></figure>
-
-<h3 id="删除淘宝镜像配置"><a href="#删除淘宝镜像配置" class="headerlink" title="删除淘宝镜像配置"></a>删除淘宝镜像配置</h3><blockquote>
-<p>删除cnpm</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm uninstall cnpm -g</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>删除当前npm的淘宝镜像配置</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config delete registry</span><br></pre></td></tr></table></figure>]]></content>
+<h3 id="不同镜像源之间的切换（使用nrm）"><a href="#不同镜像源之间的切换（使用nrm）" class="headerlink" title="不同镜像源之间的切换（使用nrm）"></a>不同镜像源之间的切换（使用nrm）</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 全局安装nrm</span><br><span class="line">npm install -g nrm</span><br><span class="line"></span><br><span class="line"># 查看本机可选的源（*代表正在使用的源）</span><br><span class="line">nrm ls</span><br><span class="line"></span><br><span class="line"># 增加定制源（淘宝镜像为例）</span><br><span class="line">nrm add registry https:&#x2F;&#x2F;registry.npm.taobao.org</span><br><span class="line"></span><br><span class="line"># 切换源（相当于npm config set）</span><br><span class="line">nrm use xxx</span><br><span class="line"></span><br><span class="line"># 删除源</span><br><span class="line">nrm del xxx</span><br><span class="line"></span><br><span class="line"># 测速</span><br><span class="line">nrm test xxx</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Node.js</category>
       </categories>
@@ -274,6 +252,131 @@
       </categories>
   </entry>
   <entry>
+    <title>关于换行的3个css属性</title>
+    <url>/2020/10/10/%E5%85%B3%E4%BA%8E%E6%8D%A2%E8%A1%8C%E7%9A%843%E4%B8%AAcss%E5%B1%9E%E6%80%A7/</url>
+    <content><![CDATA[<blockquote>
+<p>white-space 控制空白字符的显示，同时还能控制是否自动换行</p>
+</blockquote>
+<p>可选值：<code>normal | nowrap | pre | pre-wrap | pre-line</code></p>
+<blockquote>
+<p>word-break 控制单词如何被拆分换行</p>
+</blockquote>
+<p>可选值：<code>normal | break-all | keep-all</code></p>
+<blockquote>
+<p>word-wrap（overflow-wrap）控制长度超过一行的单词是否被拆分换行</p>
+</blockquote>
+<p>可选值：<code>normal | break-word</code></p>
+<h4 id="文本超长显示省略号"><a href="#文本超长显示省略号" class="headerlink" title="文本超长显示省略号"></a>文本超长显示省略号</h4><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.text-overflow</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">    <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：容器的<code>width</code>或者<code>max-width</code>必须有具体的值</p>
+]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>对象的灵活扩展&amp;ES6扩展运算符</title>
+    <url>/2020/11/13/%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%81%B5%E6%B4%BB%E6%89%A9%E5%B1%95-ES6%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
+    <content><![CDATA[<h3 id="向对象中添加属性-or-合并对象"><a href="#向对象中添加属性-or-合并对象" class="headerlink" title="向对象中添加属性 or 合并对象"></a>向对象中添加属性 or 合并对象</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 向scores中添加frank的属性</span></span><br><span class="line"><span class="keyword">const</span> frank = &#123; <span class="attr">id_frank</span>:<span class="number">100</span>, <span class="attr">name_frank</span>:<span class="string">'Frank'</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> scores = &#123; ...frank, <span class="attr">EN</span>:<span class="number">120</span>, <span class="attr">CN</span>:<span class="number">118</span> &#125;; <span class="comment">// &#123; id_frank:100, name_frank:'Frank', EN:120, CN:118 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加条件属性，当password存在的时候才会添加 password</span></span><br><span class="line"><span class="keyword">const</span> password = <span class="string">'Password!'</span></span><br><span class="line"><span class="keyword">const</span> frankWithRealPassword = &#123;</span><br><span class="line">  ...frank,</span><br><span class="line">  ...(password &amp;&amp; &#123; password &#125;)</span><br><span class="line">&#125; <span class="comment">// &#123; id_frank:100, name_frank:'Frank', password: 'Password!' &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并 frank &amp; lucy 到 user 中</span></span><br><span class="line"><span class="keyword">const</span> lucy = &#123; <span class="attr">id_lucy</span>:<span class="number">101</span>, <span class="attr">name_lucy</span>:<span class="string">'lucy'</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> user = &#123; ...frank, ...lucy &#125;; <span class="comment">// &#123;id_frank: 100, name_frank: "Frank", id_lucy: 101, name_lucy: "lucy"&#125;</span></span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="删除对象属性（去掉user中的password）"><a href="#删除对象属性（去掉user中的password）" class="headerlink" title="删除对象属性（去掉user中的password）"></a>删除对象属性（去掉user中的password）</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 参数中的rest不是固定名词，可改，但是必须要将...rest操作符放在参数的最后一位，否则会报错</span></span><br><span class="line"><span class="keyword">const</span> noPassword = <span class="function">(<span class="params">&#123; password, ...rest &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> rest;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">  id: <span class="number">100</span>,</span><br><span class="line">  name: <span class="string">'coffe1891'</span>,</span><br><span class="line">  password: <span class="string">'Password!'</span></span><br><span class="line">&#125;</span><br><span class="line">noPassword(user); <span class="comment">// &#123; id: 100, name: 'coffe1891' &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="从对象中删除一个或多个属性，将剩余的属性组成一个新的对象"><a href="#从对象中删除一个或多个属性，将剩余的属性组成一个新的对象" class="headerlink" title="从对象中删除一个或多个属性，将剩余的属性组成一个新的对象"></a>从对象中删除一个或多个属性，将剩余的属性组成一个新的对象</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const obj &#x3D; &#123; a: 11, b: 22, c: 33, d: 44 &#125;;</span><br><span class="line">const &#123;c, d, ...rest&#125; &#x3D; obj;</span><br><span class="line">const objNew &#x3D; &#123;...rest&#125;;</span><br><span class="line">console.log(objNew); &#x2F;&#x2F; &#123;a: 11, b: 22&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="从对象中取出指定的若干属性，组成一个新的对象"><a href="#从对象中取出指定的若干属性，组成一个新的对象" class="headerlink" title="从对象中取出指定的若干属性，组成一个新的对象"></a>从对象中取出指定的若干属性，组成一个新的对象</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 方法定义</span></span><br><span class="line">cleanData(obj, keyArr) &#123;</span><br><span class="line">	<span class="keyword">return</span> keyArr.reduce( <span class="function">(<span class="params">res, key</span>) =&gt;</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> ( obj.hasOwnProperty(key) ) &#123;</span><br><span class="line">			res[key] = obj[key];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;, &#123;&#125;); <span class="comment">// 注意这个&#123;&#125;，reduce的第二个参数,是对res的初始化</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">a</span>:<span class="number">1</span>, <span class="attr">b</span>:<span class="number">2</span>, <span class="attr">c</span>:<span class="number">3</span>, <span class="attr">d</span>:<span class="number">4</span>&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(cleanData(obj, [<span class="string">'a'</span>, <span class="string">'c'</span>])); <span class="comment">// &#123;a:1, c:2&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>reduce()</code>是数组的归并方法，与<code>forEach()、map()、filter()</code>等迭代方法一样都会对数组每一项进行遍历，但是<code>reduce()</code>可同时将前面数组项遍历产生的结果与当前遍历项进行运算</p>
+<p>如果为了方便的话，比如obj就几个属性，可以直接用下面这种es6的扩展运算</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let obj &#x3D; &#123;a:1, b:2, c:3, d:4&#125;;</span><br><span class="line">const &#123;a,c&#125; &#x3D; obj;</span><br><span class="line">const objNew &#x3D; &#123;a,c&#125;;</span><br><span class="line">console.log(objNew); &#x2F;&#x2F; &#123;a:1, c:3&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="将对象的key值抽出来组成一个新数组"><a href="#将对象的key值抽出来组成一个新数组" class="headerlink" title="将对象的key值抽出来组成一个新数组"></a>将对象的key值抽出来组成一个新数组</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let person &#x3D; &#123;</span><br><span class="line">    name: &#39;张三&#39;,</span><br><span class="line">    age: 18,</span><br><span class="line">    66: &#39;66&#39;,</span><br><span class="line">    2: &#39;2&#39;</span><br><span class="line">&#125;;</span><br><span class="line">console.log(Object.keys(person)); &#x2F;&#x2F; [&#39;2&#39;, &#39;66&#39;, &#39;name&#39;, &#39;age&#39;]</span><br></pre></td></tr></table></figure>
+
+<p>类似的还有<code>Object.values()</code></p>
+<h3 id="对象属性重命名"><a href="#对象属性重命名" class="headerlink" title="对象属性重命名"></a>对象属性重命名</h3><p>原理：先解构对应的属性，再将属性以新的命名添加进去</p>
+<p>举例: 比如讲user中的ID改为小写id</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> renamed = <span class="function">(<span class="params">&#123;ID, ...obj&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        id: ID,</span><br><span class="line">        ...obj,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">    ID: <span class="number">123</span>,</span><br><span class="line">    name: <span class="string">'xsad'</span>,</span><br><span class="line">    years: <span class="string">'12'</span>,</span><br><span class="line">&#125;</span><br><span class="line">renamed(user); <span class="comment">// &#123;id: '123', name: 'xsad', years: '12'&#125;</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>ES6</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>小程序(uni)在页面传参时布尔值失效的问题</title>
+    <url>/2020/06/05/%E5%B0%8F%E7%A8%8B%E5%BA%8F-uni-%E5%9C%A8%E9%A1%B5%E9%9D%A2%E4%BC%A0%E5%8F%82%E6%97%B6%E5%B8%83%E5%B0%94%E5%80%BC%E5%A4%B1%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>在开发过程中发现了一个不太起眼但很重要的问题，也是踩坑踩过来的。先看下面这段小程序A页面传值到B页面的代码</p>
+<a id="more"></a>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// A页面</span></span><br><span class="line">methods: &#123;</span><br><span class="line">    viewB() &#123;</span><br><span class="line">        <span class="keyword">let</span> id = <span class="string">'123'</span>,</span><br><span class="line">            isHide = <span class="literal">true</span>,</span><br><span class="line">        uni.navigateTo(&#123;</span><br><span class="line">            url: <span class="string">'/pages/demo/b?id='</span> + id + <span class="string">'&amp;isHide='</span> isHide,</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// B页面 接收值</span></span><br><span class="line">onLoad(e) &#123;</span><br><span class="line">    <span class="keyword">this</span>.isHide = e.isHide;</span><br><span class="line">    <span class="keyword">this</span>.id = e.id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看起来没什么问题，传参有两个，字符传类型<code>id</code> 和 布尔值类型<code>isHide</code>。在B页面的onLoad周期中也能正常接收到这两个值。</p>
+<p>因为<code>isHide</code>是A页面去控制B页面的按钮是否显示的，但是在B页面中发现无论<code>isHide</code>是<code>true</code>还是<code>false</code>，都无法正常控制按钮的显示与隐藏</p>
+<p>仔细排查确认代码没写错之后，<strong>在小程序调试工具中偶然发现A页面带过来的布尔类型<code>isHide</code>，到了B页面却莫名其妙的变成了字符串类型</strong></p>
+<p>也就是说，在A页面 <code>isHide: true;</code> 但是在B页面 <code>isHide: &#39;true&#39;</code>;</p>
+<p>初步猜想是url传参的时候，布尔值被转成了字符串，所以我又尝试了以对象的形式去传参，如下代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// A页面</span></span><br><span class="line">methods: &#123;</span><br><span class="line">    viewB() &#123;</span><br><span class="line">        <span class="keyword">let</span> params: &#123;</span><br><span class="line">            id: <span class="string">'123'</span>,</span><br><span class="line">            isHide: <span class="literal">true</span>,</span><br><span class="line">        &#125;</span><br><span class="line">        uni.navigateTo(&#123;</span><br><span class="line">            url: <span class="string">'/pages/demo/b?params='</span> + <span class="built_in">encodeURIComponent</span>(<span class="built_in">JSON</span>.stringify(params)),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// B页面 接收值</span></span><br><span class="line">onLoad(e) &#123;</span><br><span class="line">    <span class="keyword">let</span> obj = <span class="built_in">JSON</span>.parse(<span class="built_in">decodeURIComponent</span>(e.params));</span><br><span class="line">    <span class="keyword">this</span>.isHide = obj.isHide; <span class="comment">// 这里拿到的isHide不会被转成字符串</span></span><br><span class="line">    <span class="keyword">this</span>.id = obj.id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样页面就正常了</p>
+]]></content>
+      <categories>
+        <category>小程序</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>小程序(基于uni)常用的应用生命周期&amp;页面生命周期</title>
+    <url>/2020/05/11/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%9F%BA%E4%BA%8Euni-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E9%A1%B5%E9%9D%A2%E5%91%A8%E6%9C%9F/</url>
+    <content><![CDATA[<blockquote>
+<p>常用应用生命周期</p>
+</blockquote>
+<a id="more"></a>
+
+<table>
+<thead>
+<tr>
+<th align="left">函数名</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">onLaunch</td>
+<td align="left">当uni-app 初始化完成时触发（全局只触发一次）</td>
+</tr>
+<tr>
+<td align="left">onShow</td>
+<td align="left">当 uni-app 启动，或从后台进入前台显示</td>
+</tr>
+<tr>
+<td align="left">onHide</td>
+<td align="left">当 uni-app 从前台进入后台</td>
+</tr>
+<tr>
+<td align="left">onError</td>
+<td align="left">当 uni-app 报错时触发</td>
+</tr>
+</tbody></table>
+<ul>
+<li>应用生命周期仅可在App.vue中监听，在其它页面监听无效</li>
+<li>调用顺序：onLaunch &gt; onShow &gt; onHide</li>
+</ul>
+<blockquote>
+<p>常用页面生命周期</p>
+</blockquote>
+<p>详见uni官方文档</p>
+<ul>
+<li>当每进入/切换到一个新的页面的时候，就会调用页面生命周期函数</li>
+<li>调用顺序：onLoad &gt; onReady &gt; onShow &gt; onHide</li>
+</ul>
+<p>参考来源：<br><em><a href="https://www.jianshu.com/p/3f43eaa83bbd" target="_blank" rel="noopener">https://www.jianshu.com/p/3f43eaa83bbd</a></em></p>
+]]></content>
+      <categories>
+        <category>小程序</category>
+      </categories>
+  </entry>
+  <entry>
     <title>vue-i18n国际化</title>
     <url>/2020/08/31/vue-i18n%E5%9B%BD%E9%99%85%E5%8C%96/</url>
     <content><![CDATA[<h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>在vue项目中使用vue-i18n进行国际化（业务需求，本文例子中只考虑中英互译）</p>
@@ -355,131 +458,6 @@
       </categories>
   </entry>
   <entry>
-    <title>对象的灵活扩展&amp;ES6扩展运算符</title>
-    <url>/2020/11/13/%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%81%B5%E6%B4%BB%E6%89%A9%E5%B1%95-ES6%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
-    <content><![CDATA[<h3 id="向对象中添加属性-or-合并对象"><a href="#向对象中添加属性-or-合并对象" class="headerlink" title="向对象中添加属性 or 合并对象"></a>向对象中添加属性 or 合并对象</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 向scores中添加frank的属性</span></span><br><span class="line"><span class="keyword">const</span> frank = &#123; <span class="attr">id_frank</span>:<span class="number">100</span>, <span class="attr">name_frank</span>:<span class="string">'Frank'</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> scores = &#123; ...frank, <span class="attr">EN</span>:<span class="number">120</span>, <span class="attr">CN</span>:<span class="number">118</span> &#125;; <span class="comment">// &#123; id_frank:100, name_frank:'Frank', EN:120, CN:118 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加条件属性，当password存在的时候才会添加 password</span></span><br><span class="line"><span class="keyword">const</span> password = <span class="string">'Password!'</span></span><br><span class="line"><span class="keyword">const</span> frankWithRealPassword = &#123;</span><br><span class="line">  ...frank,</span><br><span class="line">  ...(password &amp;&amp; &#123; password &#125;)</span><br><span class="line">&#125; <span class="comment">// &#123; id_frank:100, name_frank:'Frank', password: 'Password!' &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并 frank &amp; lucy 到 user 中</span></span><br><span class="line"><span class="keyword">const</span> lucy = &#123; <span class="attr">id_lucy</span>:<span class="number">101</span>, <span class="attr">name_lucy</span>:<span class="string">'lucy'</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> user = &#123; ...frank, ...lucy &#125;; <span class="comment">// &#123;id_frank: 100, name_frank: "Frank", id_lucy: 101, name_lucy: "lucy"&#125;</span></span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<h3 id="删除对象属性（去掉user中的password）"><a href="#删除对象属性（去掉user中的password）" class="headerlink" title="删除对象属性（去掉user中的password）"></a>删除对象属性（去掉user中的password）</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 参数中的rest不是固定名词，可改，但是必须要将...rest操作符放在参数的最后一位，否则会报错</span></span><br><span class="line"><span class="keyword">const</span> noPassword = <span class="function">(<span class="params">&#123; password, ...rest &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> rest;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">  id: <span class="number">100</span>,</span><br><span class="line">  name: <span class="string">'coffe1891'</span>,</span><br><span class="line">  password: <span class="string">'Password!'</span></span><br><span class="line">&#125;</span><br><span class="line">noPassword(user); <span class="comment">// &#123; id: 100, name: 'coffe1891' &#125;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="从对象中删除一个或多个属性，将剩余的属性组成一个新的对象"><a href="#从对象中删除一个或多个属性，将剩余的属性组成一个新的对象" class="headerlink" title="从对象中删除一个或多个属性，将剩余的属性组成一个新的对象"></a>从对象中删除一个或多个属性，将剩余的属性组成一个新的对象</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const obj &#x3D; &#123; a: 11, b: 22, c: 33, d: 44 &#125;;</span><br><span class="line">const &#123;c, d, ...rest&#125; &#x3D; obj;</span><br><span class="line">const objNew &#x3D; &#123;...rest&#125;;</span><br><span class="line">console.log(objNew); &#x2F;&#x2F; &#123;a: 11, b: 22&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="从对象中取出指定的若干属性，组成一个新的对象"><a href="#从对象中取出指定的若干属性，组成一个新的对象" class="headerlink" title="从对象中取出指定的若干属性，组成一个新的对象"></a>从对象中取出指定的若干属性，组成一个新的对象</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 方法定义</span></span><br><span class="line">cleanData(obj, keyArr) &#123;</span><br><span class="line">	<span class="keyword">return</span> keyArr.reduce( <span class="function">(<span class="params">res, key</span>) =&gt;</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> ( obj.hasOwnProperty(key) ) &#123;</span><br><span class="line">			res[key] = obj[key];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;, &#123;&#125;); <span class="comment">// 注意这个&#123;&#125;，reduce的第二个参数,是对res的初始化</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">a</span>:<span class="number">1</span>, <span class="attr">b</span>:<span class="number">2</span>, <span class="attr">c</span>:<span class="number">3</span>, <span class="attr">d</span>:<span class="number">4</span>&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(cleanData(obj, [<span class="string">'a'</span>, <span class="string">'c'</span>])); <span class="comment">// &#123;a:1, c:2&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p><code>reduce()</code>是数组的归并方法，与<code>forEach()、map()、filter()</code>等迭代方法一样都会对数组每一项进行遍历，但是<code>reduce()</code>可同时将前面数组项遍历产生的结果与当前遍历项进行运算</p>
-<p>如果为了方便的话，比如obj就几个属性，可以直接用下面这种es6的扩展运算</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let obj &#x3D; &#123;a:1, b:2, c:3, d:4&#125;;</span><br><span class="line">const &#123;a,c&#125; &#x3D; obj;</span><br><span class="line">const objNew &#x3D; &#123;a,c&#125;;</span><br><span class="line">console.log(objNew); &#x2F;&#x2F; &#123;a:1, c:3&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="将对象的key值抽出来组成一个新数组"><a href="#将对象的key值抽出来组成一个新数组" class="headerlink" title="将对象的key值抽出来组成一个新数组"></a>将对象的key值抽出来组成一个新数组</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let person &#x3D; &#123;</span><br><span class="line">    name: &#39;张三&#39;,</span><br><span class="line">    age: 18,</span><br><span class="line">    66: &#39;66&#39;,</span><br><span class="line">    2: &#39;2&#39;</span><br><span class="line">&#125;;</span><br><span class="line">console.log(Object.keys(person)); &#x2F;&#x2F; [&#39;2&#39;, &#39;66&#39;, &#39;name&#39;, &#39;age&#39;]</span><br></pre></td></tr></table></figure>
-
-<p>类似的还有<code>Object.values()</code></p>
-<h3 id="对象属性重命名"><a href="#对象属性重命名" class="headerlink" title="对象属性重命名"></a>对象属性重命名</h3><p>原理：先解构对应的属性，再将属性以新的命名添加进去</p>
-<p>举例: 比如讲user中的ID改为小写id</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> renamed = <span class="function">(<span class="params">&#123;ID, ...obj&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        id: ID,</span><br><span class="line">        ...obj,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">    ID: <span class="number">123</span>,</span><br><span class="line">    name: <span class="string">'xsad'</span>,</span><br><span class="line">    years: <span class="string">'12'</span>,</span><br><span class="line">&#125;</span><br><span class="line">renamed(user); <span class="comment">// &#123;id: '123', name: 'xsad', years: '12'&#125;</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>ES6</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>小程序(uni)在页面传参时布尔值失效的问题</title>
-    <url>/2020/06/05/%E5%B0%8F%E7%A8%8B%E5%BA%8F-uni-%E5%9C%A8%E9%A1%B5%E9%9D%A2%E4%BC%A0%E5%8F%82%E6%97%B6%E5%B8%83%E5%B0%94%E5%80%BC%E5%A4%B1%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>在开发过程中发现了一个不太起眼但很重要的问题，也是踩坑踩过来的。先看下面这段小程序A页面传值到B页面的代码</p>
-<a id="more"></a>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// A页面</span></span><br><span class="line">methods: &#123;</span><br><span class="line">    viewB() &#123;</span><br><span class="line">        <span class="keyword">let</span> id = <span class="string">'123'</span>,</span><br><span class="line">            isHide = <span class="literal">true</span>,</span><br><span class="line">        uni.navigateTo(&#123;</span><br><span class="line">            url: <span class="string">'/pages/demo/b?id='</span> + id + <span class="string">'&amp;isHide='</span> isHide,</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// B页面 接收值</span></span><br><span class="line">onLoad(e) &#123;</span><br><span class="line">    <span class="keyword">this</span>.isHide = e.isHide;</span><br><span class="line">    <span class="keyword">this</span>.id = e.id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>看起来没什么问题，传参有两个，字符传类型<code>id</code> 和 布尔值类型<code>isHide</code>。在B页面的onLoad周期中也能正常接收到这两个值。</p>
-<p>因为<code>isHide</code>是A页面去控制B页面的按钮是否显示的，但是在B页面中发现无论<code>isHide</code>是<code>true</code>还是<code>false</code>，都无法正常控制按钮的显示与隐藏</p>
-<p>仔细排查确认代码没写错之后，<strong>在小程序调试工具中偶然发现A页面带过来的布尔类型<code>isHide</code>，到了B页面却莫名其妙的变成了字符串类型</strong></p>
-<p>也就是说，在A页面 <code>isHide: true;</code> 但是在B页面 <code>isHide: &#39;true&#39;</code>;</p>
-<p>初步猜想是url传参的时候，布尔值被转成了字符串，所以我又尝试了以对象的形式去传参，如下代码：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// A页面</span></span><br><span class="line">methods: &#123;</span><br><span class="line">    viewB() &#123;</span><br><span class="line">        <span class="keyword">let</span> params: &#123;</span><br><span class="line">            id: <span class="string">'123'</span>,</span><br><span class="line">            isHide: <span class="literal">true</span>,</span><br><span class="line">        &#125;</span><br><span class="line">        uni.navigateTo(&#123;</span><br><span class="line">            url: <span class="string">'/pages/demo/b?params='</span> + <span class="built_in">encodeURIComponent</span>(<span class="built_in">JSON</span>.stringify(params)),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// B页面 接收值</span></span><br><span class="line">onLoad(e) &#123;</span><br><span class="line">    <span class="keyword">let</span> obj = <span class="built_in">JSON</span>.parse(<span class="built_in">decodeURIComponent</span>(e.params));</span><br><span class="line">    <span class="keyword">this</span>.isHide = obj.isHide; <span class="comment">// 这里拿到的isHide不会被转成字符串</span></span><br><span class="line">    <span class="keyword">this</span>.id = obj.id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样页面就正常了</p>
-]]></content>
-      <categories>
-        <category>小程序</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>关于换行的3个css属性</title>
-    <url>/2020/10/10/%E5%85%B3%E4%BA%8E%E6%8D%A2%E8%A1%8C%E7%9A%843%E4%B8%AAcss%E5%B1%9E%E6%80%A7/</url>
-    <content><![CDATA[<blockquote>
-<p>white-space 控制空白字符的显示，同时还能控制是否自动换行</p>
-</blockquote>
-<p>可选值：<code>normal | nowrap | pre | pre-wrap | pre-line</code></p>
-<blockquote>
-<p>word-break 控制单词如何被拆分换行</p>
-</blockquote>
-<p>可选值：<code>normal | break-all | keep-all</code></p>
-<blockquote>
-<p>word-wrap（overflow-wrap）控制长度超过一行的单词是否被拆分换行</p>
-</blockquote>
-<p>可选值：<code>normal | break-word</code></p>
-<h4 id="文本超长显示省略号"><a href="#文本超长显示省略号" class="headerlink" title="文本超长显示省略号"></a>文本超长显示省略号</h4><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.text-overflow</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">    <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意：容器的<code>width</code>或者<code>max-width</code>必须有具体的值</p>
-]]></content>
-      <categories>
-        <category>css</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>小程序(基于uni)常用的应用生命周期&amp;页面生命周期</title>
-    <url>/2020/05/11/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%9F%BA%E4%BA%8Euni-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E9%A1%B5%E9%9D%A2%E5%91%A8%E6%9C%9F/</url>
-    <content><![CDATA[<blockquote>
-<p>常用应用生命周期</p>
-</blockquote>
-<a id="more"></a>
-
-<table>
-<thead>
-<tr>
-<th align="left">函数名</th>
-<th align="left">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">onLaunch</td>
-<td align="left">当uni-app 初始化完成时触发（全局只触发一次）</td>
-</tr>
-<tr>
-<td align="left">onShow</td>
-<td align="left">当 uni-app 启动，或从后台进入前台显示</td>
-</tr>
-<tr>
-<td align="left">onHide</td>
-<td align="left">当 uni-app 从前台进入后台</td>
-</tr>
-<tr>
-<td align="left">onError</td>
-<td align="left">当 uni-app 报错时触发</td>
-</tr>
-</tbody></table>
-<ul>
-<li>应用生命周期仅可在App.vue中监听，在其它页面监听无效</li>
-<li>调用顺序：onLaunch &gt; onShow &gt; onHide</li>
-</ul>
-<blockquote>
-<p>常用页面生命周期</p>
-</blockquote>
-<p>详见uni官方文档</p>
-<ul>
-<li>当每进入/切换到一个新的页面的时候，就会调用页面生命周期函数</li>
-<li>调用顺序：onLoad &gt; onReady &gt; onShow &gt; onHide</li>
-</ul>
-<p>参考来源：<br><em><a href="https://www.jianshu.com/p/3f43eaa83bbd" target="_blank" rel="noopener">https://www.jianshu.com/p/3f43eaa83bbd</a></em></p>
-]]></content>
-      <categories>
-        <category>小程序</category>
-      </categories>
-  </entry>
-  <entry>
     <title>微信小程序(uni)拍照或选取相册图片进行上传、图片预览</title>
     <url>/2020/06/13/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-uni-%E6%8B%8D%E7%85%A7%E6%88%96%E9%80%89%E5%8F%96%E7%9B%B8%E5%86%8C%E5%9B%BE%E7%89%87%E8%BF%9B%E8%A1%8C%E4%B8%8A%E4%BC%A0/</url>
     <content><![CDATA[<p>如题，记录一下相关api使用方法，对一些值的处理需要注意</p>
@@ -537,6 +515,26 @@
       </categories>
   </entry>
   <entry>
+    <title>每天一道小心机：for循环将接口多个字段push进数组</title>
+    <url>/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93%E5%B0%8F%E5%BF%83%E6%9C%BA%EF%BC%9Afor%E5%BE%AA%E7%8E%AF%E5%B0%86%E6%8E%A5%E5%8F%A3%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5push%E8%BF%9B%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<blockquote>
+<p>场景：接口将1~12个月份对应的值用12个字段返回，这12个字段长这样：<code>field1、field2 ... field12</code>，但前端想要将12个字段组装为一个数组去循环生成相应元素，怎么做？</p>
+</blockquote>
+<a id="more"></a>
+
+<p>json数据：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  field1: '12',</span><br><span class="line">  field2: '2',</span><br><span class="line">  field3: '36',</span><br><span class="line">  <span class="comment">// ... 中间省略</span></span><br><span class="line">  field12: '324'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">12</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> fieldIndex = <span class="string">'field'</span> + (i + <span class="number">1</span>); <span class="comment">// 加上1是因为接口字段从field1开始，没有field0</span></span><br><span class="line">    arr.push(data[fieldIndex]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：push的时候不能直接用<code>data.fieldIndex</code>，这样写实际上js会读取data里面叫<code>fieldIndex</code>变量的值，但在情境中<code>fieldIndex</code>是动态值，因此只能用<code>data[fieldIndex]</code>的方式去访问，又是一个小细节-。-</p>
+]]></content>
+      <categories>
+        <category>每天一道小心机</category>
+      </categories>
+  </entry>
+  <entry>
     <title>微信小程序(uni)通过地图选择地址、根据地址查看地图(进行导航)</title>
     <url>/2020/06/18/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-uni-%E9%80%9A%E8%BF%87%E5%9C%B0%E5%9B%BE%E9%80%89%E6%8B%A9%E5%9C%B0%E5%9D%80%E3%80%81%E6%A0%B9%E6%8D%AE%E5%9C%B0%E5%9D%80%E6%9F%A5%E7%9C%8B%E5%9C%B0%E5%9B%BE-%E8%BF%9B%E8%A1%8C%E5%AF%BC%E8%88%AA/</url>
     <content><![CDATA[<blockquote>
@@ -565,26 +563,6 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> QQMap <span class="keyword">from</span> <span class="string">'./qqmap-wx-jssdk.js'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            mapsdk: <span class="literal">null</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    onLoad(e) &#123;</span><br><span class="line">        <span class="comment">// 实例化 腾讯地图构造函数</span></span><br><span class="line">        <span class="keyword">this</span>.mapsdk = <span class="keyword">new</span> QQMapWX(&#123;</span><br><span class="line">            key: <span class="string">'申请的密钥'</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        <span class="comment">// 在地图中查看地址</span></span><br><span class="line">        addressInMap() &#123;</span><br><span class="line">            <span class="keyword">this</span>.mapsdk.geocoder(&#123;</span><br><span class="line">                address: <span class="string">'地址：如广东省深圳市深圳大学'</span>,</span><br><span class="line">                success: <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="comment">// 调起地图</span></span><br><span class="line">                    wx.openLocation(&#123;</span><br><span class="line">                        latitude: res.result.location.lat,</span><br><span class="line">                        longitude: res.result.location.lng,</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;,</span><br><span class="line">                fail: <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="comment">// 这里是防止地址不合法，怕查不到对应经纬度，提示一下用户</span></span><br><span class="line">                    uni.showToast(&#123;</span><br><span class="line">                        title: <span class="string">'无法定位到该地址，请检查地址准确性'</span>,</span><br><span class="line">                        icon: <span class="string">'none'</span>,</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;,</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>小程序</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>每天一道小心机：for循环将接口多个字段push进数组</title>
-    <url>/2020/05/20/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93%E5%B0%8F%E5%BF%83%E6%9C%BA%EF%BC%9Afor%E5%BE%AA%E7%8E%AF%E5%B0%86%E6%8E%A5%E5%8F%A3%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5push%E8%BF%9B%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<blockquote>
-<p>场景：接口将1~12个月份对应的值用12个字段返回，这12个字段长这样：<code>field1、field2 ... field12</code>，但前端想要将12个字段组装为一个数组去循环生成相应元素，怎么做？</p>
-</blockquote>
-<a id="more"></a>
-
-<p>json数据：</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  field1: '12',</span><br><span class="line">  field2: '2',</span><br><span class="line">  field3: '36',</span><br><span class="line">  <span class="comment">// ... 中间省略</span></span><br><span class="line">  field12: '324'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>代码：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">12</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> fieldIndex = <span class="string">'field'</span> + (i + <span class="number">1</span>); <span class="comment">// 加上1是因为接口字段从field1开始，没有field0</span></span><br><span class="line">    arr.push(data[fieldIndex]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意：push的时候不能直接用<code>data.fieldIndex</code>，这样写实际上js会读取data里面叫<code>fieldIndex</code>变量的值，但在情境中<code>fieldIndex</code>是动态值，因此只能用<code>data[fieldIndex]</code>的方式去访问，又是一个小细节-。-</p>
-]]></content>
-      <categories>
-        <category>每天一道小心机</category>
       </categories>
   </entry>
   <entry>
