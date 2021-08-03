@@ -568,7 +568,7 @@
   <entry>
     <title>总结一些git日常使用命令</title>
     <url>/2020/08/05/%E6%80%BB%E7%BB%93%E4%B8%80%E4%BA%9Bgit%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<p>日常使用的git命令，记录下</p>
+    <content><![CDATA[<p>记录日常使用的git命令</p>
 <a id="more"></a>
 
 <h3 style="color: #FF4500;">创建新分支（基于远程分支）</h3>
@@ -576,22 +576,22 @@
 <blockquote>
 <p>基于远程release分支新创建自己的release-bibifeng分支</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout release &#x2F;&#x2F; 切换到release分支</span><br><span class="line">git checkout -b release-bibifeng &#x2F;&#x2F; 创建自己的分支</span><br><span class="line">git push --set-upstream origin release-bibifeng &#x2F;&#x2F; 推到远程仓库并且将本地分支与远程分支关联起来</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 切换到release分支并更新</span><br><span class="line">git checkout release</span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"># 根据最新的release分支创建自己的分支</span><br><span class="line">git checkout -b release-bibifeng</span><br><span class="line"></span><br><span class="line"># 推到远程仓库并且将本地分支与远程分支关联起来</span><br><span class="line">git push --set-upstream origin release-bibifeng</span><br></pre></td></tr></table></figure>
 
 <h3 style="color: #FF4500;">自己的私人分支merge到公共分支有冲突时</h3>
 
 <blockquote>
-<p>以自己分支release-bibifeng 合并到 dev 分支为例</p>
+<p>以自己分支dev-bibifeng 合并到 dev 分支为例</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout dev</span><br><span class="line">git pull &#x2F;&#x2F; 更新分支</span><br><span class="line">git merge --no-ff release-bibifeng</span><br><span class="line">&#x2F;&#x2F; 解决冲突...</span><br><span class="line">git add .</span><br><span class="line">git commit -m &#39;commit message&#39;</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 1.切换并更新dev分支</span><br><span class="line">git checkout dev</span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"># 2.合并自己的分支到dev</span><br><span class="line">git merge --no-ff dev-bibifeng</span><br><span class="line"></span><br><span class="line"># 3.如遇冲突先解决，然后add、commit</span><br><span class="line"></span><br><span class="line"># 4.推送至远程</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure>
 
-<h3 style="color: #FF4500;">更新自己的分支以达到与远程分支同步时的操作，即rebase</h3>
+<h3 style="color: #FF4500;">更新自己的分支以达到与远程分支同步时的操作(rebase方法)</h3>
 
 <blockquote>
 <p>更新远程主分支release到自己的分支release-bibifeng为例</p>
 </blockquote>
 <p>场景：这里的release-bibifeng是从release拉下来的，但是同时别人也有他自己的分支（也是从release拉下来的），那么大家都会合代码到release分支，一段时间后，远程的分支代码和自己的分支代码就会有差异了，这时候就要定时把远程release分支更新到自己的分支</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout release &#x2F;&#x2F; 切换并更新本地的release分支</span><br><span class="line">git pull</span><br><span class="line">git checkout release-bibifeng &#x2F;&#x2F; 切换到自己的分支</span><br><span class="line">git pull origin release-bibifeng --rebase</span><br><span class="line">git rebase release &#x2F;&#x2F; 同步release到自己的分支</span><br><span class="line">&#x2F;&#x2F; 解决冲突（如需要）</span><br><span class="line">git push &#x2F;&#x2F; 更新自己的远程分支</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 1.检查并获取最新的远程release分支</span><br><span class="line">git fetch origin release</span><br><span class="line"></span><br><span class="line"># 2.切换到自己的分支</span><br><span class="line">git checkout release-bibifeng</span><br><span class="line"></span><br><span class="line"># 3.同步release到自己的分支</span><br><span class="line">git pull origin release --rebase</span><br><span class="line"></span><br><span class="line"># 4.如遇冲突先解决</span><br><span class="line">git add .</span><br><span class="line">git rebase --continue</span><br><span class="line"></span><br><span class="line"># continue之后可能仍会出现冲突，如有则重复第4步，直至冲突解决干净</span><br><span class="line"></span><br><span class="line"># 如果遇到冲突暂时不想去处理，可放弃本次rebase操作</span><br><span class="line">git rebase --abort</span><br><span class="line"></span><br><span class="line"># 5.推送到远程</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
 
 <p>用rebase有时候会需要多次fix冲突，注意按照提示去操作，解决冲突之后执行<br>git add .<br>git rebase –continue （这个时候rebase会继续，如果是没有改动的情况，按提示输入git rebase –skip继续执行合并）<br>这里解决冲突和 continue/skip 动作可能会执行多次，直到结束之后，提交到远程</p>
 <h3 style="color: #FF4500;">代码回退的两种方式</h3>
@@ -604,16 +604,20 @@
 <blockquote>
 <p>git revert 撤销某一版本的修改,不影响该版本后的提交版本。只单独撤销某一版本，这种改动实质上是“反做”之前的那条提交记录，并生成一条新的记录重新提交上去。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git revert -n xxx版本id</span><br><span class="line">&#x2F;&#x2F; 若有冲突，先手动解决，然后add、commit、push三刀流</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git revert -n xxx版本id</span><br><span class="line"># 若有冲突，先手动解决，然后add、commit、push三刀流</span><br></pre></td></tr></table></figure>
 
 <h3 style="color: #FF4500;">删除分支（本地、远程）</h3>
 
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git branch -r &#x2F;&#x2F; 仅查看远程分支</span><br><span class="line">git branch -a &#x2F;&#x2F; 查看所有分支</span><br><span class="line">git push origin --delete xxx分支名 &#x2F;&#x2F; 删除远程分支</span><br><span class="line">git branch -D xxx分支名 &#x2F;&#x2F; 删除本地分支</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 仅查看远程分支</span><br><span class="line">git branch -r</span><br><span class="line"></span><br><span class="line"># 查看所有分支</span><br><span class="line">git branch -a</span><br><span class="line"></span><br><span class="line"># 删除远程分支</span><br><span class="line">git push origin --delete xxx分支名</span><br><span class="line"></span><br><span class="line"># 删除本地分支</span><br><span class="line">git branch -D xxx分支名</span><br></pre></td></tr></table></figure>
 
 <p>删除分支时，本地和远程互不影响</p>
 <h3 style="color: #FF4500;">重命名自己的分支</h3>
 
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 删除远程分支（以下均为按需操作）</span><br><span class="line">git push --delete origin release-bibifeng</span><br><span class="line">&#x2F;&#x2F; 重命名本地分支</span><br><span class="line">git branch -m release-bibifeng release-old</span><br><span class="line">&#x2F;&#x2F; 将新命名的分支推到远程</span><br><span class="line">git push origin release-old</span><br><span class="line">&#x2F;&#x2F; 本地分支关联远程分支</span><br><span class="line">git branch --set-upstream-to&#x3D;origin&#x2F;release-old</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 1.删除远程分支（以下均为按需操作）</span><br><span class="line">git push --delete origin release-bibifeng</span><br><span class="line"></span><br><span class="line"># 2.重命名本地分支</span><br><span class="line">git branch -m release-bibifeng release-new-name</span><br><span class="line"></span><br><span class="line"># 3.将新命名的分支推到远程</span><br><span class="line">git push origin release-new-name</span><br><span class="line"></span><br><span class="line"># 4.本地分支关联远程分支</span><br><span class="line">git branch --set-upstream-to&#x3D;origin&#x2F;release-new-name</span><br></pre></td></tr></table></figure>
+
+<h3 style="color: #FF4500;">暂存内容</h3>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 暂存当前改动</span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line"># 查看暂存的内容</span><br><span class="line">git stash show</span><br><span class="line"></span><br><span class="line"># 恢复暂存的内容到当前分支</span><br><span class="line">git stash pop</span><br></pre></td></tr></table></figure>
 
 
 ]]></content>
@@ -636,6 +640,112 @@
 ]]></content>
       <categories>
         <category>小程序</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>锚点联动vue版</title>
+    <url>/2021/07/26/%E9%94%9A%E7%82%B9%E8%81%94%E5%8A%A8vue%E7%89%88/</url>
+    <content><![CDATA[<blockquote>
+<p>锚点定位跳转的几个方法总结</p>
+</blockquote>
+<h3 id="设置scrollTop（vue版）"><a href="#设置scrollTop（vue版）" class="headerlink" title="设置scrollTop（vue版）"></a>设置scrollTop（vue版）</h3><p>通过ref获取到对应dom之后，设置滚动容器的scrollTop为锚点dom的offsetTop</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;span @click&#x3D;&quot;viewTo&quot;&gt;点击滚动到p1&lt;&#x2F;span&gt;</span><br><span class="line"></span><br><span class="line">&lt;div ref&#x3D;&quot;scrollWap&quot;&gt;</span><br><span class="line">    &lt;p ref&#x3D;&quot;p1&quot;&gt;p1&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">methods: &#123;</span><br><span class="line">    viewTo() &#123;</span><br><span class="line">        this.$refs.scrollWap.scrollTop &#x3D; this.$refs.p1.offsetTop;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>注意：如果p标签或者其祖元素是通过v-for生成的，<code>this.$refs.p1</code>打印出来的将会是数组</p>
+<h3 id="通过a标签直接跳转锚点"><a href="#通过a标签直接跳转锚点" class="headerlink" title="通过a标签直接跳转锚点"></a>通过<code>a</code>标签直接跳转锚点</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#div1"</span>&gt;</span>点击跳转到div1<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span>&gt;</span>div1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：使用这种方法时，点击a标签之后地址栏url会变</p>
+<h3 id="js的animate方法"><a href="#js的animate方法" class="headerlink" title="js的animate方法"></a>js的<code>animate</code>方法</h3><p>原理也是利用scrollTop，具体animate用法另行查看</p>
+<h3 id="js的scrollIntoView方法"><a href="#js的scrollIntoView方法" class="headerlink" title="js的scrollIntoView方法"></a>js的<code>scrollIntoView</code>方法</h3>]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Promise笔记</title>
+    <url>/2021/07/30/Promise%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><blockquote>
+<p>定义：<code>Promise</code>是一个对象，从它可以获取异步操作的消息，知道异步函数是完成了还是出错了。</p>
+</blockquote>
+<p>比如，<code>axios</code>返回的结果就是一个<code>Promise</code></p>
+<p><code>Promise</code>有三种状态：</p>
+<ul>
+<li>pending 进行中</li>
+<li>fulfilled 已成功</li>
+<li>rejected 已失败</li>
+</ul>
+<p>状态一旦改变 就不会再变，任何时候添加回调函数，得到的都是这个结果。</p>
+<p>如果状态已经<code>resolve</code>了，再在后面抛出错误也是无效的，也不会改变状态为<code>rejected</code>，后面有异常也不会抛出（并不代表后面的代码不执行）</p>
+<blockquote>
+<p>如何创造一个<code>Promise</code>实例?</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(我一创建就执行了)</span><br><span class="line">    <span class="keyword">if</span> (<span class="comment">/* 异步操作成功 */</span>)&#123;</span><br><span class="line">      resolve(value); <span class="comment">// 传递结果</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      reject(error); <span class="comment">// 传递错误</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>Promise</code>新建后，就会立即执行,返回一个<code>Promise对象</code></p>
+<p><code>Promise</code>构造函数需要<code>一个函数</code>作为参数，比如这个函数叫<code>A函数</code></p>
+<p><code>A函数</code>有两个参数，分别是<code>resolve</code>和<code>reject</code>：</p>
+<ul>
+<li><code>resolve</code>: 把Promise状态 从<code>pending</code>变为<code>resolved</code>，在异步操作成功时调用，并将异步操作的结果，作为参数传递出去</li>
+<li><code>reject</code>: 把Promise状态 从<code>pending</code>变为<code>reject</code>，在异步操作失败时调用，并把错误作为参数传递出去</li>
+</ul>
+<p>此外，<code>reject</code>方法的作用，也等同于抛出异常。<code>reject</code>的参数会被<code>catch</code>捕获。即便没有调用<code>reject</code>，如果执行过程中出错了，也会被<code>catch</code>捕获。</p>
+<blockquote>
+<p>Promise对象实例如何使用异步函数的执行结果</p>
+</blockquote>
+<p>Promise实例有两个方法：</p>
+<ul>
+<li><code>then</code>指定了<code>resolve</code>状态和<code>reject</code>的回调函数</li>
+<li><code>catch</code>专门用来捕获Promise对象产生的错误</li>
+</ul>
+<p><code>then</code>方法的参数是两个回调函数，都接受Promise对象传出的值作为参数：</p>
+<p>第一个参数是resolve状态的回调函数</p>
+<p>第二个参数是reject的回调函数， 这个参数是可选的</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">promise.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// success</span></span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// failure</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>通常第二个参数也不写，因为Promise实例还有一个方法叫catch是专门用来捕获异常的。</p>
+<p><code>catch</code>是<code>.then(null, rejection)</code>的别名，用于指定发生错误时的回调函数。</p>
+<p>一旦<code>catch</code>前面的任何一个Promise发生异常，都会被<code>catch</code>捕获，包括<code>Promise</code>函数创建的<code>Promise</code>，还有<code>.then</code>返回的<code>Promise</code>，甚至<code>catch</code>前面如果还有一个<code>catch</code>，在这个<code>catch</code>抛出的异常也会被后一个catch捕获</p>
+<p>上面那个代码块一般这样写：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">promise</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// success</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// error</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Promise两个常用方法</p>
+</blockquote>
+<ul>
+<li><code>Promise.all()</code>：将多个<code>Promise</code>实例，包装成一个新的<code>Promise</code>实例。内部所有的Promise的状态都变成fulfilled，这个Promise状态才会变成fulfilled，返回值是一个数组，但是只要有一个<code>rejected</code>这个Promise对象就会变成<code>rejected</code>，返回第一个被<code>reject</code>的实例的返回值</li>
+<li><code>Promise.race()</code>：跟all方法一样，只是race就想是赛跑，谁先有结果，返回谁的结果。不会等到所有的Promise都执行完。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'three'</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'two'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'one'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，setTimeout(fn,0),在下一轮循环事件开始执行</p>
+<p>Promise.resolve()在本轮事件循环结束时执行</p>
+<p>console.log(‘one’)立刻执行，</p>
+<p>因此上面的打印顺序是 one two three</p>
+<h3 id="async、await"><a href="#async、await" class="headerlink" title="async、await"></a>async、await</h3><blockquote>
+<p>在函数声明前使用async关键词修饰 说明函数中有异步操作</p>
+</blockquote>
+<p><code>async</code>函数的返回值是<code>Promise</code></p>
+<p><code>await</code>等待后面的代码执行完毕，再继续向下执行</p>
+<p>举例：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'hello world'</span>;</span><br><span class="line">&#125;</span><br><span class="line">f().then().catch()</span><br></pre></td></tr></table></figure>
+
+<p>正常情况下<code>async</code>函数中<code>return</code>结果会使<code>Promise</code>对象变为<code>resolved</code>状态，返回值作为<code>then</code>方法回调函数的参数，而出错则会使<code>Promise</code>对象的变为<code>reject</code>状态，错误会被<code>catch</code>捕获。</p>
+<p>因为<code>async</code>函数相当于对多个<code>Promise</code>的封装，所以必须等到内部所有的<code>await</code>命令执行完，才会改变自己的状态为<code>resolved</code>，除非碰到return语句或者抛出了异常。</p>
+<p>只要一个<code>await</code>后面的<code>Promise</code>变为<code>rejected</code>，整个<code>async</code>函数就会中断执行，整个<code>async</code>返回的<code>Promise</code>对象就会是<code>rejected</code>状态</p>
+<p>也就是说，正常情况下只有<code>async</code>函数内部的异步操作执行完，才会执行<code>then</code>后面的语句。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">await</span> <span class="built_in">Promise</span>.reject(<span class="string">'出错了'</span>);</span><br><span class="line">  <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="string">'hello world'</span>); <span class="comment">// 不会执行</span></span><br><span class="line">&#125;</span><br><span class="line">f().then().catch();  <span class="comment">// 不走then，走catch</span></span><br></pre></td></tr></table></figure>
+
+<p>假如希望即使前一个异步操作失败，也不要中断后面的异步操作，可以将第一个<code>await</code>放在<code>try...catch</code>结构里面，这样不管这个异步操作是否成功，第二个<code>await</code>都会执行</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">await</span> <span class="built_in">Promise</span>.reject(<span class="string">'出错了'</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(e); <span class="comment">// log：出错了</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="string">'hello world'</span>); <span class="comment">// 会继续执行</span></span><br><span class="line">&#125;</span><br><span class="line">f().then().catch();  <span class="comment">// 走then，不走catch</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="try…catch"><a href="#try…catch" class="headerlink" title="try…catch"></a>try…catch</h3><p>如果有多个<code>await</code>命令，可以将其都放在<code>try...catch</code>结构中，如果执行出错，<code>catch</code>会去捕获异常</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">await</span> <span class="built_in">Promise</span>.reject(<span class="string">'出错了'</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'上面已经出错了'</span>); <span class="comment">// 不会执行</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="string">'hello world'</span>); <span class="comment">// 不会执行</span></span><br><span class="line">    &#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(e); <span class="comment">// log：出错了</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f().then(<span class="function"><span class="params">v</span> =&gt;</span> <span class="built_in">console</span>.log(v)) <span class="comment">// 会执行，但是打印出来的为undefined，因为上面没有传递"hello world"</span></span><br></pre></td></tr></table></figure>
+
+<p><code>catch</code>会去捕获<code>try</code>代码块中的错误，只要有一个抛出了异常，就不会继续执行，所以上面的代码不会打印 “上面已经出错了” ，也不会执行 <code>return await Promise.resolve(&#39;hello world&#39;);</code></p>
+<p>因为使用了<code>try...catch</code>，所以<code>async</code>是顺利执行完成的，其中的报错被<code>try...catch</code>处理了，所以异常不会被<code>async</code>返回的<code>Promise</code>的<code>catch</code>捕获，因此<code>async</code>返回的<code>Promise</code>对象状态是<code>resolved</code>，但没有传递值。</p>
+]]></content>
+      <categories>
+        <category>Promise笔记</category>
       </categories>
   </entry>
 </search>
