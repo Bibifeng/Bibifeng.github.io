@@ -748,4 +748,43 @@
         <category>Promise笔记</category>
       </categories>
   </entry>
+  <entry>
+    <title>记录使用jsx写vue组件</title>
+    <url>/2021/08/25/%E8%AE%B0%E5%BD%95%E4%BD%BF%E7%94%A8jsx%E5%86%99vue%E7%BB%84%E4%BB%B6/</url>
+    <content><![CDATA[<h3 id="jsx如何在组件中使用类似-sync修饰符"><a href="#jsx如何在组件中使用类似-sync修饰符" class="headerlink" title="jsx如何在组件中使用类似.sync修饰符"></a>jsx如何在组件中使用类似.sync修饰符</h3><p>正常在vue组件中，vue提供了语法糖<code>.sync</code>的写法，用来对一个<code>prop</code>进行”双向绑定”，使子组件可直接改变<code>prop</code>的值</p>
+<figure class="highlight html"><figcaption><span>父组件</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">child-component</span> <span class="attr">:title.sync</span>=<span class="string">"parentData"</span>&gt;</span><span class="tag">&lt;/<span class="name">child-component</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>子组件可直接改变<code>title</code>这个<code>prop</code></p>
+<p>vue官网对<code>.sync</code>语法糖的解释如下：</p>
+<figure class="highlight html"><figcaption><span>父组件</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">child-component</span> <span class="attr">:title</span>=<span class="string">"parentData"</span> @<span class="attr">update:title</span>=<span class="string">"val =&gt; this.parentData = val"</span>&gt;</span><span class="tag">&lt;/<span class="name">child-component</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><figcaption><span>子组件child-component</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$emit(<span class="string">'update:title'</span>, newVal);</span><br></pre></td></tr></table></figure>
+
+<p>在jsx中写法如下：</p>
+<figure class="highlight jsx"><figcaption><span>父组件</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;child-component </span><br><span class="line">    title=&#123;<span class="keyword">this</span>.parentData&#125;</span><br><span class="line">    &#123;...&#123; <span class="attr">on</span>: &#123; <span class="string">'update:title'</span>: <span class="function"><span class="params">val</span> =&gt;</span> &#123;<span class="keyword">this</span>.parentData = val&#125; &#125;&#125;&#125;</span><br><span class="line">    /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果有多个props，可以写成：</p>
+<figure class="highlight jsx"><figcaption><span>父组件</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> listener = &#123;</span><br><span class="line">    <span class="string">'update:propA'</span>: <span class="function"><span class="params">val</span> =&gt;</span> <span class="keyword">this</span>.parentDataA = val,</span><br><span class="line">    <span class="string">'update:propB'</span>: <span class="function"><span class="params">val</span> =&gt;</span> <span class="keyword">this</span>.parentDataB = val,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;child-component </span><br><span class="line">    propA=&#123;<span class="keyword">this</span>.parentDataA&#125;</span><br><span class="line">    propB=&#123;<span class="keyword">this</span>.parentDataB&#125;</span><br><span class="line">    &#123;...&#123; <span class="attr">on</span>: &#123; listener &#125;&#125;&#125;</span><br><span class="line">    /&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="jsx在组件中使用解构赋值"><a href="#jsx在组件中使用解构赋值" class="headerlink" title="jsx在组件中使用解构赋值"></a>jsx在组件中使用解构赋值</h3><figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> props = &#123;</span><br><span class="line">    propA: <span class="string">'123'</span>,</span><br><span class="line">    propB: <span class="string">'456'</span>,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;child-component &#123;...&#123; props &#125;&#125; /&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 相当于下面这种写法：</span></span><br><span class="line">&lt;child-component propA=&#123;props.propA&#125; propB=&#123;props.propB&#125; /&gt;;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>jsx</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>word-wrap与word-break的区别</title>
+    <url>/2021/08/26/word-wrap%E4%B8%8Eword-break%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p>转载自:<a href="https://blog.csdn.net/github_39319000/article/details/80595516" target="_blank" rel="noopener">https://blog.csdn.net/github_39319000/article/details/80595516</a></p>
+<h2 id="两种方法的区别说明："><a href="#两种方法的区别说明：" class="headerlink" title="两种方法的区别说明："></a>两种方法的区别说明：</h2><p><code>word-break:break-all</code></p>
+<p>例如div宽400px，它的内容就会到400px自动换行，如果该行末端有个英文单词很长（congratulation等），它会把单词截断，变成该行末端为conra(congratulation的前端部分)，下一行为tulation（conguatulation）的后端部分了。</p>
+<p><code>word-wrap:break-word</code></p>
+<p>例子与上面一样，但区别就是它会把congratulation整个单词看成一个整体，如果该行末端宽度不够显示整个单词，它会自动把整个单词放到下一行，而不会把单词截断掉的。还有就是如果单词太长的话也会进行分割。</p>
+<h2 id="失效原因"><a href="#失效原因" class="headerlink" title="失效原因"></a>失效原因</h2><p>1、word-wrap对行内元素是没有效果的</p>
+<p>2、一般情况下，元素拥有默认的white-space:normal（自动换行，不换行是white-space:nowrap），可能是元素中设置的white-space是norwrap导致，无法换行</p>
+<p>3、对table 的td 标签下的元素设置word-wrap、word-break是没有效果的</p>
+]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+  </entry>
 </search>
